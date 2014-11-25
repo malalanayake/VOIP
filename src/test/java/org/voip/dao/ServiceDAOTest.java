@@ -25,7 +25,6 @@ public class ServiceDAOTest {
 		service.setName("Test Service");
 
 		Service serviceAfter = sericeDAO.save(service);
-		assertEquals(service.getId(), serviceAfter.getId());
 		assertEquals(service.getName(), serviceAfter.getName());
 	}
 
