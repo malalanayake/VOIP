@@ -7,10 +7,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class Customer {
 	@Id
-	private int phoneNumber;
+	private long phoneNumber;
 	
-//	@OneToOne
-//	private CountryService countryService;
+	@OneToOne
+	private CountryService countryService;
 	
 	//Address 
 	private String name;
@@ -19,19 +19,19 @@ public class Customer {
 	private int zip;
 	
 	
-	public int getPhoneNumber() {
+	public long getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setPhoneNumber(int phoneNumber) {
+	public void setPhoneNumber(long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
-//	public CountryService getCountryService() {
-//		return countryService;
-//	}
-//	public void setCountryService(CountryService countryService) {
-//		this.countryService = countryService;
-//	}
+	public CountryService getCountryService() {
+		return countryService;
+	}
+	public void setCountryService(CountryService countryService) {
+		this.countryService = countryService;
+	}
 	public String getName() {
 		return name;
 	}
