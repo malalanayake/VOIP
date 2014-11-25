@@ -1,11 +1,16 @@
 package org.voip.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Customer {
+	@Id
 	private int phoneNumber;
-	private Service service;
+	
+//	@OneToOne
+//	private CountryService countryService;
 	
 	//Address 
 	private String name;
@@ -20,12 +25,13 @@ public class Customer {
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public Service getService() {
-		return service;
-	}
-	public void setService(Service service) {
-		this.service = service;
-	}
+	
+//	public CountryService getCountryService() {
+//		return countryService;
+//	}
+//	public void setCountryService(CountryService countryService) {
+//		this.countryService = countryService;
+//	}
 	public String getName() {
 		return name;
 	}
