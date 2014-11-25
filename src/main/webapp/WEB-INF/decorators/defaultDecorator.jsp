@@ -5,9 +5,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>VOIP</title>
+<sitemesh:write property='head' />
 </head>
 <body>
-VOIP
 <sitemesh:write property='body' />
 </body>
 </html>
