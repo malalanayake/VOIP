@@ -9,6 +9,10 @@
 <title>VOIP</title>
 <link rel="stylesheet"
 	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="${context}/resources/js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript"
+	src="${context}/resources/bootstrap-3.2.0/js/bootstrap.min.js"></script>
 <sitemesh:write property='head' />
 </head>
 <body class="container">
@@ -29,7 +33,19 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="${context}/rates">Rates <span class="sr-only">(current)</span></a></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">Rates
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#">Update international calling rates</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Output current international calling rates</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Process calling files</a></li>
+						<li class="divider"></li>
+						<li><a href="#">Create rate sheets</a></li>
+					</ul></li>
 				<li><a href="${context}/customers">Customer</a></li>
 			</ul>
 		</div>
@@ -37,8 +53,6 @@
 	</div>
 	<!-- /.container-fluid --> </nav>
 	<sitemesh:write property='body' />
-	<footer>
-		
-	</footer>
+	<footer> </footer>
 </body>
 </html>
