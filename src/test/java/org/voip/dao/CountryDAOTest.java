@@ -18,7 +18,7 @@ public class CountryDAOTest {
 	CountryDAO countryDao;
 
 	@Test
-	public void test() {
+	public void createCountry() {
 		Country country = new Country();
 		country.setCode(1);
 		country.setName("USA");
