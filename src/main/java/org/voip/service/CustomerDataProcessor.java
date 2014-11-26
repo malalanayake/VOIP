@@ -1,6 +1,6 @@
 package org.voip.service;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
 
 /**
  * Process the customer data
@@ -11,8 +11,7 @@ import java.io.InputStream;
 public class CustomerDataProcessor implements ProcessData {
 
 	@Override
-	public boolean process(InputStream inputStream) {
-		// TODO Auto-generated method stub
+	public boolean process(FileInputStream inputStream) {
 		return false;
 	}
 

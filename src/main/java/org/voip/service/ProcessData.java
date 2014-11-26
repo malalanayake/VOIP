@@ -1,6 +1,6 @@
 package org.voip.service;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
 
 /**
  * Interface which is used to process the data
@@ -9,5 +9,5 @@ import java.io.InputStream;
  *
  */
 public interface ProcessData {
-	public boolean process(InputStream inputStream);
+	public boolean process(FileInputStream inputStream);
 }

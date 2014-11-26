@@ -1,6 +1,6 @@
 package org.voip.service;
 
-import java.io.InputStream;
+import java.io.FileInputStream;
 
 /**
  * Process the call rate data
@@ -11,7 +11,7 @@ import java.io.InputStream;
 public class CallRatesDataProcessor implements ProcessData {
 
 	@Override
-	public boolean process(InputStream inputStream) {
+	public boolean process(FileInputStream inputStream) {
 		// TODO Auto-generated method stub
 		return false;
 	}
