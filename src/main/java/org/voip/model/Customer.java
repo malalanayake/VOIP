@@ -14,6 +14,7 @@ public class Customer {
 	
 	//Address 
 	private String name;
+	private String street;
 	private String city;
 	private String state;
 	private int zip;
@@ -55,6 +56,12 @@ public class Customer {
 	}
 	public void setZip(int zip) {
 		this.zip = zip;
+	}
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
 	}
 	
 	
