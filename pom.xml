@@ -42,11 +42,11 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 		<!-- MS SQL Connector -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
-		</dependency>
+		</dependency> -->
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
