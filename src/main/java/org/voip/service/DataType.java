@@ -7,5 +7,5 @@ package org.voip.service;
  *
  */
 public enum DataType {
-	CUSTOMER, SALES_REP,COUNTRY
+	CUSTOMER, SALES_REP,COUNTRY, CALL, CALL_RATE
 }

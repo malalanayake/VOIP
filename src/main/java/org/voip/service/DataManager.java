@@ -15,14 +15,27 @@ import org.springframework.stereotype.Service;
 public class DataManager {
 	@Autowired
 	private CountryDataProcessor countryDataProcessor;
+	@Autowired
+	private CustomerDataProcessor customerDataProcessor;
+	@Autowired
+	private CallsDataProcessor callDataProcessor;
+	@Autowired
+	private CallRatesDataProcessor callRateDataProcessor;
 	
 	public boolean processData(DataType dataType, FileInputStream inputStream) {
 		Boolean returnValue=false;
-		switch(dataType){
+		switch (dataType) {
+		case CALL:
+			returnValue=callDataProcessor.process(inputStream);
+			break;
+		case CALL_RATE:
+			returnValue=callRateDataProcessor.process(inputStream);
+			break;
 		case COUNTRY:
 			returnValue=countryDataProcessor.process(inputStream);
 			break;
 		case CUSTOMER:
+			returnValue=customerDataProcessor.process(inputStream);
 			break;
 		case SALES_REP:
 			break;
@@ -31,5 +44,6 @@ public class DataManager {
 		
 		}
 		return returnValue;
+	
 	}
 }

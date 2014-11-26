@@ -15,5 +15,5 @@ import org.voip.model.CountryService;
 @Repository
 public interface CountryServiceDAO extends CrudRepository<CountryService, Long> {
 	@Query(value="execute getCountryService :countryCode, :serviceName",nativeQuery = true)
-	public CountryService getCountryServiceByPK(@Param("countryCode") int counntryCode,@Param("serviceName") String serviceName);
+	public CountryService getCountryServiceByPK(@Param("countryCode") int countryCode,@Param("serviceName") String serviceName);
 }
