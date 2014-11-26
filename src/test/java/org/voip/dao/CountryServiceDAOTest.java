@@ -22,6 +22,8 @@ public class CountryServiceDAOTest {
 	CountryDAO countryDao;
 	@Autowired
 	ServiceDAO sericeDAO;
+	
+
 
 	@Test
 	public void createCountryService() {
@@ -50,5 +52,11 @@ public class CountryServiceDAOTest {
 
 		CountryService countryServiceAfter = countryServiceDAO
 				.save(countryService);
+	}
+	@Test
+	public void testStoredProcedure(){
+		CountryService countryService = countryServiceDAO.getCountryServiceByPK(1, "Spectra");
+		System.out.println("Cname:"+countryService.getCountry().getName());
+		System.out.println("Sname:"+countryService.getService().getName());
 	}
 }
