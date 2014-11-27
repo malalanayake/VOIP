@@ -1,5 +1,6 @@
 package org.voip.service.report;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -7,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author malalanayake
  */
+
+@Service
 public class ReportManager {
 
-    public ModelAndView getReportView(ReportType reportType) {
-        ModelAndView modelAndView = null;
-
-        return modelAndView;
-    }
+	public ModelAndView getReportView(CustomReport customReport) {
+		return customReport.getReportTemplate();
+	}
 }

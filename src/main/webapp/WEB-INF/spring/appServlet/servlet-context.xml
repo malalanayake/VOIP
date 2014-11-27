@@ -21,6 +21,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <beans:property name="location" value="/WEB-INF/spring/appServlet/jasper-views.xml"/>
+        <beans:property name="order" value="0"/>
+    </beans:bean> 
+    
+    <beans:import resource="jasper-views.xml"/>
+	
 	<context:component-scan base-package="org.voip.controller" />
 	
 	
