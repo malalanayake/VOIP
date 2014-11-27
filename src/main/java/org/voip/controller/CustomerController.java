@@ -35,8 +35,15 @@ public class CustomerController {
 		return "home";
 	}
 	
-	@RequestMapping(value="bulkUpdate")
+	@RequestMapping(value="bulkUpdate", method= RequestMethod.GET)
+	public String bulkUpdatePage(Model model){
+		System.out.println("Bulk Update mode");
+		return "customers/bulkUpdate";
+	}
+	
+	@RequestMapping(value="bulkUpdate", method= RequestMethod.POST)
 	public String bulkUpdate(Model model){
+		System.out.println("Bulk Updating value");
 		return "customers/bulkUpdate";
 	}
 }
