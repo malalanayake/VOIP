@@ -57,6 +57,8 @@
 						<li><a href="<%=request.getContextPath()%>/customers">Add a Customer</a></li>
 						<li class="divider"></li>
 						<li><a href="<%=request.getContextPath() %>/customers/bulkUpdate">Upload Customer List</a></li>
+						<li class="divider"></li>
+						<li><a href="<%= request.getContextPath() %>/customers/list">Show Customers</a>
 					</ul></li>
 			</ul>
 		</div>
