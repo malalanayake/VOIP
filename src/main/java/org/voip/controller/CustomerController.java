@@ -12,14 +12,14 @@ import org.voip.model.Customer;
 @RequestMapping("/customers")
 public class CustomerController {
 	
-//	@Autowired
-//	private CustomerDAO customerDAO;
+	@Autowired
+	private CustomerDAO customerDAO;
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String cutomerHome(Model model){
 		System.out.println("Passing to customer");
 		model.addAttribute("customer", new Customer());
-		return "customers";
+		return "customers/customers";
 	}
 	
 	
@@ -28,9 +28,15 @@ public class CustomerController {
 		System.out.println("Customer Adding in process");
 		if(customer !=null )
 		{
+			//customerDAO.save(customer);
 			System.out.println(customer.getName());
 			System.out.println(customer.getPhoneNumber());
 		}
 		return "home";
+	}
+	
+	@RequestMapping(value="bulkUpdate")
+	public String bulkUpdate(Model model){
+		return "customers/bulkUpdate";
 	}
 }

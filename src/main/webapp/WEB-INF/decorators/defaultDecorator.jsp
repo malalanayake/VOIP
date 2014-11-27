@@ -40,13 +40,24 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="#">Update international calling rates</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Output current international calling rates</a></li>
+						<li><a href="#">Output current international calling
+								rates</a></li>
 						<li class="divider"></li>
 						<li><a href="#">Process calling files</a></li>
 						<li class="divider"></li>
 						<li><a href="#">Create rate sheets</a></li>
 					</ul></li>
-				<li><a href="${context}/customers">Customer</a></li>
+					
+					
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">Customers
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="<%=request.getContextPath()%>/customers">Add a Customer</a></li>
+						<li class="divider"></li>
+						<li><a href="<%=request.getContextPath() %>/customers/bulkUpdate">Upload Customer List</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
