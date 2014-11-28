@@ -45,11 +45,14 @@ AS
     Where name=@countryName
 GO
 
--- execute getCountryByName 'USA'
-
----Generate some test data---
-
-    
-
-
----test Data---
+---
+---Stored Precures for Reports----
+CREATE PROCEDURE findLatestRate 
+    @countryServiceId int 
+AS 
+  
+    SELECT *
+    FROM CallRate
+    WHERE country_service_id=@countryServiceId
+GO
+--execute findLatestRate 1

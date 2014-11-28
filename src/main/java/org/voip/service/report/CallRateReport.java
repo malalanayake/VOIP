@@ -33,7 +33,7 @@ public class CallRateReport implements CustomReport {
          JRDataSource JRdataSource = new JRBeanCollectionDataSource(usersList);
   
          parameterMap.put("datasource", JRdataSource);
-         parameterMap.put("header", "Call Rate Report");
+         parameterMap.put("header", "Rate Sheet");
          parameterMap.put("country", "USA");
          parameterMap.put("service", "Spectra");
          parameterMap.put("peakTime", "P");
