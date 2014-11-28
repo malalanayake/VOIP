@@ -16,7 +16,7 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<property name="url"
-			value="jdbc:sqlserver://localhost;databaseName=voiptest" />
+			value="jdbc:sqlserver://localhost;databaseName=voip" />
 		<property name="username" value="sa" />
 		<property name="password" value="mumsql" />
 
