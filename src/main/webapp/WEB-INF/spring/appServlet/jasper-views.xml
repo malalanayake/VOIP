@@ -12,6 +12,6 @@
 		file -->
 	<bean id="callRatePdfReport"
 		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
-		p:url="classpath:/report/CallRatesReport.jrxml" p:reportDataKey="datasource" p:attributes="header"/>
+		p:url="classpath:/report/CallRatesReport.jrxml" p:reportDataKey="datasource"/>
 
 </beans>

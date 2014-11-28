@@ -19,6 +19,9 @@ import org.voip.model.CallRate;
  */
 public class CallRateReport implements CustomReport {
 
+    public CallRateReport() {
+    }
+    
     @Override
     public ModelAndView getReportTemplate() {
     	 Map<String,Object> parameterMap = new HashMap<String,Object>();
@@ -31,6 +34,10 @@ public class CallRateReport implements CustomReport {
   
          parameterMap.put("datasource", JRdataSource);
          parameterMap.put("header", "Call Rate Report");
+         parameterMap.put("country", "USA");
+         parameterMap.put("service", "Spectra");
+         parameterMap.put("peakTime", "P");
+         parameterMap.put("offPeakTime", "OF");
          
          ModelAndView modelAndView = new ModelAndView("callRatePdfReport", parameterMap);
          return modelAndView;
