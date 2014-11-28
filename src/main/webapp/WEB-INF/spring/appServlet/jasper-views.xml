@@ -12,6 +12,14 @@
 		file -->
 	<bean id="callRatePdfReport"
 		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
-		p:url="classpath:/report/CallRatesReport.jrxml" p:reportDataKey="datasource"/>
+		p:url="classpath:/report/CallRatesReport.jrxml" p:reportDataKey="datasource" />
+		
+		<bean id="monthlyBillPdfReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="classpath:/report/MonthlyBillReport.jrxml" p:reportDataKey="datasource" />
+		
+		<bean id="salesCommissionPdfReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="classpath:/report/SalesCommissionReport.jrxml" p:reportDataKey="datasource" />
 
 </beans>
