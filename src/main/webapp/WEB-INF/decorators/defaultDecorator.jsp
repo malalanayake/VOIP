@@ -77,13 +77,13 @@
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Call Rate</a></li>
+						<li><a href="${context }/report/callrates">Call Rate</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Monthly Bill</a></li>
+						<li><a href="${context }/report/monthlybills">Monthly Bill</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Monthly Traffic</a>
+						<li><a href="${context }/report/monthlytraffic">Monthly Traffic</a>
 						<li class="divider"></li>
-						<li><a href="#">Sell_R Commision</a>
+						<li><a href="${context }/report/salesrepcommision">Sell_Rep Commision</a>
 					</ul></li>
 			</ul>
 		</div>
