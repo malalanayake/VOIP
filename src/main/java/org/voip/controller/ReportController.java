@@ -22,14 +22,15 @@ public class ReportController {
 	@Autowired
 	ReportManager reportManager;
 
+
 	@RequestMapping(method = RequestMethod.GET, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView) {
-		CallRateReport callRateReport = new CallRateReport();
+		CallRateReport callRateReport = new CallRateReport(1l,1l);
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "monthly-bill/pdf")
 	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView) {
 		MonthlyBillReport monthlyBillReport = new MonthlyBillReport();

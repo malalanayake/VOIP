@@ -1,6 +1,8 @@
 package org.voip.service.report;
 
 import java.io.File;
+
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -14,5 +16,10 @@ public class MonthlyBillReport implements CustomReport {
     public ModelAndView getReportTemplate() {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+
+	@Override
+	public void wireBeans(BeanFactory beanFactory) {
+
+	}
 
 }
