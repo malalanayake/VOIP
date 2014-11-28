@@ -37,10 +37,17 @@ GO
 --execute getSalesRepByCode 12
 
 
+---Generate some test data---
 
+   insert into Service values('Spectra');
+   insert into Service values('Deluxe');
+   insert into Service values('VOIP');
+   
+   insert into CountryService
+	select Country.code, Service.id
+	from Country, Service
+	Where Country.name='USA' 
+    
 
 
 ---test Data---
-insert into Service values('Spectra');
-insert into Service values('Deluxe');
-insert into Service values('VOIP');
