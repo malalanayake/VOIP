@@ -1,12 +1,15 @@
 package org.voip.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -19,9 +22,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.voip.dao.CallDetailDAO;
 import org.voip.dao.CallRateDAO;
 import org.voip.dao.CountryDAO;
 import org.voip.dao.CustomerDAO;
+import org.voip.dao.SalesCustomerDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/root-context-test.xml" })
@@ -41,7 +46,7 @@ public class DataManagerTest {
 		try {
 			file = new File(resource.toURI());
 			FileInputStream fileInputStream = new FileInputStream(file);
-			Boolean value=dataManager.processData(DataType.COUNTRY, fileInputStream);
+			Boolean value=dataManager.executeDataProcessor(new CountryDataProcessor(fileInputStream));
 			assertEquals(true, value);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -56,13 +61,15 @@ public class DataManagerTest {
 	@Autowired
 	CustomerDAO customerDAO;
 	@Test
+	//@Rollback(false)
 	public void processCustomerData(){
+		long prev=customerDAO.count();
 		URL resource = getClass().getResource("/Customer.xls");
 		File file;
 		try {
 			file = new File(resource.toURI());
 			FileInputStream fileInputStream = new FileInputStream(file);
-			Boolean value=dataManager.processData(DataType.CUSTOMER, fileInputStream);
+			Boolean value=dataManager.executeDataProcessor(new CustomerDataProcessor(fileInputStream));
 			assertEquals(true, value);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -71,7 +78,7 @@ public class DataManagerTest {
 			e.printStackTrace();
 			assertFalse(true);
 		}
-		assertEquals(customerDAO.count(),3);
+		assertEquals(3+prev, customerDAO.count());
 
 	}
 	
@@ -84,7 +91,28 @@ public class DataManagerTest {
 		try {
 			file = new File(resource.toURI());
 			FileInputStream fileInputStream = new FileInputStream(file);
-			Boolean value=dataManager.processData(DataType.CALL_RATE, fileInputStream);
+			Boolean value=dataManager.executeDataProcessor(new CallRatesDataProcessor(fileInputStream, new Date()));
+			assertEquals(true, value);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}
+
+	}
+	
+	@Autowired
+	SalesCustomerDAO salesCustomerDAO;
+	@Test
+	public void processSalesRepData(){
+		URL resource = getClass().getResource("/SalesRep.xls");
+		File file;
+		try {
+			file = new File(resource.toURI());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			Boolean value=dataManager.executeDataProcessor(new SalesCustomerDataProcessor(fileInputStream));
 			assertEquals(true, value);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -94,8 +122,29 @@ public class DataManagerTest {
 			assertFalse(true);
 		}
 		
-
 	}
+	
+	@Autowired
+	CallDetailDAO callDetailDAO;
+	@Test
+	public void processCallDetails(){
+		URL resource = getClass().getResource("/Calls_Test.xls");
+		File file;
+		try {
+			file = new File(resource.toURI());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			Boolean value=dataManager.executeDataProcessor(new CallsDataProcessor(fileInputStream));
+			assertEquals(true, value);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}
+		
+	}
+	
 	
 	
 	@Test

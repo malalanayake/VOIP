@@ -1,8 +1,8 @@
 package org.voip.service;
 
-import java.io.FileInputStream;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,38 +12,17 @@ import org.springframework.stereotype.Service;
  *
  */
 @Service
-public class DataManager {
-	@Autowired
-	private CountryDataProcessor countryDataProcessor;
-	@Autowired
-	private CustomerDataProcessor customerDataProcessor;
-	@Autowired
-	private CallsDataProcessor callDataProcessor;
-	@Autowired
-	private CallRatesDataProcessor callRateDataProcessor;
-	
-	public boolean processData(DataType dataType, FileInputStream inputStream) {
-		Boolean returnValue=false;
-		switch (dataType) {
-		case CALL:
-			returnValue=callDataProcessor.process(inputStream);
-			break;
-		case CALL_RATE:
-			returnValue=callRateDataProcessor.process(inputStream);
-			break;
-		case COUNTRY:
-			returnValue=countryDataProcessor.process(inputStream);
-			break;
-		case CUSTOMER:
-			returnValue=customerDataProcessor.process(inputStream);
-			break;
-		case SALES_REP:
-			break;
-		default:
-			break;
-		
-		}
-		return returnValue;
-	
+public class DataManager implements BeanFactoryAware{
+	private BeanFactory beanFactory;
+	public boolean executeDataProcessor(DataProcessor dataProcessor){
+		dataProcessor.wireBeans(beanFactory);
+		return dataProcessor.process();
 	}
+
+	@Override
+	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+		this.beanFactory =beanFactory;
+		
+	}
+	
 }

@@ -6,8 +6,7 @@ import java.util.Iterator;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.BeanFactory;
 import org.voip.dao.CountryServiceDAO;
 import org.voip.dao.CustomerDAO;
 import org.voip.model.CountryService;
@@ -19,18 +18,30 @@ import org.voip.model.Customer;
  * @author malalanayake
  *
  */
-@Service
-public class CustomerDataProcessor implements ProcessData {
-	@Autowired
-	private CountryServiceDAO countryServiceDAO;
-	@Autowired
-	private CustomerDAO customerDAO;
 
+public class CustomerDataProcessor implements DataProcessor {
+	private CountryServiceDAO countryServiceDAO;
+	private CustomerDAO customerDAO;
+	
+	private FileInputStream fileInputStream;
+	
+	public CustomerDataProcessor(FileInputStream fileInputStream) {
+		this.fileInputStream = fileInputStream;
+	}
+	/**
+	 * manually wire DAO beans
+	 */
 	@Override
-	public boolean process(FileInputStream inputStream) {
+	public void wireBeans(BeanFactory beanFactory) {
+		countryServiceDAO = beanFactory.getBean(CountryServiceDAO.class);
+		customerDAO = beanFactory.getBean(CustomerDAO.class);
+	}
+	
+	@Override
+	public boolean process() {
 		try {
 
-			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
 			// Iterate through each rows one by one
@@ -68,5 +79,8 @@ public class CustomerDataProcessor implements ProcessData {
 		return true;
 
 	}
+
+
+	
 
 }

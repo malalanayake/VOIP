@@ -7,8 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.BeanFactory;
 import org.voip.dao.CountryDAO;
 import org.voip.model.Country;
 
@@ -18,18 +17,31 @@ import org.voip.model.Country;
  * @author malalanayake
  *
  */
-@Service
-public class CountryDataProcessor implements ProcessData {
-
-	@Autowired
+public class CountryDataProcessor implements DataProcessor {
+	
 	private CountryDAO countryDAO;
+	
+	private FileInputStream fileInputStream;
+	
+	public CountryDataProcessor(FileInputStream fileInputStream) {
+		this.fileInputStream = fileInputStream;
+	}
+	/**
+	 * manually wire the DAO beans
+	 */
+	
+	@Override
+	public void wireBeans(BeanFactory beanFactory) {
+		countryDAO= beanFactory.getBean(CountryDAO.class);
+	}
 
 	@Override
-	public boolean process(FileInputStream inputStream) {
+	public boolean process() {
+		
 
 		try {
 
-			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
 			// Iterate through each rows one by one
@@ -44,24 +56,16 @@ public class CountryDataProcessor implements ProcessData {
 				}
 				
 				// For each row, iterate through all the columns
-				Iterator<Cell> cellIterator = row.cellIterator();
+				
 				Country country = new Country();
-				while (cellIterator.hasNext()) {
-					
-					Cell cell = cellIterator.next();
-					// Check the cell type and format accordingly
-					switch (cell.getCellType()) {
-
-					case Cell.CELL_TYPE_STRING:
-						country.setName(cell.getStringCellValue());
-						break;
-					case Cell.CELL_TYPE_NUMERIC:
-						System.out.print(cell.getNumericCellValue() + "n");
-						country.setCode((int)cell.getNumericCellValue());
-						break;
-
-					}
-				}
+				country.setName(row.getCell(0).getStringCellValue());
+				country.setCode((int) row.getCell(1).getNumericCellValue());
+				Cell cell=row.getCell(2);
+				if(cell!=null)
+					country.setPeakTime((int) cell.getNumericCellValue());
+				cell = row.getCell(3);
+				if(cell!=null)
+					country.setOffPeakTime((int) cell.getNumericCellValue());
 				countryDAO.save(country);
 			}
 
@@ -73,5 +77,8 @@ public class CountryDataProcessor implements ProcessData {
 		return true;
 
 	}
+
+
+
 
 }
