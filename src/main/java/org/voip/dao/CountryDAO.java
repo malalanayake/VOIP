@@ -11,6 +11,6 @@ import org.voip.model.Country;
  *
  */
 @Repository
-public interface CountryDAO extends CrudRepository<Country, Long> {
+public interface CountryDAO extends CrudRepository<Country, Integer> {
 
 }

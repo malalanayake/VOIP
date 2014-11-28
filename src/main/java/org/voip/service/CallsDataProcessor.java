@@ -1,16 +1,19 @@
 package org.voip.service;
 
 import java.io.FileInputStream;
+import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+import org.springframework.beans.factory.BeanFactory;
+import org.voip.dao.CallDetailDAO;
 import org.voip.dao.CountryDAO;
 import org.voip.dao.CustomerDAO;
 import org.voip.model.CallDetail;
 import org.voip.model.Country;
+import org.voip.model.Customer;
 
 /**
  * Process calls data
@@ -18,42 +21,67 @@ import org.voip.model.Country;
  * @author malalanayake
  *
  */
-public class CallsDataProcessor implements ProcessData {
-	
-	private CustomerDAO customerDAO;
+
+public class CallsDataProcessor implements DataProcessor {
 	
 	private CountryDAO countryDAO;
+	private CustomerDAO customerDAO;
+	private CallDetailDAO callDetailDAO;
+	
+	private FileInputStream fileInputStream;
+	
+	public CallsDataProcessor(FileInputStream fileInputStream) {
+		this.fileInputStream =fileInputStream;
+	}
+	/**
+	 * manually wire the DAO beans
+	 */
 	@Override
-	public boolean process(FileInputStream inputStream) {
+	public void wireBeans(BeanFactory beanFactory) {
+		customerDAO = beanFactory.getBean(CustomerDAO.class);
+		callDetailDAO = beanFactory.getBean(CallDetailDAO.class);
+		countryDAO = beanFactory.getBean(CountryDAO.class);
+	}
+
+	@Override
+	public boolean process() {
 		try {
 
-			HSSFWorkbook workbook = new HSSFWorkbook(inputStream);
+			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
 			// Iterate through each rows one by one
 			Iterator<Row> rowIterator = sheet.iterator();
+			boolean firstRow=true;
 			while (rowIterator.hasNext()) {
+				
 				Row row = rowIterator.next();
-				// For each row, iterate through all the columns
-				Iterator<Cell> cellIterator = row.cellIterator();
-				CallDetail call = new CallDetail();
-				while (cellIterator.hasNext()) {
-					
-					Cell cell = cellIterator.next();
-					
-					switch (cell.getCellType()) {
-
-					case Cell.CELL_TYPE_STRING:
-						//country.setName(cell.getStringCellValue());
-						break;
-					case Cell.CELL_TYPE_NUMERIC:
-						System.out.print(cell.getNumericCellValue() + "n");
-						//country.setCode((int)cell.getNumericCellValue());
-						break;
-
-					}
+				if(firstRow){ //ignore first row
+					firstRow=false;
+					continue;
 				}
-				//countryDAO.save(country);
+				
+			
+				CallDetail callDetails = new CallDetail();
+				
+				Country fromCountry = countryDAO.findOne((int)row.getCell(0).getNumericCellValue());
+				Country toCountry = countryDAO.findOne((int)row.getCell(1).getNumericCellValue());
+				Customer customer = customerDAO.findOne((long)row.getCell(2).getNumericCellValue());
+				long toTel = (long)row.getCell(3).getNumericCellValue();
+				long duration = (long)row.getCell(4).getNumericCellValue();
+				Date callDate = row.getCell(5).getDateCellValue();
+				int callTime = (int)row.getCell(6).getNumericCellValue();
+				
+				callDetails.setCallDate(callDate);
+				callDetails.setCallTime(callTime);
+				callDetails.setDuration(duration);
+				callDetails.setFromCountry(fromCountry);
+				callDetails.setToCountry(toCountry);
+				callDetails.setToTel(toTel);
+				callDetails.setFromCustomer(customer);
+				
+				callDetailDAO.save(callDetails);
+				
 			}
 
 		} catch (Exception e) {
@@ -62,7 +90,9 @@ public class CallsDataProcessor implements ProcessData {
 		}
 
 		return true;
-
 	}
 
+	
+
+			
 }

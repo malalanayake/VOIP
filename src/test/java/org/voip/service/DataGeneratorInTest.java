@@ -19,6 +19,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,9 +30,9 @@ import org.voip.dao.CustomerDAO;
 import org.voip.dao.SalesCustomerDAO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:/root-context-test.xml" })
+@ContextConfiguration(locations = { "classpath:/root-context-test-data.xml" })
 @Transactional
-public class DataManagerTest {
+public class DataGeneratorInTest {
 	@Autowired
 	DataManager dataManager;
 	
@@ -39,6 +40,7 @@ public class DataManagerTest {
 	CountryDAO countryDAO;
 	
 	@Test
+	@Rollback(false)
 	public void processCountryData() {
 
 		URL resource = getClass().getResource("/Calling_Codes.xls");
@@ -61,7 +63,7 @@ public class DataManagerTest {
 	@Autowired
 	CustomerDAO customerDAO;
 	@Test
-	//@Rollback(false)
+	@Rollback(false)
 	public void processCustomerData(){
 		long prev=customerDAO.count();
 		URL resource = getClass().getResource("/Customer.xls");
@@ -85,6 +87,7 @@ public class DataManagerTest {
 	@Autowired
 	CallRateDAO callRateDAO;
 	@Test
+	@Rollback(false)
 	public void processCallRateData(){
 		URL resource = getClass().getResource("/Rates_20130901.xls");
 		File file;
@@ -106,6 +109,7 @@ public class DataManagerTest {
 	@Autowired
 	SalesCustomerDAO salesCustomerDAO;
 	@Test
+	@Rollback(false)
 	public void processSalesRepData(){
 		URL resource = getClass().getResource("/SalesRep.xls");
 		File file;
@@ -127,6 +131,7 @@ public class DataManagerTest {
 	@Autowired
 	CallDetailDAO callDetailDAO;
 	@Test
+	@Rollback(false)
 	public void processCallDetails(){
 		URL resource = getClass().getResource("/Calls_Test.xls");
 		File file;

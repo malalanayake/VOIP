@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.voip.model.Customer;
 
 /**
  * Handles requests for the application home page.
@@ -42,10 +43,5 @@ public class HomeController {
 		return "rates";
 	}
 	
-	@RequestMapping(value = "/customers", method = RequestMethod.GET)
-	public String customers() {
-		
-		return "customers";
-	}
 	
 }
