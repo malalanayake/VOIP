@@ -17,7 +17,6 @@
 					<textElement>
 						<font size="16" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA["GroupField"]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>
@@ -43,7 +42,7 @@
 			</textField>
 			<image hAlign="Right">
 				<reportElement x="301" y="13" width="252" height="51" uuid="acd8e434-3a5e-455f-b292-4f69b8fb2253"/>
-				<imageExpression><![CDATA["Z:\\Seminar\\VOIP-Billing\\VOIP\\src\\main\\resources\\report\\leaf_banner_violet.png"]]></imageExpression>
+				<imageExpression><![CDATA["report\\leaf_banner_violet.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>
