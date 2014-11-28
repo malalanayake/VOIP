@@ -9,6 +9,8 @@
 <title>VOIP</title>
 <link rel="stylesheet"
 	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet"
+	href="${context}/resources/css/main.css">
 <script type="text/javascript"
 	src="${context}/resources/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript"
@@ -16,6 +18,9 @@
 <sitemesh:write property='head' />
 </head>
 <body class="container">
+	<header>
+		<div><a href="${context}"><img src='${context}/resources/logo/voip_logo.jpg' alt='logo'/></a></div>
+	</header>
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
 		<!-- Brand and toggle get grouped for better mobile display -->
@@ -26,7 +31,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">VOIP</a>
+			<a class="navbar-brand" href="${context}">Home</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -38,14 +43,14 @@
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="#">Update international calling rates</a></li>
+						<li><a href="${context}/update-rates">Update international calling rates</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Output current international calling
+						<li><a href="${context}/output-rates">Output current international calling
 								rates</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Process calling files</a></li>
+						<li><a href="${context}/process-call-file">Process calling files</a></li>
 						<li class="divider"></li>
-						<li><a href="#">Create rate sheets</a></li>
+						<li><a href="${context}/create-rate-sheet">Create rate sheets</a></li>
 					</ul></li>
 					
 					

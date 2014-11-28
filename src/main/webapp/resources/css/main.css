@@ -1,0 +1,14 @@
+@CHARSET "ISO-8859-1";
+header{
+	width:100%;
+	background-color: #D55307;
+	/*border-radius:5px 5px 0px 0px;
+	margin-top: 10px;*/
+}
+header img{
+	height: 150px;
+	border-radius: 5px;
+}
+.navbar{
+	border-radius:0px 0px 5px 5px;
+}

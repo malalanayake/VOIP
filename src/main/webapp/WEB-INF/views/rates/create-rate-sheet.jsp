@@ -7,6 +7,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<form class="form-inline" role="form">
+		<div class="form-group">
+			<select class="form-control ">
+				<option>Country 1</option>
+				<option>Country 2</option>
+				<option>Country 3</option>
+				<option>Country 4</option>
+				<option>Country 5</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<select class="form-control ">
+				<option>Service 1</option>
+				<option>Service 2</option>
+				<option>Service 3</option>
+				<option>Service 4</option>
+				<option>Service 5</option>
+			</select>
+		</div>
+		<button type="submit" class="btn btn-success">Export</button>
+	</form>
 </body>
 </html>

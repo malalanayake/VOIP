@@ -10,11 +10,12 @@
 <body>
 	<form:form role="form">
 		<div class="form-group">
-			<label for="exampleInputFile">Upload call file</label> <input type="file"
+			<label for="exampleInputFile">Upload rate file</label> <input type="file"
 				id="exampleInputFile">
 			<p class="help-block">Example block-level help text here.</p>
 		</div>
 		<button type="submit" class="btn btn-default">Submit</button>
 	</form:form>
+</body>
 </body>
 </html>

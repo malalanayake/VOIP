@@ -43,5 +43,27 @@ public class HomeController {
 		return "rates";
 	}
 	
+	@RequestMapping(value = "/create-rate-sheet", method = RequestMethod.GET)
+	public String createRateSheet() {
+		
+		return "rates/create-rate-sheet";
+	}
 	
+	@RequestMapping(value = "/output-rates", method = RequestMethod.GET)
+	public String ouputRates() {
+		
+		return "rates/output-rates";
+	}
+	
+	@RequestMapping(value = "/process-call-file", method = RequestMethod.GET)
+	public String processCallFile() {
+		
+		return "rates/process-call-file";
+	}
+	
+	@RequestMapping(value = "/update-rates", method = RequestMethod.GET)
+	public String updateRates() {
+		
+		return "rates/update-rates";
+	}
 }
