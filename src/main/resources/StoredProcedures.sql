@@ -36,17 +36,19 @@ GO
 
 --execute getSalesRepByCode 12
 
+CREATE PROCEDURE getCountryByName 
+    @countryName nvarchar(20) 
+AS 
+  
+    SELECT *
+    FROM Country
+    Where name=@countryName
+GO
+
+-- execute getCountryByName 'USA'
 
 ---Generate some test data---
 
-   insert into Service values('Spectra');
-   insert into Service values('Deluxe');
-   insert into Service values('VOIP');
-   
-   insert into CountryService
-	select Country.code, Service.id
-	from Country, Service
-	Where Country.name='USA' 
     
 
 

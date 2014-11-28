@@ -53,7 +53,7 @@ public class CountryServiceDAOTest {
 		CountryService countryServiceAfter = countryServiceDAO
 				.save(countryService);
 	}
-	@Test
+	//@Test
 	public void testStoredProcedure(){
 		CountryService countryService = countryServiceDAO.getCountryServiceByPK(1, "Spectra");
 		System.out.println("Cname:"+countryService.getCountry().getName());
