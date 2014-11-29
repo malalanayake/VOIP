@@ -54,7 +54,7 @@ public class CustomerController {
 	public String addCustomer(Model model, @ModelAttribute("customer") Customer customer,BindingResult result){
 		System.out.println("Customer Adding in process");
 		customerService.saveCustomer(customer);
-		return "home";
+		return "customers/CustomerList";
 	}
 	
 	@RequestMapping(value="bulkUpdate", method= RequestMethod.GET)

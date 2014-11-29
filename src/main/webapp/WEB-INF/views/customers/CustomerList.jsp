@@ -16,6 +16,7 @@
 				<td>Phone number</td>
 				<td>City</td>
 				<td>Street</td>
+				<td>Service</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -25,6 +26,7 @@
 					<td>${customer.phoneNumber }</td>
 					<td>${customer.city }</td>
 					<td>${customer.street }</td>
+					<td>${customer.countryService.service.name }
 					</tr>
 			</c:forEach>
 		</tbody>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,8 +12,8 @@
 	<form:form action="customers/add" method="POST" commandName="customer"
 		class="form-horizontal" role="form">
 		<div class="form-group">
-			<label for="phoneNumber" class="col-sm-2 control-label">Phone number
-			</label>
+			<label for="phoneNumber" class="col-sm-2 control-label">Phone
+				number </label>
 			<div class="col-sm-10">
 				<form:input type="text" path="phoneNumber" name="phoneNumber"
 					class="form-control" placeholder="Phone Number" />
@@ -28,8 +28,9 @@
 				Service</label>
 			<div class="col-sm-10">
 				<form:select path="countryService" name="countryService">
-					<c:forEach items="${countryServiceList}"  var="service">
-						<option value="${service.id }">${service.country.name }'s ${service.service.name }</option>
+					<c:forEach items="${countryServiceList}" var="service">
+						<option value="${service.id }">${service.country.name }'s
+							${service.service.name }</option>
 					</c:forEach>
 				</form:select>
 			</div>
@@ -40,7 +41,8 @@
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Name</label>
 			<div class="col-sm-10">
-				<form:input path="name" name="name" cssClass="form-control" placeholder="Customer Name" />
+				<form:input path="name" name="name" cssClass="form-control"
+					placeholder="Customer Name" />
 			</div>
 			<div>
 				<form:errors path="name" cssClass="error" />
@@ -48,9 +50,21 @@
 		</div>
 
 		<div class="form-group">
+			<label for="street" class="col-sm-2 control-label">Street</label>
+			<div class="col-sm-10">
+				<form:input path="street" name="street" cssClass="form-control"
+					placeholder="Street" />
+			</div>
+			<div>
+				<form:errors path="street" cssClass="error" />
+			</div>
+		</div>
+
+		<div class="form-group">
 			<label for="city" class="col-sm-2 control-label">City</label>
 			<div class="col-sm-10">
-				<form:input path="city" name="city" cssClass="form-control" placeholder="City " />
+				<form:input path="city" name="city" cssClass="form-control"
+					placeholder="City " />
 			</div>
 			<div>
 				<form:errors path="city" cssClass="error" />
@@ -60,7 +74,8 @@
 		<div class="form-group">
 			<label for="state" class="col-sm-2 control-label">State</label>
 			<div class="col-sm-10">
-				<form:input path="state" name="state" cssClass="form-control" placeholder="State"/>
+				<form:input path="state" name="state" cssClass="form-control"
+					placeholder="State" />
 			</div>
 			<div>
 				<form:errors path="state" cssClass="error" />
