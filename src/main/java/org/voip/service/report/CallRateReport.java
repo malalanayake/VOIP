@@ -1,6 +1,5 @@
 package org.voip.service.report;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.voip.dao.CallRateDAO;
 import org.voip.dao.CountryServiceDAO;
 import org.voip.model.CallRate;
+import org.voip.model.Country;
 import org.voip.model.CountryService;
+import org.voip.model.Service;
 
 /**
  * Call Rate report generator
@@ -22,8 +23,8 @@ import org.voip.model.CountryService;
  * @author malalanayake
  */
 public class CallRateReport implements CustomReport {
-	private long serviceID;
-	private long countryID;
+	private Service service;
+	private Country country;
 
 	@Autowired
 	private CallRateDAO callRateDAO;
@@ -31,19 +32,21 @@ public class CallRateReport implements CustomReport {
 	@Autowired
 	private CountryServiceDAO countryServiceDAO;
 
-	public CallRateReport(long countryID, long serviceID) {
-		this.countryID = countryID;
-		this.serviceID = serviceID;
+	public CallRateReport(Country country, Service service) {
+		this.country = country;
+		this.service = service;
 	}
 
 	@Override
 	public ModelAndView getReportTemplate() {
-		CountryService countryService = countryServiceDAO.findOne(1l);
-		List<CallRate> callRates = callRateDAO.findLatestRate(1l);
+		CountryService countryService = countryServiceDAO
+				.findByCountryAndService(country, service);
+		List<CallRate> callRates = callRateDAO.findLatestRate(countryService
+				.getId());
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(callRates);
-		
+
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "RATE SHEET");
 		parameterMap.put("country", countryService.getCountry().getName());
