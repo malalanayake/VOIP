@@ -103,6 +103,7 @@ GO
 ----------------------------------
 --Create Monthly Commission Report
 ----------------------------------
+
 CREATE PROCEDURE getSalesReport 
     @reportDate date,
     @salesRepCode numeric(19, 0) 
@@ -132,14 +133,17 @@ AS
 
 
 	-- Join all the data to produce result
-	select c.name,cnt.name+'_'+s.name as countryservice,t.cost,sc.commission*t.cost/100 as commission
-	From #T3 t
+	select IDENTITY(int, 1,1) AS id,c.name,cnt.name+'_'+s.name as countryservice,t.cost,sc.commission*t.cost/100 as commission
+	into #T4
+	From #T3 t 
 	Join Customer c on t.phoneNumber=c.phoneNumber
 	Join CountryService cs on cs.id=c.countryService_id
 	Join Country cnt on cnt.code=cs.country_code
 	Join SalesCustomer sc on sc.customer_phoneNumber=c.phoneNumber
 	Join SalesRep sr on sr.id=sc.salesRep_id
 	Join Service s on s.id=cs.service_id
+	
+	select * from #T4
 Go
 
 --exec getSalesReport '2014-12-05',23
