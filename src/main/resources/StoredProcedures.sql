@@ -100,6 +100,52 @@ GO
 --exec getMonthlyTraffic '2014-12-1'
 
 
+----------------------------------
+--Create Monthly Commission Report
+----------------------------------
+CREATE PROCEDURE getSalesReport 
+    @reportDate date,
+    @salesRepCode numeric(19, 0) 
+AS 
+	--Get All Customers for salesRep
+	SELECT  c.phoneNumber into #T1
+	FROM SalesRep sr 
+	Join SalesCustomer sc on sr.id = sc.salesRep_id
+	Join Customer c on c.phoneNumber=sc.customer_phoneNumber
+	WHERE sr.code=@salesRepCode
+	
+	--Get Call Cost for all call for phone numbers in #T1
+	select distinct cd.id, c.phoneNumber,
+	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) as cost
+	 into #T2
+	from CallDetail cd 
+	join Customer c on c.phoneNumber =cd.fromCustomer_phoneNumber 
+	join CallRate cr on c.countryService_id=cr.country_service_id 
+	Join Country on cd.toCountry_code=Country.code
+	Join #T1 t on t.phoneNumber= c.phoneNumber
+	where YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
+	
+	-- Get total cost by each customer
+	select phoneNumber,SUM(cost) as cost  into #T3
+	From #T2  group by phoneNumber
+	
+
+
+	-- Join all the data to produce result
+	select c.name,cnt.name+'_'+s.name as countryservice,t.cost,sc.commission*t.cost/100 as commission
+	From #T3 t
+	Join Customer c on t.phoneNumber=c.phoneNumber
+	Join CountryService cs on cs.id=c.countryService_id
+	Join Country cnt on cnt.code=cs.country_code
+	Join SalesCustomer sc on sc.customer_phoneNumber=c.phoneNumber
+	Join SalesRep sr on sr.id=sc.salesRep_id
+	Join Service s on s.id=cs.service_id
+Go
+
+--exec getSalesReport '2014-12-05',23
+
+
+
 ---------------------------------------
 CREATE FUNCTION  getCallRate(
 	@country_serviceId numeric(19, 0),
