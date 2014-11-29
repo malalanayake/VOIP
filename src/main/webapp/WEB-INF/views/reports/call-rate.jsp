@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form modelAttribute="command" class="form-inline"  role="form" action="call-rates/pdf" method="POST">
+	<form:form class="form-inline"  role="form" action="call-rates/pdf" method="POST">
 		<div class="form-group">
 			<select  class="form-control " name="country">
 				<c:forEach items="${countries}" var="country">

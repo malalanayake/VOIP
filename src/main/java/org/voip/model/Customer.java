@@ -1,5 +1,6 @@
 package org.voip.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -9,7 +10,7 @@ public class Customer {
 	@Id
 	private long phoneNumber;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private CountryService countryService;
 	
 	//Address 

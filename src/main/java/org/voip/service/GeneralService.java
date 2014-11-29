@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.voip.dao.CountryDAO;
+import org.voip.dao.CountryServiceDAO;
 import org.voip.dao.CustomerDAO;
 import org.voip.dao.ServiceDAO;
 import org.voip.model.Country;
+import org.voip.model.CountryService;
 import org.voip.model.Customer;
 import org.voip.model.Service;
 
@@ -21,6 +23,9 @@ public class GeneralService {
 	
 	@Autowired
 	CustomerDAO customerDao;
+	
+	@Autowired
+	CountryServiceDAO countryServiceDAO;
 	
 	public List<Country> getAllCountries(){
 		List<Country> result;
@@ -38,5 +43,11 @@ public class GeneralService {
 		List<Customer> customers;
 		customers = (List<Customer>) customerDao.findAll();
 		return customers;
+	}
+	
+	public List<org.voip.model.CountryService> getAllCountryService(){
+		List<org.voip.model.CountryService> countryServices ;
+		countryServices =  (List<CountryService>) countryServiceDAO.findAll();
+		return countryServices;
 	}
 }

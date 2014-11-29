@@ -13,4 +13,8 @@ public class CustomerService {
 	public Customer getCustomerById(long phoneNumber){
 		return customerDAO.findOne(phoneNumber);
 	}
+	
+	public void saveCustomer(Customer customer){
+		customerDAO.save(customer);
+	}
 }
