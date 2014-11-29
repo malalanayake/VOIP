@@ -16,7 +16,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 		String path = (String)request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		if(username==null && !path.equals("/login")){
 			//redirect to login
-			response.sendRedirect("login");
+			response.sendRedirect(request.getContextPath()+"/login");
 		}
 		return super.preHandle(request, response, handler);
 	}
