@@ -60,6 +60,24 @@ AS
 	  Where T.maxEffectiveFrom=cr.effectiveFrom and cr.country_service_id=@countryServiceId
 GO
 --execute findLatestRate 1
+
+
+CREATE PROCEDURE getMonthlyReport 
+    @reportDate date,
+    @customerId numeric(19, 0) 
+AS 
+	select distinct cd.id, cd.callDate as date,cd.callTime as time,cd.duration,Country.name as country,cd.toTel as phoneno,
+	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) as cost
+	from CallDetail cd join Customer c
+	on c.phoneNumber =cd.fromCustomer_phoneNumber join CallRate cr
+	on c.countryService_id=cr.country_service_id join Country
+	on cd.toCountry_code=Country.code
+	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
+    
+GO
+
+--execute getMonthlyReport '2014-12-05',71393754
+
 CREATE FUNCTION  getCallRate(
 	@country_serviceId numeric(19, 0),
 	@dest_country_code int,
@@ -96,26 +114,13 @@ BEGIN
 	
 END
 --select dbo.getCallRate(1,597,'2014-12-05',929)
-CREATE PROCEDURE getMonthlyReport 
-    @reportDate date,
-    @customerId numeric(19, 0) 
-AS 
-	select distinct cd.id, cd.callDate as date,cd.callTime as time,cd.duration,Country.name as country,cd.toTel as phoneno,
-	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) 
-	from CallDetail cd join Customer c
-	on c.phoneNumber =cd.fromCustomer_phoneNumber join CallRate cr
-	on c.countryService_id=cr.country_service_id join Country
-	on cd.toCountry_code=Country.code
-	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
-    
-GO
 
 
 
 
 
 
---execute getMonthlyReport '2014-12-05',71393754
+
 
 
 --CREATE PROCEDURE getMonthlyReport 
