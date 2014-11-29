@@ -50,7 +50,6 @@ public class CallRatesDataProcessor implements DataProcessor {
 	@Override
 	public boolean process() {
 		try {
-
 			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			for (int sheetNo = 0; sheetNo < workbook.getNumberOfSheets(); sheetNo++) {
 				HSSFSheet sheet = workbook.getSheetAt(sheetNo);
@@ -83,7 +82,6 @@ public class CallRatesDataProcessor implements DataProcessor {
 						callRate.setOffPeakRate((float) row.getCell(2)
 								.getNumericCellValue());
 						callRate.setEffectiveFrom(effectiveFrom);
-
 						callRateDAO.save(callRate);
 					}
 				}
@@ -93,7 +91,6 @@ public class CallRatesDataProcessor implements DataProcessor {
 			e.printStackTrace();
 			return false;
 		}
-
 		return true;
 	}
 

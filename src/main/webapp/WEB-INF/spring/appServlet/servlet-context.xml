@@ -36,6 +36,13 @@
 
 	</beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/*"/>
+			<beans:bean class="org.voip.controller.interceptor.AuthorizationInterceptor"></beans:bean>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="org.voip.controller" />
 	
 	

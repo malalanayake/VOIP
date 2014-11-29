@@ -84,7 +84,15 @@
 						<li><a href="${context }/report/monthlytraffic">Monthly Traffic</a>
 						<li class="divider"></li>
 						<li><a href="${context }/report/salesrepcommision">Sell_Rep Commision</a>
-					</ul></li>
+					</ul>
+				</li>
+				
+				<li >
+				<a href="${context }/logout" 
+					role="button" aria-expanded="false">Logout
+						
+				</a>
+				</li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
