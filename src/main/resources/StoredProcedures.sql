@@ -133,7 +133,7 @@ AS
 
 
 	-- Join all the data to produce result
-	select IDENTITY(int, 1,1) AS id,c.name,cnt.name+'_'+s.name as countryservice,t.cost,sc.commission*t.cost/100 as commission
+	select IDENTITY(int, 1,1) AS id,c.name as customer,cnt.name+'_'+s.name as countryservice,t.cost,sc.commission*t.cost/100 as commission
 	into #T4
 	From #T3 t 
 	Join Customer c on t.phoneNumber=c.phoneNumber
