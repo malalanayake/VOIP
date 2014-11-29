@@ -27,6 +27,14 @@
     </beans:bean> 
     
     <beans:import resource="jasper-views.xml"/>
+    
+    <beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		<!-- setting maximum upload size -->
+		<beans:property name="maxUploadSize" value="10000000" />
+
+	</beans:bean>
 	
 	<context:component-scan base-package="org.voip.controller" />
 	
