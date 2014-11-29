@@ -9,8 +9,7 @@
 <title>VOIP</title>
 <link rel="stylesheet"
 	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.min.css">
-	<link rel="stylesheet"
-	href="${context}/resources/css/main.css">
+<link rel="stylesheet" href="${context}/resources/css/main.css">
 <script type="text/javascript"
 	src="${context}/resources/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript"
@@ -19,7 +18,10 @@
 </head>
 <body class="container">
 	<header>
-		<div><a href="${context}"><img src='${context}/resources/logo/voip_logo.jpg' alt='logo'/></a></div>
+	<div>
+		<a href="${context}"><img
+			src='${context}/resources/logo/voip_logo.jpg' alt='logo' /></a>
+	</div>
 	</header>
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">
@@ -43,33 +45,58 @@
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="${context}/update-rates">Update international calling rates</a></li>
+						<li><a href="${context}/update-rates">Update
+								international calling rates</a></li>
 						<li class="divider"></li>
-						<li><a href="${context}/output-rates">Output current international calling
-								rates</a></li>
+						<li><a href="${context}/output-rates">Output current
+								international calling rates</a></li>
 						<li class="divider"></li>
-						<li><a href="${context}/process-call-file">Process calling files</a></li>
+						<li><a href="${context}/process-call-file">Process
+								calling files</a></li>
 						<li class="divider"></li>
-						<li><a href="${context}/create-rate-sheet">Create rate sheets</a></li>
+						<li><a href="${context}/create-rate-sheet">Create rate
+								sheets</a></li>
 					</ul></li>
-					
-					
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+
+
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-expanded="false">Customers
 						<span class="caret"></span>
 				</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="<%=request.getContextPath()%>/customers">Add a Customer</a></li>
+						<li><a href="${context }/customers">Add a Customer</a></li>
 						<li class="divider"></li>
-						<li><a href="<%=request.getContextPath() %>/customers/bulkUpdate">Upload Customer List</a></li>
+						<li><a href="${context }/customers/bulkUpdate">Upload
+								Customer List</a></li>
 						<li class="divider"></li>
-						<li><a href="<%= request.getContextPath() %>/customers/list">Show Customers</a>
+						<li><a href="${context }/customers/list">Show Customers</a>
+					</ul></li>
+
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">Reports
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="${context }/report/callrates">Call Rate</a></li>
+						<li class="divider"></li>
+						<li><a href="${context }/report/monthlybills">Monthly Bill</a></li>
+						<li class="divider"></li>
+						<li><a href="${context }/report/monthlytraffic">Monthly Traffic</a>
+						<li class="divider"></li>
+						<li><a href="${context }/report/salesrepcommision">Sell_Rep Commision</a>
 					</ul></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>
 	<!-- /.container-fluid --> </nav>
+	<!-- flash message -->
+	<c:if test="${success!=null}">
+		<div class="alert alert-success" role="alert">${success}</div>
+	</c:if>
+	<c:if test="${error!=null}">
+		<div class="alert alert-danger" role="alert">${error}</div>
+	</c:if>
 	<sitemesh:write property='body' />
 	<footer> </footer>
 </body>
