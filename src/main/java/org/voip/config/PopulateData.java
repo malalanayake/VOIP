@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Test;
@@ -37,7 +39,7 @@ import org.voip.service.SalesCustomerDataProcessor;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/root-context-test-data.xml" })
 @Transactional
-public class DataGeneratorInTest {
+public class PopulateData {
 	@Autowired
 	DataManager dataManager;
 	
@@ -67,15 +69,15 @@ public class DataGeneratorInTest {
 		processCountryData();
 		generateCountryServiceData();
 		processCallRateData();
+		processCallRateData2();
+		processCallRateData3();
+		processCallRateData4();
 		processCustomerData();
 		processCallDetails();
 		processSalesRepData();
 		
 	}
 	
-	/*
-	@Test
-	@Rollback(false)*/
 	public void processCountryData() {
 
 		URL resource = getClass().getResource("/Calling_Codes.xls");
@@ -116,16 +118,16 @@ public class DataGeneratorInTest {
 		assertEquals(3+prev, customerDAO.count());
 
 	}
-	
-	
-	
+
 	public void processCallRateData(){
-		URL resource = getClass().getResource("/Rates_20130901.xls");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		URL resource = getClass().getResource("/Rates_20140115.xls");
 		File file;
 		try {
 			file = new File(resource.toURI());
 			FileInputStream fileInputStream = new FileInputStream(file);
-			Boolean value=dataManager.executeDataProcessor(new CallRatesDataProcessor(fileInputStream, new Date()));
+			Date date = formatter.parse("15/01/2014");
+			Boolean value=dataManager.executeDataProcessor(new CallRatesDataProcessor(fileInputStream, date));
 			assertEquals(true, value);
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
@@ -133,11 +135,76 @@ public class DataGeneratorInTest {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			assertFalse(true);
+		}catch (ParseException e) {
+			e.printStackTrace();
 		}
 
 	}
 	
-	
+	public void processCallRateData2(){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		URL resource = getClass().getResource("/Rates_20140101.xls");
+		File file;
+		try {
+			file = new File(resource.toURI());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			Date date = formatter.parse("01/01/2014");
+			Boolean value=dataManager.executeDataProcessor(new CallRatesDataProcessor(fileInputStream, date));
+			assertEquals(true, value);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void processCallRateData3(){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		URL resource = getClass().getResource("/Rates_20131215.xls");
+		File file;
+		try {
+			file = new File(resource.toURI());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			Date date = formatter.parse("15/12/2013");
+			Boolean value=dataManager.executeDataProcessor(new CallRatesDataProcessor(fileInputStream, date));
+			assertEquals(true, value);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void processCallRateData4(){
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		URL resource = getClass().getResource("/Rates_20130901.xls");
+		File file;
+		try {
+			file = new File(resource.toURI());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			Date date = formatter.parse("01/09/2013");
+			Boolean value=dataManager.executeDataProcessor(new CallRatesDataProcessor(fileInputStream, date));
+			assertEquals(true, value);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	
 	public void processSalesRepData(){
 		URL resource = getClass().getResource("/SalesRep.xls");
@@ -157,8 +224,6 @@ public class DataGeneratorInTest {
 		
 	}
 	
-	
-	
 	public void processCallDetails(){
 		URL resource = getClass().getResource("/Calls_Test.xls");
 		File file;
@@ -176,8 +241,6 @@ public class DataGeneratorInTest {
 		}
 		
 	}
-	
-
 	
 	public void generateCountryServiceData(){
 		Service spectra = new Service();
@@ -201,15 +264,14 @@ public class DataGeneratorInTest {
 		
 		CountryService usaVoip = new CountryService();
 		usaVoip.setCountry(usa);
-		usaSpectra.setService(voip);
+		usaVoip.setService(voip);
 		countryServiceDAO.save(usaVoip);
 		
 		CountryService usaDeluxe = new CountryService();
-		usaSpectra.setCountry(usa);
-		usaSpectra.setService(deluxe);
+		usaDeluxe.setCountry(usa);
+		usaDeluxe.setService(deluxe);
 		countryServiceDAO.save(usaDeluxe);
 		
 	}
-	
 	
 }
