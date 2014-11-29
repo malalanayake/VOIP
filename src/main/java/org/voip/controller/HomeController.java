@@ -78,6 +78,6 @@ public class HomeController {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest req) {
 		req.getSession().removeAttribute(Constants.USERNAME);
-		return "login";
+		return "redirect:/login";
 	}
 }
