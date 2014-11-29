@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CallRatesReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d29d042-99ac-4f67-9c76-c5e5d816881a">
-	<property name="ireport.zoom" value="1.1000000000000012"/>
+	<property name="ireport.zoom" value="1.2100000000000026"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
@@ -18,65 +18,14 @@
 	<field name="country" class="java.lang.String"/>
 	<field name="phoneno" class="java.lang.String"/>
 	<field name="cost" class="java.lang.String"/>
-	<group name="Group2">
-		<groupHeader>
-			<band height="28">
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="0" y="11" width="94" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="03dbf2e7-6946-4ad9-8779-16d9fd20c9f0"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[DATE]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="94" y="11" width="100" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="b92ad927-a72e-425f-a93b-784eff0e041c"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[TIME]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="194" y="11" width="80" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="10527555-7b51-4e23-8e07-f7ceccff5dfc"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[DURATION]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="274" y="11" width="110" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="e48ccbb8-53f7-4404-ae2f-d1d6a5878b6d"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[COUNTRY]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="384" y="11" width="94" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="f8f603cc-deb9-4d1c-8066-2483143a17a8"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[PHONE NO]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="478" y="11" width="77" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="38196561-17fb-4175-9d9c-2b2026a27bdd"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[COST]]></text>
-				</staticText>
-				<line>
-					<reportElement positionType="FixRelativeToBottom" x="0" y="26" width="555" height="1" uuid="274f8581-4b13-410d-b0ed-b34d0d745d20"/>
-					<graphicElement>
-						<pen lineWidth="0.5" lineColor="#999999"/>
-					</graphicElement>
-				</line>
-			</band>
-		</groupHeader>
-	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="148" splitType="Stretch">
+		<band height="149" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="104" width="555" height="44" forecolor="#FFFFFF" backcolor="#CCCCCC" uuid="6fb53d00-1a22-4b94-ab7f-de1acbea0acd"/>
+			</rectangle>
 			<staticText>
 				<reportElement style="Title" x="0" y="13" width="263" height="33" forecolor="#000066" uuid="ccdf32f0-1d61-44f2-a42a-27dfc0dd18ab"/>
 				<textElement verticalAlignment="Middle">
@@ -86,8 +35,8 @@
 			</staticText>
 			<textField>
 				<reportElement x="1" y="79" width="262" height="20" uuid="c122d207-a54c-4331-a688-a6c3b8a9d12f"/>
-				<textElement>
-					<font fontName="Times New Roman" size="14" isBold="true" isUnderline="true"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="11" isBold="true" isUnderline="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{header}]]></textFieldExpression>
 			</textField>
@@ -104,44 +53,44 @@
 TP : (641) 472-7000]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="1" y="129" width="93" height="15" uuid="9edf2154-63ea-40c1-ac9f-0b968627cf7f"/>
+				<reportElement style="Column header" mode="Transparent" x="1" y="129" width="93" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="9edf2154-63ea-40c1-ac9f-0b968627cf7f"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<text><![CDATA[SERVICE       :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="1" y="109" width="93" height="15" uuid="656eb8e6-19f3-4c16-8713-7dadb207813e"/>
+				<reportElement style="Column header" mode="Transparent" x="1" y="109" width="93" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="656eb8e6-19f3-4c16-8713-7dadb207813e"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<text><![CDATA[CUSTOMER  :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="94" y="129" width="128" height="15" uuid="22a26087-89bc-406b-a64f-f52c9d16ba9f"/>
+				<reportElement mode="Transparent" x="94" y="129" width="128" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="22a26087-89bc-406b-a64f-f52c9d16ba9f"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{service}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" x="243" y="109" width="68" height="15" uuid="1318b16c-6df0-4469-a6f9-a3b1768743a9"/>
+				<reportElement style="Column header" mode="Transparent" x="243" y="109" width="68" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="1318b16c-6df0-4469-a6f9-a3b1768743a9"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<text><![CDATA[MONTH  :]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="311" y="109" width="137" height="15" uuid="b97391db-f92a-4da6-a724-a7af3f8b7141"/>
+			<textField pattern="MMM-yy" isBlankWhenNull="true">
+				<reportElement mode="Transparent" x="311" y="109" width="137" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="b97391db-f92a-4da6-a724-a7af3f8b7141"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{month}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="94" y="109" width="128" height="15" uuid="e3843dbd-a61c-45dd-bf26-d48bb8b9acfc"/>
+				<reportElement mode="Transparent" x="94" y="109" width="128" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="e3843dbd-a61c-45dd-bf26-d48bb8b9acfc"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{customer}]]></textFieldExpression>
 			</textField>
@@ -151,10 +100,53 @@ TP : (641) 472-7000]]></text>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="7" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="1" y="6" width="94" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="03dbf2e7-6946-4ad9-8779-16d9fd20c9f0"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="95" y="6" width="100" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="b92ad927-a72e-425f-a93b-784eff0e041c"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[TIME]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="195" y="6" width="80" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="10527555-7b51-4e23-8e07-f7ceccff5dfc"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[DURATION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="275" y="6" width="110" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="e48ccbb8-53f7-4404-ae2f-d1d6a5878b6d"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[COUNTRY]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="385" y="6" width="94" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="f8f603cc-deb9-4d1c-8066-2483143a17a8"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[PHONE NO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="479" y="6" width="76" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="38196561-17fb-4175-9d9c-2b2026a27bdd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[COST]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
-		<band height="18" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<line>
 				<reportElement positionType="FixRelativeToBottom" x="0" y="17" width="555" height="1" uuid="345c6a63-2354-466e-adff-ef39a3401e1a"/>
 				<graphicElement>
@@ -163,69 +155,84 @@ TP : (641) 472-7000]]></text>
 			</line>
 			<textField>
 				<reportElement x="0" y="1" width="94" height="16" uuid="5dcd3d10-3171-40e6-83d4-ec2f986fa100"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{date}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="194" y="1" width="80" height="16" uuid="cf5d2284-3506-4a67-9cc1-ebac5fce2457"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{duration}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="274" y="1" width="110" height="16" uuid="1f65e0ed-73ff-4d35-8506-f92813701acd"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{country}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="384" y="1" width="94" height="16" uuid="7b0853f2-0149-41fe-95eb-ef444a87654b"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{phoneno}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="94" y="1" width="100" height="16" uuid="216f7b8a-1198-4f11-9173-8eeffd0de4d9"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{time}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="478" y="2" width="75" height="16" uuid="b4e5d1b2-be73-4be4-b6d3-7a26878a381e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cost}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch">
-			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="c111bf41-4a02-4041-a484-f177e5ce3d58"/>
-				<graphicElement>
-					<pen lineWidth="0.5" lineColor="#999999"/>
-				</graphicElement>
-			</line>
+		<band height="32" splitType="Stretch">
 			<staticText>
 				<reportElement style="Column header" x="384" y="4" width="94" height="15" uuid="c92afc07-3ad6-4b4c-bccc-14af6cb7f599"/>
-				<textElement>
-					<font fontName="Times New Roman"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="478" y="4" width="75" height="15" uuid="2e6079cb-b141-4327-92f9-b0d0d78b9237"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="20" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="5f94bc65-a816-4755-8e58-d6614b9d25da"/>
+				<reportElement style="Column header" mode="Opaque" x="433" y="0" width="80" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="5f94bc65-a816-4755-8e58-d6614b9d25da"/>
 				<textElement textAlignment="Right">
 					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="f10ad7f2-9283-4404-a57a-45ac567d7a30"/>
+				<reportElement style="Column header" mode="Opaque" x="513" y="0" width="42" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="f10ad7f2-9283-4404-a57a-45ac567d7a30"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="2e0380ec-aa5c-4548-80d9-733944cbd128"/>
+				<reportElement style="Column header" mode="Opaque" x="0" y="0" width="433" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="2e0380ec-aa5c-4548-80d9-733944cbd128"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
