@@ -11,9 +11,9 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
-import org.voip.dao.CustomerMonthlyReportDAO;
+import org.voip.dao.CustomerMonthlyDAO;
 import org.voip.model.Customer;
-import org.voip.model.report.CustomerMonthlyReport;
+import org.voip.model.report.CustomerMonthly;
 
 /**
  * Monthly billing report generator
@@ -25,7 +25,7 @@ public class MonthlyBillReport implements CustomReport {
 	private Customer customer;
 
 	@Autowired
-	private CustomerMonthlyReportDAO customerMonthlyReportDAO;
+	private CustomerMonthlyDAO customerMonthlyReportDAO;
 
 	public MonthlyBillReport(Date month, Customer customer) {
 		this.month = month;
@@ -36,7 +36,7 @@ public class MonthlyBillReport implements CustomReport {
 	public ModelAndView getReportTemplate() {
 
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
-		List<CustomerMonthlyReport> listOfRecords = customerMonthlyReportDAO
+		List<CustomerMonthly> listOfRecords = customerMonthlyReportDAO
 				.getReportByMonthACustomer(month, customer.getPhoneNumber());
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(
 				listOfRecords);
@@ -55,7 +55,7 @@ public class MonthlyBillReport implements CustomReport {
 
 	@Override
 	public void wireBeans(BeanFactory beanFactory) {
-		customerMonthlyReportDAO = beanFactory.getBean(CustomerMonthlyReportDAO.class);
+		customerMonthlyReportDAO = beanFactory.getBean(CustomerMonthlyDAO.class);
 	}
 
 }

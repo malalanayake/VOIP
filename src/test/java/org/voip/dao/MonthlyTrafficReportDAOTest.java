@@ -14,24 +14,22 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/root-context-test-data.xml" })
 @Transactional
-public class CustomerMonthlyReportDAOTest {
-
+public class MonthlyTrafficReportDAOTest {
+	
 	@Autowired
-	CustomerMonthlyDAO customerMonthlyReportDAO;
+	MonthlyTrafficDAO monthlyTrafficReportDAO;
+	
 	@Test
-	public void testStoredProcedures(){
+	public void testStoredProcedure(){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date date;
 		try {
-			date = formatter.parse("05/12/2014");
-		  System.out.println(customerMonthlyReportDAO.getReportByMonthACustomer(date, 7139375437L).size());
+			date = formatter.parse("01/12/2014");
+			System.out.println(monthlyTrafficReportDAO.getMonthlyTraffic(date).size());
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-		
 	}
-
 }

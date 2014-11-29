@@ -61,7 +61,7 @@ AS
 GO
 --execute findLatestRate 1
 
-
+------
 CREATE PROCEDURE getMonthlyReport 
     @reportDate date,
     @customerId numeric(19, 0) 
@@ -78,6 +78,29 @@ GO
 
 --execute getMonthlyReport '2014-12-05',71393754
 
+
+------
+CREATE PROCEDURE getMonthlyTraffic 
+    @monthDate date
+AS 
+  
+    select IDENTITY(int, 1,1) AS id,s.name as serviceName,sC.name as fromCountry,dC.name as toCountry,SUM(duration)/60 as minutesOfCalls into #T1
+	From CallDetail cd 
+	Join Country sC on cd.fromCountry_code=sC.code 
+	Join Country dC on cd.fromCountry_code=dC.code 
+	Join Customer c on cd.fromCustomer_phoneNumber=c.phoneNumber
+	Join CountryService cs on c.countryService_id = cs.service_id
+	Join Service s on cs.service_id= s.id
+	where YEAR(cd.callDate)=YEAR(@monthDate) and MONTH(cd.callDate)=MONTH(@monthDate)
+	group by s.name,sC.name,dC.name
+	
+	select * from #T1
+GO
+
+--exec getMonthlyTraffic '2014-12-1'
+
+
+---------------------------------------
 CREATE FUNCTION  getCallRate(
 	@country_serviceId numeric(19, 0),
 	@dest_country_code int,

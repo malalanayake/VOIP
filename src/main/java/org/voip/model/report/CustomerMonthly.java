@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class CustomerMonthlyReport {
+public class CustomerMonthly {
 	@Id @GeneratedValue
 	private long id;
 	@Temporal(TemporalType.DATE)
