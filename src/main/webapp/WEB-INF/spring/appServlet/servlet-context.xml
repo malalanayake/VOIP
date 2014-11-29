@@ -38,7 +38,7 @@
 	
 	<interceptors>
 		<interceptor>
-			<mapping path="/*"/>
+			<mapping path="/**"/>
 			<beans:bean class="org.voip.controller.interceptor.AuthorizationInterceptor"></beans:bean>
 		</interceptor>
 	</interceptors>
