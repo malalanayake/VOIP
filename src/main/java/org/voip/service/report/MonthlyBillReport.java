@@ -42,7 +42,7 @@ public class MonthlyBillReport implements CustomReport {
 				listOfRecords);
 
 		parameterMap.put("datasource", JRdataSource);
-		parameterMap.put("header", "RATE SHEET");
+		parameterMap.put("header", "MONTHLY BILL");
 		parameterMap.put("month", this.month);
 		parameterMap.put("customer", this.customer.getName());
 		parameterMap.put("service", this.customer.getCountryService()

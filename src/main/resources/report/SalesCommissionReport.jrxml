@@ -12,48 +12,14 @@
 	<parameter name="month" class="java.lang.String"/>
 	<parameter name="total" class="java.lang.String"/>
 	<field name="customer" class="java.lang.String"/>
-	<field name="service" class="java.lang.String"/>
+	<field name="countryservice" class="java.lang.String"/>
 	<field name="cost" class="java.lang.String"/>
 	<field name="commission" class="java.lang.String"/>
-	<group name="Group2">
-		<groupHeader>
-			<band height="28">
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="0" y="11" width="126" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="03dbf2e7-6946-4ad9-8779-16d9fd20c9f0"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[CUSTOMER]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="126" y="11" width="117" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="b92ad927-a72e-425f-a93b-784eff0e041c"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[SERVICE]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="243" y="11" width="109" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="10527555-7b51-4e23-8e07-f7ceccff5dfc"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[COST]]></text>
-				</staticText>
-				<staticText>
-					<reportElement style="Column header" mode="Opaque" x="352" y="11" width="203" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="e48ccbb8-53f7-4404-ae2f-d1d6a5878b6d"/>
-					<textElement>
-						<font fontName="Times New Roman"/>
-					</textElement>
-					<text><![CDATA[COMMISSION]]></text>
-				</staticText>
-			</band>
-		</groupHeader>
-	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="130" splitType="Stretch">
+		<band height="135" splitType="Stretch">
 			<staticText>
 				<reportElement style="Title" x="0" y="13" width="263" height="33" forecolor="#000066" uuid="ccdf32f0-1d61-44f2-a42a-27dfc0dd18ab"/>
 				<textElement verticalAlignment="Middle">
@@ -114,7 +80,36 @@ TP : (641) 472-7000]]></text>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="6" splitType="Stretch"/>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="1" y="10" width="126" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="03dbf2e7-6946-4ad9-8779-16d9fd20c9f0"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[CUSTOMER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="127" y="10" width="117" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="b92ad927-a72e-425f-a93b-784eff0e041c"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[SERVICE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="244" y="10" width="109" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="10527555-7b51-4e23-8e07-f7ceccff5dfc"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[COST]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" mode="Opaque" x="353" y="10" width="202" height="15" forecolor="#CCCCCC" backcolor="#000000" uuid="e48ccbb8-53f7-4404-ae2f-d1d6a5878b6d"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[COMMISSION]]></text>
+			</staticText>
+		</band>
 	</columnHeader>
 	<detail>
 		<band height="21" splitType="Stretch">
@@ -130,7 +125,7 @@ TP : (641) 472-7000]]></text>
 			</textField>
 			<textField>
 				<reportElement x="126" y="1" width="117" height="16" uuid="de2f02cb-85a9-4ecc-9d6e-76e5e2ae8417"/>
-				<textFieldExpression><![CDATA[$F{service}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{countryservice}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="243" y="1" width="109" height="16" uuid="b91c4b74-9576-4742-a4fe-7958b9d3adbe"/>

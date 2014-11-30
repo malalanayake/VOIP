@@ -14,13 +14,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.voip.model.Country;
 import org.voip.model.Customer;
+import org.voip.model.SalesRep;
 import org.voip.model.Service;
 import org.voip.service.CountryService;
 import org.voip.service.CustomerService;
+import org.voip.service.SalesRepService;
 import org.voip.service.ServiceService;
 import org.voip.service.report.CallRateReport;
 import org.voip.service.report.MonthlyBillReport;
 import org.voip.service.report.ReportManager;
+import org.voip.service.report.SalesCommissionReport;
 
 /**
  * Report controller
@@ -31,7 +34,7 @@ import org.voip.service.report.ReportManager;
 @Controller
 @RequestMapping("/report/")
 public class ReportController {
-	
+
 	@Autowired
 	ReportManager reportManager;
 	@Autowired
@@ -40,12 +43,16 @@ public class ReportController {
 	CountryService countryService;
 	@Autowired
 	CustomerService customerService;
+	@Autowired
+	SalesRepService salesRepService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
-	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,@RequestParam("country") int countryCode, @RequestParam("service") int serviceCode) {
+	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
+			@RequestParam("country") int countryCode,
+			@RequestParam("service") int serviceCode) {
 		Country country = countryService.getCountry(countryCode);
 		Service service = serviceService.getService(serviceCode);
-		CallRateReport callRateReport = new CallRateReport(country,service);
+		CallRateReport callRateReport = new CallRateReport(country, service);
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;
@@ -61,8 +68,27 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,customer);
-	    modelAndView = reportManager.getReportView(monthlyBillReport);
+		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,
+				customer);
+		modelAndView = reportManager.getReportView(monthlyBillReport);
+
+		return modelAndView;
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "sales-commission/pdf")
+	public ModelAndView generateSalesCommissionPdfReport(
+			ModelAndView modelAndView) {
+		SalesRep salesRep = salesRepService.getSalesRepById(1l);
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		try {
+			date = formatter.parse("2014/12/05");
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		SalesCommissionReport monthlyBillReport = new SalesCommissionReport(
+				salesRep, date);
+		modelAndView = reportManager.getReportView(monthlyBillReport);
 
 		return modelAndView;
 	}
