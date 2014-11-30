@@ -38,6 +38,7 @@ public class ReportController_Ramesh {
 	@RequestMapping(value="monthlybills",method= RequestMethod.GET)
 	public String reportForMonthlyBill(Model model){
 		System.out.println("Forwading to Monthly billing report page");
+		model.addAttribute("customerList", generalServices.getAllCustomers());
 		return "reports/monthly-bill";
 	}
 	

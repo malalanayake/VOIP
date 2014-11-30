@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,19 +59,19 @@ public class ReportController {
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "monthly-bill/pdf")
-	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView) {
-		Customer customer = customerService.getCustomerById(7139375437l);
+	@RequestMapping(method = RequestMethod.POST, value = "monthly-bill/pdf")
+	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView, @RequestParam("date")String sDate, @RequestParam("customer") long customerID, BindingResult result) {
+		Customer customer = customerService.getCustomerById(customerID);
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			date = formatter.parse("2014/12/05");
+			date = formatter.parse(sDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,
-				customer);
-		modelAndView = reportManager.getReportView(monthlyBillReport);
+		
+		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,customer);
+	    modelAndView = reportManager.getReportView(monthlyBillReport);
 
 		return modelAndView;
 	}
