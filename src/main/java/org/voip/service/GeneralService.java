@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.voip.dao.CountryDAO;
 import org.voip.dao.CountryServiceDAO;
 import org.voip.dao.CustomerDAO;
+import org.voip.dao.SalesRepDAO;
 import org.voip.dao.ServiceDAO;
 import org.voip.model.Country;
 import org.voip.model.CountryService;
 import org.voip.model.Customer;
+import org.voip.model.SalesRep;
 import org.voip.model.Service;
 
 @org.springframework.stereotype.Service
@@ -26,6 +28,9 @@ public class GeneralService {
 	
 	@Autowired
 	CountryServiceDAO countryServiceDAO;
+	
+	@Autowired
+	SalesRepDAO salesRepDao;
 	
 	public List<Country> getAllCountries(){
 		List<Country> result;
@@ -49,5 +54,9 @@ public class GeneralService {
 		List<org.voip.model.CountryService> countryServices ;
 		countryServices =  (List<CountryService>) countryServiceDAO.findAll();
 		return countryServices;
+	}
+	
+	public List<SalesRep> getAllSalesRep(){
+		return (List<SalesRep>) salesRepDao.findAll();
 	}
 }

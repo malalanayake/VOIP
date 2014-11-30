@@ -60,7 +60,8 @@ public class ReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "monthly-bill/pdf")
-	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView, @RequestParam("date")String sDate, @RequestParam("customer") long customerID, BindingResult result) {
+	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView, 
+			@RequestParam("date")String sDate, @RequestParam("customer") long customerID, BindingResult result) {
 		Customer customer = customerService.getCustomerById(customerID);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -76,14 +77,14 @@ public class ReportController {
 		return modelAndView;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "sales-commission/pdf")
+	@RequestMapping(method = RequestMethod.POST, value = "sales-commission/pdf")
 	public ModelAndView generateSalesCommissionPdfReport(
-			ModelAndView modelAndView) {
-		SalesRep salesRep = salesRepService.getSalesRepById(1l);
+			ModelAndView modelAndView,@RequestParam("salesRep") int salesRepID,@RequestParam("date") String sDate) {
+		SalesRep salesRep = salesRepService.getSalesRepById(salesRepID);
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			date = formatter.parse("2014/12/05");
+			date = formatter.parse(sDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

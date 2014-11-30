@@ -51,6 +51,7 @@ public class ReportController_Ramesh {
 	@RequestMapping(value="salesrepcommision",method=RequestMethod.GET)
 	public String reportForSalesRepCommision(Model model){
 		System.out.println("Forwarding to Sales representative commision page");
+		model.addAttribute("salesRepList", generalServices.getAllSalesRep());
 		return "reports/sales-rep-commision";
 	}
 	
