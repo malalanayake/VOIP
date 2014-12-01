@@ -1,5 +1,6 @@
 package org.voip.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +18,6 @@ import org.voip.model.CallRate;
 @Repository
 public interface CallRateDAO extends CrudRepository<CallRate, Long> {
 	
-	@Query(value="execute findLatestRate :countryServiceId",nativeQuery = true)
-	public List<CallRate> findLatestRate(@Param("countryServiceId") long countryServiceId);
+	@Query(value="execute findLatestRate :countryServiceId,:date",nativeQuery = true)
+	public List<CallRate> findLatestRate(@Param("countryServiceId") long countryServiceId,@Param("date") Date date);
 }

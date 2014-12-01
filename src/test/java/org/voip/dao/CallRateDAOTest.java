@@ -1,5 +1,7 @@
 package org.voip.dao;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ public class CallRateDAOTest {
 	
 	@Test
 	public void testStoredProcedures(){
-	 	System.out.println(callRateDAO.findLatestRate(1).size());
+	 	System.out.println(callRateDAO.findLatestRate(1,new Date()).size());
 	}
 
 }

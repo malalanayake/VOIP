@@ -48,17 +48,28 @@ GO
 ---
 ---Stored Precures for Reports----
 CREATE PROCEDURE findLatestRate 
-    @countryServiceId int 
+    @countryServiceId int,
+    @date date
 AS 
-  
-     SELECT distinct cr.*
-    FROM CallRate cr Join 
-    ( select country_service_id , dest_country_code,MAX(effectiveFrom) as maxEffectiveFrom
-	  from CallRate
-	  group by country_service_id , dest_country_code
-	  ) as T on cr.country_service_id=T.country_service_id and cr.dest_country_code=T.dest_country_code 
-	  Where T.maxEffectiveFrom=cr.effectiveFrom and cr.country_service_id=@countryServiceId
+		select distinct cr.*,c.name into #T2
+		from CallRate cr 
+		Join 
+		( 
+			select country_service_id , dest_country_code,MAX(effectiveFrom) as maxEffectiveFrom
+			from CallRate
+			where effectiveFrom<=@date
+			group by country_service_id , dest_country_code
+		)
+	    as T on cr.country_service_id=T.country_service_id and cr.dest_country_code=T.dest_country_code 
+		Join Country c on c.code = cr.dest_country_code
+		where T.maxEffectiveFrom=cr.effectiveFrom and cr.country_service_id=1
+		order by c.name
+		
+		SELECT T.id,T.effectiveFrom,T.effectiveTo,T.offPeakRate,T.peakRate,T.country_service_id,T.dest_country_code
+		From #T2 as T
+    
 GO
+--execute findLatestRate 1,'2013-10-05
 --execute findLatestRate 1
 
 ------
