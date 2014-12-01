@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CallRatesReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d29d042-99ac-4f67-9c76-c5e5d816881a">
 	<property name="ireport.zoom" value="1.2100000000000026"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="11"/>
+	<property name="ireport.y" value="35"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -54,56 +54,56 @@
 TP : (641) 472-7000]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Transparent" x="2" y="145" width="93" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="9edf2154-63ea-40c1-ac9f-0b968627cf7f"/>
+				<reportElement style="Column header" mode="Transparent" x="2" y="145" width="71" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="9edf2154-63ea-40c1-ac9f-0b968627cf7f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
-				<text><![CDATA[SERVICE       :]]></text>
+				<text><![CDATA[SERVICE      :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Transparent" x="2" y="104" width="93" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="656eb8e6-19f3-4c16-8713-7dadb207813e"/>
+				<reportElement style="Column header" mode="Transparent" x="1" y="104" width="72" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="656eb8e6-19f3-4c16-8713-7dadb207813e"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
-				<text><![CDATA[CUSTOMER  :]]></text>
+				<text><![CDATA[CUSTOMER :]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Transparent" x="95" y="145" width="128" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="22a26087-89bc-406b-a64f-f52c9d16ba9f"/>
+				<reportElement mode="Transparent" x="73" y="145" width="150" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="22a26087-89bc-406b-a64f-f52c9d16ba9f"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{service}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" mode="Transparent" x="243" y="145" width="68" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="1318b16c-6df0-4469-a6f9-a3b1768743a9"/>
+				<reportElement style="Column header" mode="Transparent" x="243" y="145" width="58" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="1318b16c-6df0-4469-a6f9-a3b1768743a9"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<text><![CDATA[MONTH  :]]></text>
 			</staticText>
 			<textField pattern="" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="311" y="145" width="137" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="b97391db-f92a-4da6-a724-a7af3f8b7141"/>
+				<reportElement mode="Transparent" x="301" y="145" width="147" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="b97391db-f92a-4da6-a724-a7af3f8b7141"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{month}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="95" y="104" width="128" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="e3843dbd-a61c-45dd-bf26-d48bb8b9acfc"/>
+				<reportElement mode="Transparent" x="73" y="104" width="150" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="e3843dbd-a61c-45dd-bf26-d48bb8b9acfc"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{customer}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" mode="Transparent" x="2" y="124" width="93" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="8302e719-0500-4578-8a66-76670df064e5"/>
+				<reportElement style="Column header" mode="Transparent" x="2" y="124" width="71" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="8302e719-0500-4578-8a66-76670df064e5"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
-				<text><![CDATA[ADDRESS     :]]></text>
+				<text><![CDATA[ADDRESS    :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="95" y="124" width="458" height="15" uuid="6baa3dcc-3cde-4016-84de-6d9f31ea5ca8"/>
+				<reportElement x="73" y="124" width="480" height="15" uuid="6baa3dcc-3cde-4016-84de-6d9f31ea5ca8"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>
@@ -215,11 +215,11 @@ TP : (641) 472-7000]]></text>
 	<columnFooter>
 		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="384" y="4" width="94" height="15" uuid="c92afc07-3ad6-4b4c-bccc-14af6cb7f599"/>
+				<reportElement style="Column header" x="433" y="4" width="45" height="15" forecolor="#000000" uuid="c92afc07-3ad6-4b4c-bccc-14af6cb7f599"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="9"/>
 				</textElement>
-				<text><![CDATA[TOTAL]]></text>
+				<text><![CDATA[TOTAL   :]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="478" y="4" width="75" height="15" uuid="2e6079cb-b141-4327-92f9-b0d0d78b9237"/>
