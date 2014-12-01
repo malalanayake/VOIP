@@ -17,10 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.voip.config.Constants;
 import org.voip.model.Country;
 import org.voip.model.Service;
-import org.voip.service.CallRatesDataProcessor;
-import org.voip.service.CallsDataProcessor;
-import org.voip.service.DataManager;
 import org.voip.service.GeneralService;
+import org.voip.service.processor.CallRatesDataProcessor;
+import org.voip.service.processor.CallsDataProcessor;
+import org.voip.service.processor.DataManager;
 
 @Controller
 public class RateController {

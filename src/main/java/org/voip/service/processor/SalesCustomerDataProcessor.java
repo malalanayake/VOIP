@@ -1,4 +1,4 @@
-package org.voip.service;
+package org.voip.service.processor;
 
 import java.io.FileInputStream;
 import java.util.Iterator;

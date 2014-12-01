@@ -1,4 +1,4 @@
-package org.voip.service;
+package org.voip.service.processor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;

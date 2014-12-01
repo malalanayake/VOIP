@@ -27,6 +27,12 @@ import org.voip.dao.CallRateDAO;
 import org.voip.dao.CountryDAO;
 import org.voip.dao.CustomerDAO;
 import org.voip.dao.SalesCustomerDAO;
+import org.voip.service.processor.CallRatesDataProcessor;
+import org.voip.service.processor.CallsDataProcessor;
+import org.voip.service.processor.CountryDataProcessor;
+import org.voip.service.processor.CustomerDataProcessor;
+import org.voip.service.processor.DataManager;
+import org.voip.service.processor.SalesCustomerDataProcessor;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/root-context-test.xml" })

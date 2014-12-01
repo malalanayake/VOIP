@@ -1,4 +1,4 @@
-package org.voip.service;
+package org.voip.service.processor;
 
 /**
  * Enum which is going to provide the data type
