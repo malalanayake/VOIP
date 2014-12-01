@@ -8,10 +8,24 @@
 </head>
 <body>
 	<form method="POST" action="monthly-traffic/excel" class="form-inline">
-		<div class="form-group">
-			<input type="date" class="form-control" name="date" />
+		<div class="form-group" >
+			<div class="input-append date" id="datepicker" data-date="2014-12"
+				data-date-format="yyyy-mm">
+
+				<input type="text" class="" readonly="readonly" name="date"> <span
+					class="add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+			</div>
 		</div>
 		<button type="submit" class="btn btn-success">Generate Report</button>
 	</form>
+	<script type="text/javascript">
+		$(function() {
+			$("#datepicker").datepicker({
+				format : "yyyy-mm",
+				viewMode : "months",
+				minViewMode : "months"
+			});
+		});
+	</script>
 </body>
 </html>

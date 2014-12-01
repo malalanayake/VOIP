@@ -8,12 +8,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>VOIP</title>
 <link rel="stylesheet"
+	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.combined.min.css">
+<link rel="stylesheet"
 	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${context}/resources/datepicker/datepicker3.css">
 <link rel="stylesheet" href="${context}/resources/css/main.css">
 <script type="text/javascript"
 	src="${context}/resources/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript"
 	src="${context}/resources/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="${context}/resources/datepicker/bootstrap-datepicker.js"></script>
 <script type="text/javascript"
 	src="${context}/resources/js/main.js"></script>
 <sitemesh:write property='head' />
