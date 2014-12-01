@@ -8,8 +8,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>VOIP</title>
 <link rel="stylesheet"
-	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.combined.min.css">
-<link rel="stylesheet"
 	href="${context}/resources/bootstrap-3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="${context}/resources/datepicker/datepicker3.css">

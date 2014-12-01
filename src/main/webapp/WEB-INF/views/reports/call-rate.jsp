@@ -30,6 +30,7 @@
 			<input type="date" class="form-control" name="date" />
 		</div>
 		<button type="submit" class="btn btn-success">Generate Report</button>
+		<button class="btn btn-success">Generate Excel</button>
 	</form:form>
 </body>
 </html>
