@@ -173,21 +173,21 @@ TP : (641) 472-7000]]></text>
 	<pageFooter>
 		<band height="16" splitType="Stretch">
 			<textField>
-				<reportElement style="Column header" mode="Opaque" x="433" y="0" width="80" height="16" backcolor="#CCCCCC" uuid="5f94bc65-a816-4755-8e58-d6614b9d25da"/>
+				<reportElement style="Column header" mode="Opaque" x="433" y="0" width="80" height="16" forecolor="#000000" backcolor="#CCCCCC" uuid="5f94bc65-a816-4755-8e58-d6614b9d25da"/>
 				<textElement textAlignment="Right">
 					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement style="Column header" mode="Opaque" x="513" y="0" width="42" height="16" backcolor="#CCCCCC" uuid="f10ad7f2-9283-4404-a57a-45ac567d7a30"/>
+				<reportElement style="Column header" mode="Opaque" x="513" y="0" width="42" height="16" forecolor="#000000" backcolor="#CCCCCC" uuid="f10ad7f2-9283-4404-a57a-45ac567d7a30"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement style="Column header" mode="Opaque" x="0" y="0" width="433" height="16" backcolor="#CCCCCC" uuid="2e0380ec-aa5c-4548-80d9-733944cbd128"/>
+			<textField pattern="EEEEE dd MMMMM yyyy hh:mm aaa">
+				<reportElement style="Column header" mode="Opaque" x="0" y="0" width="433" height="16" forecolor="#000000" backcolor="#CCCCCC" uuid="2e0380ec-aa5c-4548-80d9-733944cbd128"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>

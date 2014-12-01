@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CallRatesReport" language="groovy" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="277" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d29d042-99ac-4f67-9c76-c5e5d816881a">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CallRatesReport" language="groovy" columnCount="3" pageWidth="595" pageHeight="842" columnWidth="185" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d29d042-99ac-4f67-9c76-c5e5d816881a">
 	<property name="ireport.zoom" value="1.4641000000000013"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="52"/>
@@ -15,8 +15,6 @@
 	<parameter name="month" class="java.lang.String"/>
 	<field name="peakRate" class="java.lang.String"/>
 	<field name="offPeakRate" class="java.lang.String"/>
-	<field name="effectiveFrom" class="java.lang.String"/>
-	<field name="effectiveTo" class="java.lang.String"/>
 	<field name="destCountry.name" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
@@ -137,18 +135,11 @@ TP : (641) 472-7000]]></text>
 				<text><![CDATA[OFF PEAK]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="125" y="5" width="61" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="b92ad927-a72e-425f-a93b-784eff0e041c"/>
+				<reportElement style="Column header" mode="Opaque" x="125" y="5" width="59" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="b92ad927-a72e-425f-a93b-784eff0e041c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<text><![CDATA[PEAK]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="186" y="5" width="89" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="10527555-7b51-4e23-8e07-f7ceccff5dfc"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="8"/>
-				</textElement>
-				<text><![CDATA[EFFECTIVE FROM]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Opaque" x="1" y="5" width="68" height="15" forecolor="#FFFFFF" backcolor="#000000" uuid="e29f5497-8bca-4b3e-84ba-2001903f7e5b"/>
@@ -162,7 +153,7 @@ TP : (641) 472-7000]]></text>
 	<detail>
 		<band height="19" splitType="Stretch">
 			<line>
-				<reportElement positionType="FixRelativeToBottom" x="0" y="17" width="275" height="1" uuid="345c6a63-2354-466e-adff-ef39a3401e1a"/>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="17" width="184" height="1" uuid="345c6a63-2354-466e-adff-ef39a3401e1a"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -180,13 +171,6 @@ TP : (641) 472-7000]]></text>
 					<font fontName="Times New Roman" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{offPeakRate}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="186" y="1" width="89" height="16" uuid="ca971d11-0b8b-4150-9f72-8628b6a92482"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{effectiveFrom}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="1" y="0" width="68" height="17" uuid="66fa135a-eebb-4672-83ee-1c058f11212a"/>
@@ -216,7 +200,7 @@ TP : (641) 472-7000]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="EEEEE dd MMMMM yyyy">
+			<textField pattern="EEEEE dd MMMMM yyyy hh:mm aaa" isBlankWhenNull="true">
 				<reportElement style="Column header" mode="Opaque" x="0" y="0" width="433" height="14" forecolor="#000000" backcolor="#CCCCCC" uuid="2e0380ec-aa5c-4548-80d9-733944cbd128"/>
 				<textElement>
 					<font fontName="Times New Roman" size="10" isBold="false"/>
