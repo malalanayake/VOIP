@@ -58,11 +58,19 @@ public class ReportController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
-			@RequestParam("country") int countryCode,
-			@RequestParam("service") int serviceCode) {
+			@RequestParam("country") int countryCode,@RequestParam("service") int serviceCode, @RequestParam("date") String sDate) {
+		
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(sDate);
 		Country country = countryService.getCountry(countryCode);
 		Service service = serviceService.getService(serviceCode);
-		CallRateReport callRateReport = new CallRateReport(country, service, new Date());
+		CallRateReport callRateReport = new CallRateReport(country, service, date);
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;

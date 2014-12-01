@@ -26,6 +26,9 @@
 				</c:forEach>
 			</select>
 		</div>
+		<div class="form-group">
+			<input type="date" class="form-control" name="date" />
+		</div>
 		<button type="submit" class="btn btn-success">Generate Report</button>
 	</form:form>
 </body>
