@@ -45,7 +45,7 @@ public class CallRateReport implements CustomReport {
 		CountryService countryService = countryServiceDAO
 				.findByCountryAndService(country, service);
 		List<CallRate> callRates = callRateDAO.findLatestRate(countryService
-				.getId());
+				.getId(),month);
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(callRates);
@@ -55,9 +55,9 @@ public class CallRateReport implements CustomReport {
 		parameterMap.put("month", month);
 		parameterMap.put("country", countryService.getCountry().getName());
 		parameterMap.put("service", countryService.getService().getName());
-		parameterMap.put("peakTime", countryService.getCountry().getPeakTime());
-		parameterMap.put("offPeakTime", countryService.getCountry()
-				.getOffPeakTime());
+		parameterMap.put("peakTime",getTimeStampString(countryService.getCountry().getPeakTime()));
+		parameterMap.put("offPeakTime", getTimeStampString(countryService.getCountry()
+				.getOffPeakTime()));
 
 		ModelAndView modelAndView = new ModelAndView("callRatePdfReport",
 				parameterMap);
@@ -69,5 +69,26 @@ public class CallRateReport implements CustomReport {
 		callRateDAO = beanFactory.getBean(CallRateDAO.class);
 		countryServiceDAO = beanFactory.getBean(CountryServiceDAO.class);
 	}
-
+	
+	public String getTimeStampString(int time){
+		String s = String.valueOf(time);
+		StringBuilder timeStampBuilder=new StringBuilder();
+		int length = s.length();
+		if(length<=2){
+			timeStampBuilder.append("00:");
+			if(s.length()==1)
+				timeStampBuilder.append("0");
+			timeStampBuilder.append(s);
+		}
+		else if(length>2&&length<=4){
+			String min= s.substring(length-2, length);
+			String hr = s.substring(0,length-2);
+			if(hr.length()==1)
+				timeStampBuilder.append("0");
+			timeStampBuilder.append(hr);
+			timeStampBuilder.append(":"+min);
+		}
+		
+		return timeStampBuilder.toString();
+	}
 }
