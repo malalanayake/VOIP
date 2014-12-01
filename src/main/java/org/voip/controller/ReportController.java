@@ -1,11 +1,19 @@
 package org.voip.controller;
 
 import java.beans.PropertyEditor;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -23,6 +31,7 @@ import org.voip.service.SalesRepService;
 import org.voip.service.ServiceService;
 import org.voip.service.report.CallRateReport;
 import org.voip.service.report.MonthlyBillReport;
+import org.voip.service.report.MonthlyTrafficReport;
 import org.voip.service.report.ReportManager;
 import org.voip.service.report.SalesCommissionReport;
 
@@ -93,6 +102,32 @@ public class ReportController {
 		modelAndView = reportManager.getReportView(monthlyBillReport);
 
 		return modelAndView;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "monthly-traffic/excel")
+	public void generateMonthlyTrafficExelReport(@RequestParam("date")String sDate,HttpServletRequest req,
+			HttpServletResponse res) {
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		MonthlyTrafficReport monthlyBillReport = new MonthlyTrafficReport(date);
+	    ModelAndView mav = reportManager.getReportView(monthlyBillReport);
+	    
+	    HttpHeaders header = new HttpHeaders();
+	    header.setContentType(new MediaType("application", "vnd.ms-excel"));
+	    res.setHeader("Content-disposition", "attachment; filename=" + date.toString()+".xls");
+	    HSSFWorkbook book = (HSSFWorkbook)mav.getModel().get("excelBook");
+	    try {
+			book.write(res.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

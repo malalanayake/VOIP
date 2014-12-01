@@ -72,14 +72,8 @@
 						<li><a href="${context}/update-rates">Update
 								international calling rates</a></li>
 						<li class="divider"></li>
-						<li><a href="${context}/output-rates">Output current
-								international calling rates</a></li>
-						<li class="divider"></li>
 						<li><a href="${context}/process-call-file">Process
 								calling files</a></li>
-						<li class="divider"></li>
-						<li><a href="${context}/create-rate-sheet">Create rate
-								sheets</a></li>
 					</ul></li>
 
 
@@ -109,7 +103,7 @@
 						<li><a href="${context }/report/monthlytraffic">Monthly
 								Traffic</a>
 						<li class="divider"></li>
-						<li><a href="${context }/report/salesrepcommision">Sell_Rep
+						<li><a href="${context }/report/salesrepcommision">Sales rep
 								Commision</a>
 					</ul></li>
 
