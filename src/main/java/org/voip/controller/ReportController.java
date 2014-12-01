@@ -29,6 +29,7 @@ import org.voip.service.CountryService;
 import org.voip.service.CustomerService;
 import org.voip.service.SalesRepService;
 import org.voip.service.ServiceService;
+import org.voip.service.report.CallRateExcelReport;
 import org.voip.service.report.CallRateReport;
 import org.voip.service.report.MonthlyBillReport;
 import org.voip.service.report.MonthlyTrafficReport;
@@ -74,6 +75,37 @@ public class ReportController {
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST, value = "call-rates/excel")
+	public void generateCallRateExcelReport(HttpServletResponse res,
+			@RequestParam("country") int countryCode,@RequestParam("service") int serviceCode, @RequestParam("date") String sDate) {
+		
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(sDate);
+		Country country = countryService.getCountry(countryCode);
+		Service service = serviceService.getService(serviceCode);
+		CallRateExcelReport callRateExcelReport = new CallRateExcelReport(service, country, date);
+		ModelAndView mav = reportManager.getReportView(callRateExcelReport);
+		
+		HttpHeaders header = new HttpHeaders();
+	    header.setContentType(new MediaType("application", "vnd.ms-excel"));
+	    String name= String.format("%s_%s", country.getName(),service.getName());
+	    res.setHeader("Content-disposition", "attachment; filename=" + name+".xls");
+	    HSSFWorkbook book = (HSSFWorkbook)mav.getModel().get("excelBook");
+	    try {
+			book.write(res.getOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "monthly-bill/pdf")
