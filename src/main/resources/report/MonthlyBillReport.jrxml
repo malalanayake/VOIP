@@ -80,7 +80,7 @@ TP : (641) 472-7000]]></text>
 				</textElement>
 				<text><![CDATA[MONTH  :]]></text>
 			</staticText>
-			<textField pattern="MMM-yy" isBlankWhenNull="true">
+			<textField pattern="" isBlankWhenNull="false">
 				<reportElement mode="Transparent" x="311" y="109" width="137" height="15" forecolor="#000000" backcolor="#CCCCCC" uuid="b97391db-f92a-4da6-a724-a7af3f8b7141"/>
 				<textElement>
 					<font fontName="Times New Roman" size="11"/>

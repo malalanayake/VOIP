@@ -115,7 +115,7 @@ TP : (641) 472-7000]]></text>
 				</textElement>
 				<text><![CDATA[DATE  :]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="">
 				<reportElement mode="Transparent" x="263" y="130" width="250" height="13" forecolor="#000000" backcolor="#000000" uuid="394955ff-a152-4d8a-bb09-5ddc9d43869f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="11"/>

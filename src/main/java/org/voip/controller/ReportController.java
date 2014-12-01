@@ -62,7 +62,7 @@ public class ReportController {
 			@RequestParam("service") int serviceCode) {
 		Country country = countryService.getCountry(countryCode);
 		Service service = serviceService.getService(serviceCode);
-		CallRateReport callRateReport = new CallRateReport(country, service);
+		CallRateReport callRateReport = new CallRateReport(country, service, new Date());
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;
