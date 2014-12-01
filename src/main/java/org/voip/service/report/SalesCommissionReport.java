@@ -2,7 +2,6 @@ package org.voip.service.report;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import net.sf.jasperreports.engine.JRDataSource;
@@ -13,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.ModelAndView;
 import org.voip.dao.SalesCommissionDAO;
 import org.voip.model.SalesRep;
-import org.voip.model.report.SalesCommission;
+import org.voip.model.report.SalesCommissionTotalReport;
 
 /**
  * Sales Commission report generator
@@ -35,10 +34,10 @@ public class SalesCommissionReport implements CustomReport {
 	@Override
 	public ModelAndView getReportTemplate() {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
-		List<SalesCommission> listOfRecords = salesCommissionDao
+		SalesCommissionTotalReport salesCommissionReport = salesCommissionDao
 				.getSalesReport(date, salesRep.getCode());
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(
-				listOfRecords);
+				salesCommissionReport.getSalesCommissionList());
 
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "SALES COMMISSION");

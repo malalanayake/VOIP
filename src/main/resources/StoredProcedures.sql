@@ -122,6 +122,13 @@ CREATE PROCEDURE getSalesReport
     @reportDate date,
     @salesRepCode numeric(19, 0) 
 AS 
+	
+	SET NOCOUNT ON;
+	--Drop All Row First
+	truncate table SalesCommission;
+	delete from SalesCommissionTotalReport;
+	insert into SalesCommissionTotalReport values (0);
+	
 	--Get All Customers for salesRep
 	SELECT  c.phoneNumber into #T1
 	FROM SalesRep sr 
@@ -147,8 +154,9 @@ AS
 
 
 	-- Join all the data to produce result
-	select IDENTITY(int, 1,1) AS id,c.name as customer,cnt.name+'_'+s.name as countryservice,t.cost,sc.commission*t.cost/100 as commission
-	into #T4
+	insert into SalesCommission
+	select sc.commission*t.cost/100 as commission,t.cost,cnt.name+'_'+s.name as countryservice,c.name as customer,(select top 1 id from SalesCommissionTotalReport) as report_id
+	
 	From #T3 t 
 	Join Customer c on t.phoneNumber=c.phoneNumber
 	Join CountryService cs on cs.id=c.countryService_id
@@ -157,7 +165,10 @@ AS
 	Join SalesRep sr on sr.id=sc.salesRep_id
 	Join Service s on s.id=cs.service_id
 	
-	select * from #T4
+	update SalesCommissionTotalReport
+	set totalCommission = ( select SUM(commission) from SalesCommission)
+	
+	select * from SalesCommissionTotalReport;
 Go
 
 --exec getSalesReport '2014-12-05',23
