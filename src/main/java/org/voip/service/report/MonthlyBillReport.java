@@ -1,5 +1,7 @@
 package org.voip.service.report;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -42,10 +44,13 @@ public class MonthlyBillReport implements CustomReport {
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(
 				customerMonthlyReport.getAllCustomerMonthly());
 
+		DateFormat df =new SimpleDateFormat("MMMM dd, yyyy");
+		String dateString = df.format(month);
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "MONTHLY BILL");
-		parameterMap.put("month", this.month);
+		parameterMap.put("month", dateString);
 		parameterMap.put("customer", this.customer.getName());
+		parameterMap.put("address", this.customer.toString());
 		parameterMap.put("service", this.customer.getCountryService()
 				.getService().getName());
 		parameterMap.put("total", customerMonthlyReport.getTotalCost());

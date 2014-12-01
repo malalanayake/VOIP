@@ -1,5 +1,7 @@
 package org.voip.service.report;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,9 +41,11 @@ public class SalesCommissionReport implements CustomReport {
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(
 				salesCommissionReport.getSalesCommissionList());
 
+		DateFormat df =new SimpleDateFormat("MMMM dd, yyyy");
+		String dateString = df.format(this.date);
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "SALES COMMISSION");
-		parameterMap.put("month", this.date);
+		parameterMap.put("month", dateString);
 		parameterMap.put("salesrep", this.salesRep.getCode());
 		parameterMap.put("total", salesCommissionReport.getTotalCommission());
 
