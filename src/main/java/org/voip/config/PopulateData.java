@@ -32,6 +32,7 @@ import org.voip.model.Service;
 import org.voip.service.processor.CallRatesDataProcessor;
 import org.voip.service.processor.CallsDataProcessor;
 import org.voip.service.processor.CountryDataProcessor;
+import org.voip.service.processor.CountryServiceDataProcessor;
 import org.voip.service.processor.CustomerDataProcessor;
 import org.voip.service.processor.DataManager;
 import org.voip.service.processor.SalesCustomerDataProcessor;
@@ -67,7 +68,8 @@ public class PopulateData {
 	@Rollback(false)
 	public void populateData(){
 		processCountryData();
-		generateCountryServiceData();
+		processCountryServiceData();
+		//generateCountryServiceData();
 		processCallRateData();
 		processCallRateData2();
 		processCallRateData3();
@@ -98,6 +100,23 @@ public class PopulateData {
 
 	}
 	
+	public void processCountryServiceData(){
+		URL resource = getClass().getResource("/Country_Service.xls");
+		File file;
+		try {
+			file = new File(resource.toURI());
+			FileInputStream fileInputStream = new FileInputStream(file);
+			Boolean value=dataManager.executeDataProcessor(new CountryServiceDataProcessor(fileInputStream));
+			assertEquals(true, value);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			assertFalse(true);
+		}
+		assertEquals(countryDAO.count(),205);
+	}
 	
 	public void processCustomerData(){
 		long prev=customerDAO.count();
