@@ -195,8 +195,10 @@ BEGIN
 	
 	IF( @calltime > @peakTime and @calltime < @offPeakTime) 
 		set @call_rate= @peakRate
-	IF( @calltime < @peakTime and @calltime > @offPeakTime  ) 
-		set @call_rate= @peakRate	
+
+	IF( @calltime < @peakTime or @calltime > @offPeakTime  ) 
+		set @call_rate= @offPeakRate	
+
 	return @call_rate
 	
 END
