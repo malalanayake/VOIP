@@ -37,7 +37,33 @@
 			<div>
 				<form:errors path="countryService" cssClass="error" />
 			</div>
+
 		</div>
+		
+		<div class="form-group">
+		<label for="salesRep" class="col-sm-2 control-label">Select Sales Rep</label>
+			<div class="col-sm-10">
+				<select  name="salesRep">
+					<c:forEach items="${salesRepList}" var="salesRep">
+						<option value="${salesRep.id }">${salesRep.code }</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div>
+<%-- 				<form:errors path="countryService" cssClass="error" /> --%>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label for="commision" class="col-sm-2 control-label"> Commission</label>
+			<div class="col-sm-10">
+				<input type="text"  name="commision" class="form-control" />
+			</div>
+			<div>
+<%-- 				<form:errors path="commision" cssClass="error"></form:errors> --%>
+			</div>
+		</div>
+		
 		<div class="form-group">
 			<label for="name" class="col-sm-2 control-label">Name</label>
 			<div class="col-sm-10">
