@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.voip.dao.CustomerMonthlyDAO;
 import org.voip.model.Customer;
 import org.voip.model.report.CustomerMonthly;
+import org.voip.model.report.CustomerMonthlyTotalReport;
 
 /**
  * Monthly billing report generator
@@ -36,10 +37,10 @@ public class MonthlyBillReport implements CustomReport {
 	public ModelAndView getReportTemplate() {
 
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
-		List<CustomerMonthly> listOfRecords = customerMonthlyReportDAO
+		CustomerMonthlyTotalReport customerMonthlyReport = customerMonthlyReportDAO
 				.getReportByMonthACustomer(month, customer.getPhoneNumber());
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(
-				listOfRecords);
+				customerMonthlyReport.getAllCustomerMonthly());
 
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "MONTHLY BILL");
