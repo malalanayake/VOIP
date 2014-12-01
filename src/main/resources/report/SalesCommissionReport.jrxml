@@ -71,7 +71,7 @@ TP : (641) 472-7000]]></text>
 				<textFieldExpression><![CDATA[$P{salesrep}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="311" y="110" width="100" height="20" uuid="675dcb4e-d60f-44d1-a453-2dd9c4f4b2b2"/>
+				<reportElement x="311" y="110" width="202" height="20" uuid="675dcb4e-d60f-44d1-a453-2dd9c4f4b2b2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Times New Roman" size="11"/>
 				</textElement>

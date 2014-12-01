@@ -1,5 +1,6 @@
 package org.voip.service.report;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import org.voip.model.Service;
 public class CallRateReport implements CustomReport {
 	private Service service;
 	private Country country;
+	private Date month;
 
 	@Autowired
 	private CallRateDAO callRateDAO;
@@ -32,9 +34,10 @@ public class CallRateReport implements CustomReport {
 	@Autowired
 	private CountryServiceDAO countryServiceDAO;
 
-	public CallRateReport(Country country, Service service) {
+	public CallRateReport(Country country, Service service, Date month) {
 		this.country = country;
 		this.service = service;
+		this.month = month;
 	}
 
 	@Override
@@ -49,6 +52,7 @@ public class CallRateReport implements CustomReport {
 
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "RATE SHEET");
+		parameterMap.put("month", month);
 		parameterMap.put("country", countryService.getCountry().getName());
 		parameterMap.put("service", countryService.getService().getName());
 		parameterMap.put("peakTime", countryService.getCountry().getPeakTime());
