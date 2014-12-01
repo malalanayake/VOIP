@@ -48,6 +48,7 @@ public class MonthlyBillReport implements CustomReport {
 		parameterMap.put("customer", this.customer.getName());
 		parameterMap.put("service", this.customer.getCountryService()
 				.getService().getName());
+		parameterMap.put("total", customerMonthlyReport.getTotalCost());
 
 		ModelAndView modelAndView = new ModelAndView("monthlyBillPdfReport",
 				parameterMap);
