@@ -1,5 +1,7 @@
 package org.voip.service.report;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -49,10 +51,12 @@ public class CallRateReport implements CustomReport {
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(callRates);
-
+		
+		DateFormat df =new SimpleDateFormat("MMMM dd, yyyy");
+		String dateString = df.format(month);
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "RATE SHEET");
-		parameterMap.put("month", month);
+		parameterMap.put("month", dateString);
 		parameterMap.put("country", countryService.getCountry().getName());
 		parameterMap.put("service", countryService.getService().getName());
 		parameterMap.put("peakTime",getTimeStampString(countryService.getCountry().getPeakTime()));
