@@ -14,11 +14,35 @@
 	src="${context}/resources/js/jquery-2.1.1.min.js"></script>
 <script type="text/javascript"
 	src="${context}/resources/bootstrap-3.2.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="${context}/resources/js/main.js"></script>
 <sitemesh:write property='head' />
 </head>
 <body class="container">
-	<header>
+	<header class='hide1'>
 	<div>
+		<ul>
+			<li><a href="${context }/update-rates"> 
+				<span class="glyphicon glyphicon-search"></span>
+				<span class="icon-text">Update international calling rates</span>
+			</a></li>
+			<li><a href="${context }/update-rates"> 
+				<span class="glyphicon glyphicon-search"></span>
+				<span class="icon-text">Output current international calling rates</span>
+			</a></li>
+			<li><a href="${context }/update-rates"> 
+				<span class="glyphicon glyphicon-search"></span>
+				<span>Update rates</span>
+			</a></li>
+			<li><a href="${context }/update-rates"> 
+				<span class="glyphicon glyphicon-search"></span>
+				<span>Update rates</span>
+			</a></li>
+			<li><a href="${context }/update-rates"> 
+				<span class="glyphicon glyphicon-search"></span>
+				<span>Update rates</span>
+			</a></li>
+		</ul>
 		<a href="${context}"><img
 			src='${context}/resources/logo/voip_logo.jpg' alt='logo' /></a>
 	</div>
@@ -79,20 +103,18 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${context }/report/callrates">Call Rate</a></li>
 						<li class="divider"></li>
-						<li><a href="${context }/report/monthlybills">Monthly Bill</a></li>
+						<li><a href="${context }/report/monthlybills">Monthly
+								Bill</a></li>
 						<li class="divider"></li>
-						<li><a href="${context }/report/monthlytraffic">Monthly Traffic</a>
+						<li><a href="${context }/report/monthlytraffic">Monthly
+								Traffic</a>
 						<li class="divider"></li>
-						<li><a href="${context }/report/salesrepcommision">Sell_Rep Commision</a>
-					</ul>
-				</li>
-				
-				<li >
-				<a href="${context }/logout" 
-					role="button" aria-expanded="false">Logout
-						
-				</a>
-				</li>
+						<li><a href="${context }/report/salesrepcommision">Sell_Rep
+								Commision</a>
+					</ul></li>
+
+				<li><a href="${context }/logout" role="button"
+					aria-expanded="false">Logout </a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
@@ -105,7 +127,9 @@
 	<c:if test="${error!=null}">
 		<div class="alert alert-danger" role="alert">${error}</div>
 	</c:if>
-	<sitemesh:write property='body' />
+	<div class="body-content">
+		<sitemesh:write property='body' />
+	</div>
 	<footer> </footer>
 </body>
 </html>
