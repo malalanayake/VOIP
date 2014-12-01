@@ -43,6 +43,7 @@ public class SalesCommissionReport implements CustomReport {
 		parameterMap.put("header", "SALES COMMISSION");
 		parameterMap.put("month", this.date);
 		parameterMap.put("salesrep", this.salesRep.getCode());
+		parameterMap.put("total", salesCommissionReport.getTotalCommission());
 
 		ModelAndView modelAndView = new ModelAndView(
 				"salesCommissionPdfReport", parameterMap);
