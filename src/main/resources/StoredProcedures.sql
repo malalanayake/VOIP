@@ -62,17 +62,31 @@ GO
 --execute findLatestRate 1
 
 ------
-CREATE PROCEDURE getMonthlyReport 
+CREATE PROCEDURE getMonthlyReport
     @reportDate date,
     @customerId numeric(19, 0) 
 AS 
-	select distinct cd.id, cd.callDate as date,cd.callTime as time,cd.duration,Country.name as country,cd.toTel as phoneno,
-	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) as cost
+	 SET NOCOUNT ON;
+	--Drop All Row First
+	truncate table CustomerMonthly;
+	delete from CustomerMonthlyTotalReport;
+	insert into CustomerMonthlyTotalReport values (0);
+	
+	--Insert Query Result 
+	Insert into CustomerMonthly
+	select distinct  cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) as cost,
+	Country.name as country,cd.callDate as date,cd.duration,cd.toTel as phoneno,cd.callTime as time, (select top 1 id from CustomerMonthlyTotalReport) as report_id 
+	 
 	from CallDetail cd join Customer c
 	on c.phoneNumber =cd.fromCustomer_phoneNumber join CallRate cr
 	on c.countryService_id=cr.country_service_id join Country
 	on cd.toCountry_code=Country.code
-	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
+	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate);
+    
+    update CustomerMonthlyTotalReport
+    set totalCost = ( select SUM(cost) from CustomerMonthly);
+    
+	select * from CustomerMonthlyTotalReport;
     
 GO
 
