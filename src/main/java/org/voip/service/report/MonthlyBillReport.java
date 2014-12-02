@@ -44,7 +44,7 @@ public class MonthlyBillReport implements CustomReport {
 		JRDataSource JRdataSource = new JRBeanCollectionDataSource(
 				customerMonthlyReport.getAllCustomerMonthly());
 
-		DateFormat df =new SimpleDateFormat("MMMM dd, yyyy");
+		DateFormat df =new SimpleDateFormat("MMMM, yyyy");
 		String dateString = df.format(month);
 		parameterMap.put("datasource", JRdataSource);
 		parameterMap.put("header", "MONTHLY BILL");
