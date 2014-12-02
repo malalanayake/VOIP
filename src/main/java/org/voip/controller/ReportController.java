@@ -62,7 +62,7 @@ public class ReportController {
 			@RequestParam("country") int countryCode,@RequestParam("service") int serviceCode, @RequestParam("date") String sDate) {
 		
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			date = formatter.parse(sDate);
 		} catch (ParseException e) {
@@ -82,7 +82,7 @@ public class ReportController {
 			@RequestParam("country") int countryCode,@RequestParam("service") int serviceCode, @RequestParam("date") String sDate) {
 		
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			date = formatter.parse(sDate);
 		} catch (ParseException e) {
@@ -148,7 +148,7 @@ public class ReportController {
 	public void generateMonthlyTrafficExelReport(@RequestParam("date")String sDate,HttpServletRequest req,
 			HttpServletResponse res) {
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			date = formatter.parse(sDate);
 		} catch (ParseException e) {
