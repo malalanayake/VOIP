@@ -9,6 +9,19 @@ header{
 	/*border-radius:5px 5px 0px 0px;
 	margin-top: 10px;*/
 }
+/* small screen ----------- */
+@media only screen 
+and (min-width : 1000px) {
+	header{
+		width:938px;
+	}
+}
+@media only screen 
+and (min-width : 1200px) {
+	header{
+		width:1140px;
+	}
+}
 header img{
 	height: 150px;
 	border-radius: 5px;
