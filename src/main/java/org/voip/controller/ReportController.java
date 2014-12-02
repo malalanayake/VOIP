@@ -30,7 +30,10 @@ import org.voip.model.Customer;
 import org.voip.model.SalesRep;
 import org.voip.model.Service;
 import org.voip.model.report.CustomerMonthly;
+import org.voip.model.report.SalesCommission;
+import org.voip.model.report.SalesCommissionTotalReport;
 import org.voip.service.CallRateService;
+import org.voip.service.CommissionService;
 import org.voip.service.CountryService;
 import org.voip.service.CountryServiceService;
 import org.voip.service.CustomerService;
@@ -73,7 +76,10 @@ public class ReportController {
 	
 	@Autowired
 	MonthlyBillService monthlyBillService;
-
+	
+	@Autowired
+	CommissionService commissionService;
+	
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
 			@RequestParam("countryService") int countryServiceCode, @RequestParam("date") String sDate) {
@@ -209,6 +215,31 @@ public class ReportController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="salesCommision/list/{salesRepId}/{sDate}", method=RequestMethod.GET)
+	public @ResponseBody String salesCommisionList(@PathVariable int salesRepId, @PathVariable String sDate){
+		String retVal = "";
+		System.out.println("Should show sales commision list");
+		
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		SalesCommissionTotalReport commisionReport = commissionService.getTotalReport(date, salesRepId);
+		for(SalesCommission salesCom : commisionReport.getSalesCommissionList()){
+			retVal+="<tr>";
+			retVal+="<td>"+salesCom.getCustomer()+"</td>";
+			retVal+="<td>"+salesCom.getCountryservice()+"</td>";
+			retVal+="<td>"+salesCom.getCost()+"</td>";
+			retVal+="<td>"+salesCom.getCommission()+"</td>";
+			retVal+="</tr>";
+		}
+		retVal+="<tr><td></td><td></td><td></td><td>"+"Total commision ="+commisionReport.getTotalCommission()+"</td></tr>";
+		System.out.println(retVal);
+		return retVal;
+	}
 	@RequestMapping(method = RequestMethod.POST, value = "monthly-traffic/excel")
 	public void generateMonthlyTrafficExelReport(@RequestParam("date")String sDate,HttpServletRequest req,
 			HttpServletResponse res) {

@@ -45,10 +45,7 @@
 		<button type="submit" class="btn btn-success" id="download">Download Report</button>
 	</form>
 	<div style="display: none;" id="monthlyBillList">
-			
-			
-
-			<table class="table table-bordered" id="monthlyBilllTable">
+		<table class="table table-bordered" id="monthlyBilllTable">
 				<thead>
 					<tr>
 						<td>Date</td>
