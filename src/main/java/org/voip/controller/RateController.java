@@ -20,6 +20,7 @@ import org.voip.model.Service;
 import org.voip.service.GeneralService;
 import org.voip.service.processor.CallRatesDataProcessor;
 import org.voip.service.processor.CallsDataProcessor;
+import org.voip.service.processor.CountryDataProcessor;
 import org.voip.service.processor.DataManager;
 
 @Controller
@@ -74,10 +75,30 @@ public class RateController {
 		return "redirect:/process-call-file";
 	}
 	
-	@RequestMapping(value = "/update-rates", method = RequestMethod.GET)
-	public String updateRates() {
+	@RequestMapping(value = "/update-calling-code", method = RequestMethod.GET)
+	public String updateCallingCode() {
 		
-		return "rates/update-rates";
+		return "rates/update-calling-code";
+	}
+	
+	@RequestMapping(value = "/update-calling-code", method = RequestMethod.POST)
+	public String uploadCallingCode(@RequestParam("calls") MultipartFile calls, final RedirectAttributes attr) {
+		try {
+			File temp = new File(calls.getOriginalFilename());
+			calls.transferTo(temp);
+			FileInputStream fis = new FileInputStream(temp);
+			boolean result = dataManager.executeDataProcessor(new CountryDataProcessor(fis));
+			if(result){
+				attr.addFlashAttribute(Constants.SUCCESS, "update calling code successfully!");
+			}else{
+				attr.addFlashAttribute(Constants.ERROR, "Can not update calling code!");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			attr.addFlashAttribute(Constants.ERROR, "Can not update calling code!");
+		}
+		return "redirect:/update-calling-code";
 	}
 	
 	@RequestMapping(value = "/update-rates", method = RequestMethod.POST)
@@ -98,5 +119,11 @@ public class RateController {
 			attr.addFlashAttribute(Constants.ERROR, "Can not update rates!");
 		}
 		return "redirect:/update-rates";
+	}
+	
+	@RequestMapping(value = "/update-rates", method = RequestMethod.GET)
+	public String updateRates() {
+		
+		return "rates/update-rates";
 	}
 }

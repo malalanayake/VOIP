@@ -78,6 +78,8 @@
 						<li class="divider"></li>
 						<li><a href="${context}/process-call-file">Process
 								calling files</a></li>
+						<li class="divider"></li>
+						<li><a href="${context}/update-calling-code">Update calling code</a></li>
 					</ul></li>
 
 
