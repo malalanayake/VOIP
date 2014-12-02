@@ -16,8 +16,21 @@
 			<input type="file" id="exampleInputFile" name="rates"/>
 			<p class="help-block">Example block-level help text here.</p>
 		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<button id="upload" type="submit" class="btn btn-default">Submit</button>
+		<button id="getSample" type="submit" class="btn btn-default">Get Sample</button>
 	</form:form>
+	<script type="text/javascript">
+		$(function(){
+			$('form button').click(function(){
+				if($(this).attr('id')=='upload'){
+					$('form').attr('action','${context}/update-rates').submit();
+				}else{
+					$('form').attr('action','${context}/getSampleCallRateExcel').submit();
+				}
+				return false;
+			});
+		});
+	</script>
 </body>
 </body>
 </html>
