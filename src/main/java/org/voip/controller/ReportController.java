@@ -150,7 +150,7 @@ public class ReportController {
 	public void generateMonthlyTrafficExelReport(@RequestParam("date")String sDate,HttpServletRequest req,
 			HttpServletResponse res) {
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
 		try {
 			date = formatter.parse(sDate);
 		} catch (ParseException e) {
