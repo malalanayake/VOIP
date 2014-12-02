@@ -29,10 +29,12 @@ import org.voip.model.Country;
 import org.voip.model.Customer;
 import org.voip.model.SalesRep;
 import org.voip.model.Service;
+import org.voip.model.report.CustomerMonthly;
 import org.voip.service.CallRateService;
 import org.voip.service.CountryService;
 import org.voip.service.CountryServiceService;
 import org.voip.service.CustomerService;
+import org.voip.service.MonthlyBillService;
 import org.voip.service.SalesRepService;
 import org.voip.service.ServiceService;
 import org.voip.service.report.CallRateExcelReport;
@@ -68,6 +70,9 @@ public class ReportController {
 	
 	@Autowired
 	CallRateService callRateService;
+	
+	@Autowired
+	MonthlyBillService monthlyBillService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
@@ -161,6 +166,31 @@ public class ReportController {
 		return modelAndView;
 	}
 
+	@RequestMapping(value="monthlyBill/list/{customerId}/{sDate}",method = RequestMethod.GET)
+	public @ResponseBody String monthlyBillList(@PathVariable int customerId, @PathVariable String sDate ){
+		Customer customer = customerService.getCustomerById(customerId);
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		String retVal=null;
+		for(CustomerMonthly report: monthlyBillService.getCustomerBils(date, customerId).getAllCustomerMonthly()){
+			retVal += "<tr>";
+			retVal+= "<td>"+report.getDate()+"</td>";
+			retVal+= "<td>"+report.getTime() +"</td>";
+			retVal+= "<td>"+report.getDuration() +"</td>";
+			retVal+= "<td>"+report.getCountry() +"</td>";
+			retVal+= "<td>"+report.getPhoneno() +"</td>";
+			retVal+= "<td>"+report.getCost() +"</td>";
+			retVal+="</tr>";
+		}
+		
+		return retVal;
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value = "sales-commission/pdf")
 	public ModelAndView generateSalesCommissionPdfReport(
 			ModelAndView modelAndView,@RequestParam("salesRep") int salesRepID,@RequestParam("date") String sDate) {

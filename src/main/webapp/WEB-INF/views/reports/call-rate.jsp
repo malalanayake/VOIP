@@ -12,13 +12,7 @@
 	function showCallRate() {
 		var serviceID = $("#countryService").val();
 		var date = $("#date").val();
-		var data = "countryService=" + serviceID;
-		data += ",date=" + date;
-		data = {
-			"countryService" : serviceID,
-			"date" : date
-		};
-
+		
 		$.ajax({
 			url : '${context}' + '/report/callRateList/' + serviceID + "/"
 					+ date,
