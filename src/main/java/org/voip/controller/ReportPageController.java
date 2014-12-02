@@ -13,7 +13,7 @@ import org.voip.service.GeneralService;
 
 @Controller
 @RequestMapping(value="report")
-public class ReportController_Ramesh {
+public class ReportPageController {
 	
 	@Autowired
 	GeneralService generalServices;
