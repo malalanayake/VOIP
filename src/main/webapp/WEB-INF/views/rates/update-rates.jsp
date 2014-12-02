@@ -17,6 +17,9 @@
 		</div>
 	</div>
 	<form:form class="upload-form" role="form" action="${context }/update-rates" method="post" enctype="multipart/form-data">
+		
+		<input type="date" name="date" />
+		
 		<fieldset>
 			<legend>Upload International calling rates</legend>
 		</fieldset>

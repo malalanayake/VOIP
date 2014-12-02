@@ -116,12 +116,20 @@ public class RateController {
 	}
 	
 	@RequestMapping(value = "/update-rates", method = RequestMethod.POST)
-	public String uploadRates(@RequestParam("rates") MultipartFile rates, final RedirectAttributes attr) {
+	public String uploadRates(@RequestParam("rates") MultipartFile rates, final RedirectAttributes attr, @RequestParam("date") String sDate) {
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
 		try {
 			File temp = new File(rates.getOriginalFilename());
 			rates.transferTo(temp);
 			FileInputStream fis = new FileInputStream(temp);
-			boolean result = dataManager.executeDataProcessor(new CallRatesDataProcessor(fis,new Date()));
+			boolean result = dataManager.executeDataProcessor(new CallRatesDataProcessor(fis,date));
 			if(result){
 				attr.addFlashAttribute(Constants.SUCCESS, "Update rates successfully!");
 			}else{
