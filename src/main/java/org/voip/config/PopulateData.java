@@ -71,12 +71,12 @@ public class PopulateData {
 		processCountryServiceData();
 		processCustomerData();
 		//generateCountryServiceData();
-		processCallRateData();
-		processCallRateData2();
-		processCallRateData3();
-		processCallRateData4();
+		//processCallRateData();
+		//processCallRateData2();
+		//processCallRateData3();
+		//processCallRateData4();
 		
-		processCallDetails();
+		//processCallDetails();
 		processSalesRepData();
 		
 	}
