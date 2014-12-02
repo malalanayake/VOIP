@@ -17,14 +17,19 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.voip.model.CallRate;
 import org.voip.model.Country;
 import org.voip.model.Customer;
 import org.voip.model.SalesRep;
 import org.voip.model.Service;
+import org.voip.service.CallRateService;
 import org.voip.service.CountryService;
 import org.voip.service.CountryServiceService;
 import org.voip.service.CustomerService;
@@ -60,6 +65,9 @@ public class ReportController {
 	
 	@Autowired
 	CountryServiceService countryServiceService;
+	
+	@Autowired
+	CallRateService callRateService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
@@ -79,9 +87,35 @@ public class ReportController {
 		return modelAndView;
 	}
 	
+	@RequestMapping(value="callRateList/{countryServiceID}/{date}",method=RequestMethod.GET)
+	public @ResponseBody String callRateList(@PathVariable int countryServiceID,
+			@PathVariable String date){
+		
+		//org.voip.model.CountryService countrySer = countryServiceService.getCountryService(countryServiceID);
+		Date sDate = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			sDate = formatter.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println(countryServiceID+", :" + sDate);
+		String retVal=null;
+		for(CallRate rate : callRateService.gellCurrentCallRates(countryServiceID, sDate))
+		{
+			retVal += "<tr>";
+			retVal += "<td>"+rate.getDestCountry().getName() +"</td>";
+			retVal += "<td>"+rate.getOffPeakRate()+"</td>";
+			retVal += "<td>"+rate.getPeakRate()+"</td>";
+			retVal+="</tr>";
+		}
+		System.out.println("incoming service code is : "+countryServiceID);
+		return retVal;
+	}
+	
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/excel")
 	public void generateCallRateExcelReport(HttpServletResponse res,
-			@RequestParam("country") int countryCode,@RequestParam("service") int serviceCode, @RequestParam("date") String sDate) {
+			@RequestParam("countryService") int countryServiceCode, @RequestParam("date") String sDate) {
 		
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -91,14 +125,13 @@ public class ReportController {
 			e.printStackTrace();
 		}
 		System.out.println(sDate);
-		Country country = countryService.getCountry(countryCode);
-		Service service = serviceService.getService(serviceCode);
-		CallRateExcelReport callRateExcelReport = new CallRateExcelReport(service, country, date);
+		org.voip.model.CountryService countrySer = countryServiceService.getCountryService(countryServiceCode);
+		CallRateExcelReport callRateExcelReport = new CallRateExcelReport(countrySer.getService(), countrySer.getCountry(), date);
 		ModelAndView mav = reportManager.getReportView(callRateExcelReport);
 		
 		HttpHeaders header = new HttpHeaders();
 	    header.setContentType(new MediaType("application", "vnd.ms-excel"));
-	    String name= String.format("%s_%s", country.getName(),service.getName());
+	    String name= String.format("%s_%s", countrySer.getCountry().getName(),countrySer.getService().getName());
 	    res.setHeader("Content-disposition", "attachment; filename=" + name+".xls");
 	    HSSFWorkbook book = (HSSFWorkbook)mav.getModel().get("excelBook");
 	    try {
