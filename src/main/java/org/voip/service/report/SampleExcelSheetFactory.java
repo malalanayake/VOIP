@@ -31,12 +31,12 @@ public class SampleExcelSheetFactory {
 		
 		Row row0 = sheet.createRow(0);
 		row0.createCell(0).setCellValue("from_code");
-		row0.createCell(0).setCellValue("to_code");
-		row0.createCell(0).setCellValue("from_tel");
-		row0.createCell(0).setCellValue("to_tel");
-		row0.createCell(0).setCellValue("duration");
-		row0.createCell(0).setCellValue("call_date");
-		row0.createCell(0).setCellValue("call_time");
+		row0.createCell(1).setCellValue("to_code");
+		row0.createCell(2).setCellValue("from_tel");
+		row0.createCell(3).setCellValue("to_tel");
+		row0.createCell(4).setCellValue("duration");
+		row0.createCell(5).setCellValue("call_date");
+		row0.createCell(6).setCellValue("call_time");
 		
 		Map<String, HSSFWorkbook> parameterMap = new HashMap<String, HSSFWorkbook>();
 		parameterMap.put("excelBook", workbook);
@@ -51,8 +51,8 @@ public class SampleExcelSheetFactory {
 		
 		Row row0 = sheet.createRow(0);
 		row0.createCell(0).setCellValue("dest");
-		row0.createCell(0).setCellValue("peakRate");
-		row0.createCell(0).setCellValue("offpeak");
+		row0.createCell(1).setCellValue("peakRate");
+		row0.createCell(2).setCellValue("offpeak");
 		Map<String, HSSFWorkbook> parameterMap = new HashMap<String, HSSFWorkbook>();
 		parameterMap.put("excelBook", workbook);
 		ModelAndView modelAndView = new ModelAndView();
