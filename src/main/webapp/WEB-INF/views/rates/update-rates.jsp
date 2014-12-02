@@ -14,17 +14,19 @@
 		<div id='background'></div>
 		<div>
 			<img src="${context }/resources/img/framely.gif" alt="loading"/>
-			<div>Please wait while file is processing...</div>
 		</div>
 	</div>
-	<form:form role="form" action="${context }/update-rates" method="post" enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="exampleInputFile">Upload rate file</label> 
-			<input type="file" id="exampleInputFile" name="rates"/>
-			<p class="help-block">Example block-level help text here.</p>
+	<form:form class="upload-form" role="form" action="${context }/update-rates" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<legend>Upload International calling rates</legend>
+		</fieldset>
+		<div class="upload-element">
+			<img src='${context }/resources/img/upload.png' />
+			<input type="file" id="uploadFile" name="rates" />
+			<div id='attachedFile'>No file chosen</div>
 		</div>
-		<button id="upload" type="submit" class="btn btn-default">Submit</button>
-		<button id="getSample" type="submit" class="btn btn-default">Get Sample</button>
+		<button id="upload" type="submit" class="btn btn-success">Submit</button>
+		<button id="getSample" type="submit" class="btn btn-primary">Get Sample</button>
 	</form:form>
 	<script type="text/javascript">
 		$(function(){
@@ -37,6 +39,7 @@
 				}
 				return false;
 			});
+			$('#uploadFile').change(function(){ $('#attachedFile').html($(this).val()) });
 		});
 	</script>
 </body>
