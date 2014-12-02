@@ -85,7 +85,7 @@ AS
 	
 	--Insert Query Result 
 	Insert into CustomerMonthly
-	select distinct  cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) as cost,
+	select distinct  cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime)/60 as cost,
 	Country.name as country,cd.callDate as date,cd.duration,cd.toTel as phoneno,cd.callTime as time, (select top 1 id from CustomerMonthlyTotalReport) as report_id 
 	 
 	from CallDetail cd join Customer c
@@ -149,7 +149,7 @@ AS
 	
 	--Get Call Cost for all call for phone numbers in #T1
 	select distinct cd.id, c.phoneNumber,
-	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime) as cost
+	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime)/60 as cost
 	 into #T2
 	from CallDetail cd 
 	join Customer c on c.phoneNumber =cd.fromCustomer_phoneNumber 
