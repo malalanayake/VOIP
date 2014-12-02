@@ -10,6 +10,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id='loading' class='hide'>
+		<div id='background'></div>
+		<div>
+			<img src="${context }/resources/img/framely.gif" alt="loading"/>
+			<div>Please wait while file is processing...</div>
+		</div>
+	</div>
 	<form:form role="form" action="${context }/update-rates" method="post" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="exampleInputFile">Upload rate file</label> 
@@ -23,6 +30,7 @@
 		$(function(){
 			$('form button').click(function(){
 				if($(this).attr('id')=='upload'){
+					$('#loading').toggleClass('hide');
 					$('form').attr('action','${context}/update-rates').submit();
 				}else{
 					$('form').attr('action','${context}/getSampleCallRateExcel').submit();

@@ -10,13 +10,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form:form role="form" action="${context }/process-call-file" method="post" enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="exampleInputFile">Upload call file</label> 
-			<input type="file" id="exampleInputFile" name="calls" />
-			<p class="help-block">Example block-level help text here.</p>
+	<div id='loading' class='hide'>
+		<div id='background'></div>
+		<div>
+			<img src="${context }/resources/img/framely.gif" alt="loading"/>
 		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+	</div>
+	<form:form class="upload-form" role="form" action="${context }/process-call-file" method="post" enctype="multipart/form-data">
+		<fieldset>
+			<legend>Upload call file</legend>
+		</fieldset>
+		<div class="upload-element">
+			<img src='${context }/resources/img/upload.png' />
+			<input type="file" id="uploadFile" name="calls" />
+			<div id='attachedFile'>No file chosen</div>
+		</div>
+		<button id="upload" type="submit" class="btn btn-success">Upload and process</button>
+		<button id="getSample" type="submit" class="btn btn-primary">Get sample file</button>
 	</form:form>
+	<script type="text/javascript">
+		$(function(){
+			$('form button').click(function(){
+				if($(this).attr('id')=='upload'){
+					$('#loading').toggleClass('hide');
+					$('form').attr('action','${context}/process-call-file').submit();
+				}else{
+					$('form').attr('action','${context}/getSampleCallRateExcel').submit();
+				}
+				return false;
+			});
+			$('#uploadFile').change(function(){ $('#attachedFile').html($(this).val()) });
+		});
+	</script>
 </body>
 </html>
