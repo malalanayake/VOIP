@@ -13,7 +13,7 @@ public class CronService {
 	private CustomerDAO customerDAO;
 	
 	
-	@Scheduled(cron="0 0 24 L * ?")
+	@Scheduled(cron="0 0 23 * * ?")
 	public void sendMonthlyReportToCustomers(){
 		Iterable<Customer> customers = customerDAO.findAll();
 		Date date = new Date();
