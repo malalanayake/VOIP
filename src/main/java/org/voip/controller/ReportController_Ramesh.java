@@ -20,11 +20,7 @@ public class ReportController_Ramesh {
 	
 	@RequestMapping(value="/callrates", method=RequestMethod.GET)
 	public String reportForCallRate(Model model){
-		List<Country> countries = generalServices.getAllCountries();
-		model.addAttribute("countries", countries);
-		List<Service> services = generalServices.getAllServices();
-		model.addAttribute("services", services);
-		
+		model.addAttribute("countryServiceList", generalServices.getAllCountryService());		
 		System.out.println("Forwarding to Call rate report Page");
 		return "reports/call-rate";
 	}

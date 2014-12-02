@@ -26,6 +26,7 @@ import org.voip.model.Customer;
 import org.voip.model.SalesRep;
 import org.voip.model.Service;
 import org.voip.service.CountryService;
+import org.voip.service.CountryServiceService;
 import org.voip.service.CustomerService;
 import org.voip.service.SalesRepService;
 import org.voip.service.ServiceService;
@@ -56,11 +57,14 @@ public class ReportController {
 	CustomerService customerService;
 	@Autowired
 	SalesRepService salesRepService;
+	
+	@Autowired
+	CountryServiceService countryServiceService;
 
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
-			@RequestParam("country") int countryCode,@RequestParam("service") int serviceCode, @RequestParam("date") String sDate) {
-		
+			@RequestParam("countryService") int countryServiceCode, @RequestParam("date") String sDate) {
+		org.voip.model.CountryService countrySer = countryServiceService.getCountryService(countryServiceCode);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -69,9 +73,7 @@ public class ReportController {
 			e.printStackTrace();
 		}
 		System.out.println(sDate);
-		Country country = countryService.getCountry(countryCode);
-		Service service = serviceService.getService(serviceCode);
-		CallRateReport callRateReport = new CallRateReport(country, service, date);
+		CallRateReport callRateReport = new CallRateReport(countrySer.getCountry(), countrySer.getService(), date);
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;
@@ -148,7 +150,7 @@ public class ReportController {
 	public void generateMonthlyTrafficExelReport(@RequestParam("date")String sDate,HttpServletRequest req,
 			HttpServletResponse res) {
 		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			date = formatter.parse(sDate);
 		} catch (ParseException e) {
