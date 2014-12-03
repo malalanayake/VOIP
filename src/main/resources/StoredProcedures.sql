@@ -92,7 +92,8 @@ AS
 	on c.phoneNumber =cd.fromCustomer_phoneNumber join CallRate cr
 	on c.countryService_id=cr.country_service_id join Country
 	on cd.toCountry_code=Country.code
-	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate);
+	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
+    order by cd.callDate;
     
     update CustomerMonthlyTotalReport
     set totalCost = ( select SUM(cost) from CustomerMonthly);
