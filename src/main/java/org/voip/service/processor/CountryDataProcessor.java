@@ -1,7 +1,9 @@
 package org.voip.service.processor;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -38,9 +40,9 @@ public class CountryDataProcessor implements DataProcessor {
 	@Override
 	public boolean process() {
 		
-
 		try {
-
+			List<Country> countryList = new ArrayList<Country>();
+			
 			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
@@ -66,9 +68,11 @@ public class CountryDataProcessor implements DataProcessor {
 				cell = row.getCell(3);
 				if(cell!=null)
 					country.setOffPeakTime((int) cell.getNumericCellValue());
-				countryDAO.save(country);
+				
+				countryList.add(country);
 			}
-
+			countryDAO.save(countryList);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

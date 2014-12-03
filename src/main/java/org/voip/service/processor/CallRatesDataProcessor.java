@@ -1,8 +1,10 @@
 package org.voip.service.processor;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -50,6 +52,8 @@ public class CallRatesDataProcessor implements DataProcessor {
 	@Override
 	public boolean process() {
 		try {
+			List<CallRate> callRateList = new ArrayList<CallRate>();
+			
 			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			for (int sheetNo = 0; sheetNo < workbook.getNumberOfSheets(); sheetNo++) {
 				HSSFSheet sheet = workbook.getSheetAt(sheetNo);
@@ -82,10 +86,13 @@ public class CallRatesDataProcessor implements DataProcessor {
 						callRate.setOffPeakRate((float) row.getCell(2)
 								.getNumericCellValue());
 						callRate.setEffectiveFrom(effectiveFrom);
-						callRateDAO.save(callRate);
+						
+						callRateList.add(callRate);
+						
 					}
 				}
 			}
+			callRateDAO.save(callRateList);
 
 		} catch (Exception e) {
 			e.printStackTrace();
