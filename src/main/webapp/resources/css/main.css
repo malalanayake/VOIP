@@ -25,6 +25,9 @@ legend{
 	border-bottom: 1px solid #ccc;
 	color: #555;
 }
+h1,h2{
+	color: #555;
+}
 header{
 	background-color: #D55307;
 	overflow: auto;
@@ -88,6 +91,7 @@ body{
 	background-color: #eee;
 }
 div.body-content{
+	margin-bottom: 50px;
 }
 
 .hide{
