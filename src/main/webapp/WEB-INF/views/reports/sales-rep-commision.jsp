@@ -7,7 +7,8 @@
 <head>
 <script type="text/javascript">
 	function showCommissions() {
-		var salesRepId = $("#salesRep").val();
+		var salesRepId = $('#salesRep option:selected').text();
+		alert(salesRepId);
 		var date = $("#date").val();
 		var path = '${context}' + '/report/salesCommision/list/' + salesRepId + "/"+ date;
 		$.ajax({
