@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="CallRatesReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7d29d042-99ac-4f67-9c76-c5e5d816881a">
 	<property name="ireport.zoom" value="1.2100000000000026"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="35"/>
+	<property name="ireport.y" value="63"/>
 	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -227,24 +227,7 @@ TP : (641) 472-7000]]></text>
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="32" splitType="Stretch">
-			<staticText>
-				<reportElement style="Column header" x="433" y="4" width="45" height="15" forecolor="#000000" uuid="c92afc07-3ad6-4b4c-bccc-14af6cb7f599"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="9"/>
-				</textElement>
-				<text><![CDATA[TOTAL   :]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="478" y="4" width="75" height="15" uuid="2e6079cb-b141-4327-92f9-b0d0d78b9237"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="9"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnFooter>
+	
 	<pageFooter>
 		<band height="15" splitType="Stretch">
 			<textField>
@@ -270,6 +253,24 @@ TP : (641) 472-7000]]></text>
 			</textField>
 		</band>
 	</pageFooter>
+	<lastPageFooter>
+		<band height="23">
+			<staticText>
+				<reportElement style="Column header" x="433" y="0" width="45" height="15" forecolor="#000000" uuid="c92afc07-3ad6-4b4c-bccc-14af6cb7f599"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<text><![CDATA[TOTAL   :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="478" y="0" width="75" height="15" uuid="2e6079cb-b141-4327-92f9-b0d0d78b9237"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
 	<summary>
 		<band splitType="Stretch"/>
 	</summary>
