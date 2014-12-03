@@ -18,7 +18,8 @@
 					+ date,
 			type : 'GET',
 			success : function(msg) {
-				$("#rateListTable").html($("#rateListTable").html() + msg)
+				var table = "<thead><tr><td>Country</td><td>Off peak</td><td>Peak</td></tr></thead>";
+				$("#rateListTable").html(table + msg);
 				$("#rateList").show();
 				$("#pdf").show();
 				$("#excel").show();
@@ -64,13 +65,6 @@
 			
 
 			<table class="table table-bordered" id="rateListTable">
-				<thead>
-					<tr>
-						<td>Country</td>
-						<td>Off peak</td>
-						<td>Peak</td>
-					</tr>
-				</thead>
 			</table>
 		</div>
 
