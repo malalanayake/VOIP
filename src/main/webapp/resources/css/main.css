@@ -1,4 +1,24 @@
 @CHARSET "ISO-8859-1";
+body{
+	background: url('../img/linen.jpg');
+}
+div.body-content{
+	background-color: #f8f8f8;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	padding:20px;
+	box-shadow: 3px 6px 5px #333;
+}
+form{
+	
+}
+div.alert{
+	box-shadow: 3px 6px 5px #333;
+}
+legend{
+	border-bottom: 1px solid #ccc;
+	color: #555;
+}
 header{
 	background-color: #D55307;
 	overflow: auto;
@@ -69,6 +89,7 @@ header.show{
 .navbar{
 	border-radius:0px 0px 5px 5px;
 	margin-top: 160px;
+	box-shadow: 3px 6px 5px #333;
 }
 body{
 	background-color: #eee;
@@ -135,11 +156,19 @@ div.body-content{
 
 form.upload-form{
 	text-align: center;
-	border: 2px solid #ccc;
-	border-radius: 10px;
-	padding:20px;
 }
 
 ul.nav ul{
 	z-index:10000;
+}
+
+form #date-input{
+	position: relative;	
+}
+
+#addCustomer select{
+	height:34px;
+	min-width:100px;
+	border-radius:4px;
+	width:100%;
 }

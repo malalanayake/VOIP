@@ -18,18 +18,20 @@
 	</div>
 	<form:form class="upload-form" role="form" action="${context }/update-rates" method="post" enctype="multipart/form-data">
 		
-		<input type="date" name="date" />
-		
 		<fieldset>
 			<legend>Upload International calling rates</legend>
 		</fieldset>
+		<div style="margin-bottom: 5px;">
+			<span>Date: </span>
+			<input style="height:30px;border-radius:4px;border:1px solid #ccc;" id='date-input' type="date" name="date" />
+		</div>
 		<div class="upload-element">
 			<img src='${context }/resources/img/upload.png' />
 			<input type="file" id="uploadFile" name="rates" />
 			<div id='attachedFile'>No file chosen</div>
 		</div>
-		<button id="upload" type="submit" class="btn btn-success">Submit</button>
-		<button id="getSample" type="submit" class="btn btn-primary">Get Sample</button>
+		<button id="upload" type="submit" class="btn btn-success">Upload and process</button>
+		<button id="getSample" type="submit" class="btn btn-primary">Get sample file</button>
 	</form:form>
 	<script type="text/javascript">
 		$(function(){
