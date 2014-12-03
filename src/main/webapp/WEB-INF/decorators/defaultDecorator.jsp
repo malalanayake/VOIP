@@ -23,9 +23,8 @@
 <sitemesh:write property='head' />
 </head>
 <body class="container">
-	<header class='hide1'>
-	<div>
-		<ul>
+	<header>
+		<!-- <ul>
 			<li><a href="${context }/update-rates"> 
 				<span class="glyphicon glyphicon-search"></span>
 				<span class="icon-text">Update international calling rates</span>
@@ -46,10 +45,9 @@
 				<span class="glyphicon glyphicon-search"></span>
 				<span>Update rates</span>
 			</a></li>
-		</ul>
+		</ul> -->
 		<a href="${context}"><img
 			src='${context}/resources/logo/voip_logo.jpg' alt='logo' /></a>
-	</div>
 	</header>
 	<nav class="navbar navbar-default" role="navigation">
 	<div class="container-fluid">

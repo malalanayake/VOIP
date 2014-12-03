@@ -22,10 +22,8 @@ legend{
 header{
 	background-color: #D55307;
 	overflow: auto;
-	position: fixed;
-	top:-400px;
-	z-index: 99990;
 	width:1140px;
+	box-shadow: 3px 6px 5px #333;
 	/*border-radius:5px 5px 0px 0px;
 	margin-top: 10px;*/
 }
@@ -33,7 +31,7 @@ header{
 @media only screen 
 and (min-width : 1000px) {
 	header{
-		width:938px;
+		width:940px;
 	}
 }
 @media only screen 
@@ -76,19 +74,8 @@ header ul{
 	margin-bottom: 10px;
 	height:400px;
 }
-header.hide1{
-	-webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out; 
-	top:-400 px;
-}
-header.show{
-	-webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out; 
-	top:0px;
-}
 .navbar{
 	border-radius:0px 0px 5px 5px;
-	margin-top: 160px;
 	box-shadow: 3px 6px 5px #333;
 }
 body{
@@ -171,4 +158,11 @@ form #date-input{
 	min-width:100px;
 	border-radius:4px;
 	width:100%;
+}
+form.single{
+	max-width:500px;
+	margin: 0 auto;
+}
+form table{
+	margin-top: 10px;
 }

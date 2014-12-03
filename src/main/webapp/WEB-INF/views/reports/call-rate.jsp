@@ -35,6 +35,12 @@
 <body>
 	<form:form class="form-inline" role="form" action="call-rates/pdf"
 		method="POST">
+		<fieldset>
+			<legend>
+				<img width=32 style='margin-right: 5px;vertical-align:text-bottom' src='${context }/resources/img/custom-reports.png' alt='upload call'/>
+				Generate call rate report
+			</legend>
+		</fieldset>
 		<div class="form-group">
 			<select class="form-control " name="countryService"
 				id="countryService">
