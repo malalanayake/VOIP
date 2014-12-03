@@ -11,6 +11,7 @@
 		var customerId = $("#customer").val();
 		var date = $("#date").val();
 		var path = '${context}' + '/report/monthlyBill/list/' + customerId + "/"+ date;
+		$('#loading').toggleClass('hide');
 		$.ajax({
 			url :path ,
 			type : 'GET',
@@ -18,10 +19,17 @@
 				$("#monthlyBilllTable").html($("#monthlyBilllTable").html() + msg)
 				$("#monthlyBillList").show();
 				$("#download").show();
+				$('#loading').toggleClass('hide');
 			},
 			error : function(a, b, c) {
 				alert(a + ", " + ", " + c);
+				$('#loading').toggleClass('hide');
 			}
+		});
+		$('#download').click(function(){
+			$('#loading').toggleClass('hide');
+			$('form').submit();
+			return false;
 		});
 	}
 </script>
@@ -29,6 +37,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id='loading' class='hide'>
+		<div id='background'></div>
+		<div>
+			<img src="${context }/resources/img/framely.gif" alt="loading"/>
+		</div>
+	</div>
 	<form method="POST" action="monthly-bill/pdf" class="form-inline">
 		<fieldset>
 			<legend>
@@ -48,7 +62,7 @@
 			<input type="date" class="form-control" name="date" id="date" />
 		</div>
 		<button type="button" class="btn btn-success" onclick=" showBillList();">Generate Report</button>
-		<button type="submit" class="btn btn-success" id="download">Download Report</button>
+		<button type="button" class="btn btn-success" id="download">Download Report</button>
 	</form>
 	<div style="display: none;" id="monthlyBillList">
 		<table class="table table-bordered" id="monthlyBilllTable">

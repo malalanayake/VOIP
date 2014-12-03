@@ -115,7 +115,9 @@ div.body-content{
 	border-radius:5px;
 	z-index:100002;
 	position:relative;
-	box-shadow: 2px 5px 5px #888
+	box-shadow: 3px 6px 10px #666;
+	padding:0px 50px 0px 50px;
+	background-color: white;
 }
 
 .upload-element{
