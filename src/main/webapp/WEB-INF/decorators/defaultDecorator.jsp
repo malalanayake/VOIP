@@ -127,7 +127,10 @@
 	</c:if>
 	<div class="body-content">
 		<sitemesh:write property='body' />
+		<footer>
+			&copy 2014 VOIP. All rights reserved
+		</footer>
 	</div>
-	<footer> </footer>
+	
 </body>
 </html>

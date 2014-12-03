@@ -2,6 +2,12 @@
 body{
 	background: url('../img/linen.jpg');
 }
+footer{
+	color:#888;
+	border-top:1px #ccc solid;
+	margin-top: 20px;
+	font-size: smaller;
+}
 div.body-content{
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;

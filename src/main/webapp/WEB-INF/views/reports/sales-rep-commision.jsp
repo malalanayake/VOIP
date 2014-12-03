@@ -10,6 +10,7 @@
 		var salesRepId = $('#salesRep option:selected').text();
 		var date = $("#date").val();
 		var path = '${context}' + '/report/salesCommision/list/' + salesRepId + "/"+ date;
+		$('#loading').toggleClass('hide');
 		$.ajax({
 			url :path ,
 			type : 'GET',
@@ -18,10 +19,17 @@
 				$("#commissionTable").html(header + msg)
 				$("#salesCommissionList").show();
 				$("#download").show();
+				$('#loading').toggleClass('hide');
 			},
 			error : function(a, b, c) {
 				alert(a + ", " + ", " + c);
+				$('#loading').toggleClass('hide');
 			}
+		});
+		$('#download').click(function(){
+			$('#loading').toggleClass('hide');
+			$('form').submit();
+			return false;
 		});
 	}
 </script>
@@ -30,7 +38,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<div id='loading' class='hide'>
+		<div id='background'></div>
+		<div>
+			<img src="${context }/resources/img/framely.gif" alt="loading"/>
+		</div>
+	</div>
 <form method="POST" action="sales-commission/pdf" class="form-inline">
 		<fieldset>
 			<legend>
