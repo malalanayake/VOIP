@@ -23,8 +23,8 @@
 				$('#loading').toggleClass('hide');
 			},
 			error : function(a, b, c) {
-				alert(a + ", " + ", " + c);
 				$('#loading').toggleClass('hide');
+				alert("Invalid data! please recheck inputs.");
 			}
 		});
 		$('#download').click(function(){

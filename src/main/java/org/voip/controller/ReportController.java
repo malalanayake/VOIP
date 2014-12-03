@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.voip.config.Constants;
 import org.voip.model.CallRate;
 import org.voip.model.Country;
 import org.voip.model.Customer;
@@ -172,7 +174,8 @@ public class ReportController {
 	@RequestMapping(method = RequestMethod.POST, value = "monthly-bill/pdf")
 	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView,
 			@RequestParam("date") String sDate,
-			@RequestParam("customer") long customerID, BindingResult result) {
+			@RequestParam("customer") long customerID, BindingResult result,
+			final RedirectAttributes attr) {
 		Customer customer = customerService.getCustomerById(customerID);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -180,6 +183,8 @@ public class ReportController {
 			date = formatter.parse(sDate);
 		} catch (ParseException e) {
 			e.printStackTrace();
+			attr.addFlashAttribute(Constants.ERROR, "Can not process report. Please double check inputs!");
+			return new ModelAndView("redirect:/report/monthlybills");
 		}
 
 		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,
