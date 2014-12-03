@@ -1,16 +1,10 @@
 package org.voip.service.report;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.poi.hssf.usermodel.HSSFDataFormat;
-import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -42,15 +36,16 @@ public class MonthlyTrafficReport implements CustomReport {
 
 		int rownum = 0;
 		Row row0 = sheet.createRow(rownum++);
-		row0.createCell(0).setCellValue("Service");
-		row0.createCell(1).setCellValue("Source Country");
+		
+		row0.createCell(0).setCellValue("Source Country");
+		row0.createCell(1).setCellValue("Service");
 		row0.createCell(2).setCellValue("Destination Country");
 		row0.createCell(3).setCellValue("Total Call Minutes");
 
 		for (MonthlyTraffic mt : monthlyTrafficReports) {
 			Row row = sheet.createRow(rownum++);
-			row.createCell(0).setCellValue(mt.getServiceName());
-			row.createCell(1).setCellValue(mt.getFromCountry());
+			row.createCell(0).setCellValue(mt.getFromCountry());
+			row.createCell(1).setCellValue(mt.getServiceName());
 			row.createCell(2).setCellValue(mt.getToCountry());
 			row.createCell(3).setCellValue(mt.getMinutesOfCalls());
 
