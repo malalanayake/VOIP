@@ -69,26 +69,28 @@ public class ReportController {
 	CustomerService customerService;
 	@Autowired
 	SalesRepService salesRepService;
-	
+
 	@Autowired
 	CountryServiceService countryServiceService;
-	
+
 	@Autowired
 	CallRateService callRateService;
-	
+
 	@Autowired
 	MonthlyBillService monthlyBillService;
-	
+
 	@Autowired
 	CommissionService commissionService;
-	
+
 	@Autowired
 	MonthlyTrafficService monthlyTrafficService;
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
-			@RequestParam("countryService") int countryServiceCode, @RequestParam("date") String sDate) {
-		org.voip.model.CountryService countrySer = countryServiceService.getCountryService(countryServiceCode);
+			@RequestParam("countryService") int countryServiceCode,
+			@RequestParam("date") String sDate) {
+		org.voip.model.CountryService countrySer = countryServiceService
+				.getCountryService(countryServiceCode);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -97,17 +99,19 @@ public class ReportController {
 			e.printStackTrace();
 		}
 		System.out.println(sDate);
-		CallRateReport callRateReport = new CallRateReport(countrySer.getCountry(), countrySer.getService(), date);
+		CallRateReport callRateReport = new CallRateReport(
+				countrySer.getCountry(), countrySer.getService(), date);
 		modelAndView = reportManager.getReportView(callRateReport);
 
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="callRateList/{countryServiceID}/{date}",method=RequestMethod.GET)
-	public @ResponseBody String callRateList(@PathVariable int countryServiceID,
-			@PathVariable String date){
-		
-		//org.voip.model.CountryService countrySer = countryServiceService.getCountryService(countryServiceID);
+
+	@RequestMapping(value = "callRateList/{countryServiceID}/{date}", method = RequestMethod.GET)
+	public @ResponseBody String callRateList(
+			@PathVariable int countryServiceID, @PathVariable String date) {
+
+		// org.voip.model.CountryService countrySer =
+		// countryServiceService.getCountryService(countryServiceID);
 		Date sDate = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -115,24 +119,25 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println(countryServiceID+", :" + sDate);
-		String retVal=null;
-		for(CallRate rate : callRateService.gellCurrentCallRates(countryServiceID, sDate))
-		{
+		System.out.println(countryServiceID + ", :" + sDate);
+		String retVal = null;
+		for (CallRate rate : callRateService.gellCurrentCallRates(
+				countryServiceID, sDate)) {
 			retVal += "<tr>";
-			retVal += "<td>"+rate.getDestCountry().getName() +"</td>";
-			retVal += "<td>"+rate.getOffPeakRate()+"</td>";
-			retVal += "<td>"+rate.getPeakRate()+"</td>";
-			retVal+="</tr>";
+			retVal += "<td>" + rate.getDestCountry().getName() + "</td>";
+			retVal += "<td>" + rate.getOffPeakRate() + "</td>";
+			retVal += "<td>" + rate.getPeakRate() + "</td>";
+			retVal += "</tr>";
 		}
-		System.out.println("incoming service code is : "+countryServiceID);
+		System.out.println("incoming service code is : " + countryServiceID);
 		return retVal;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/excel")
 	public void generateCallRateExcelReport(HttpServletResponse res,
-			@RequestParam("countryService") int countryServiceCode, @RequestParam("date") String sDate) {
-		
+			@RequestParam("countryService") int countryServiceCode,
+			@RequestParam("date") String sDate) {
+
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -141,16 +146,20 @@ public class ReportController {
 			e.printStackTrace();
 		}
 		System.out.println(sDate);
-		org.voip.model.CountryService countrySer = countryServiceService.getCountryService(countryServiceCode);
-		CallRateExcelReport callRateExcelReport = new CallRateExcelReport(countrySer.getService(), countrySer.getCountry(), date);
+		org.voip.model.CountryService countrySer = countryServiceService
+				.getCountryService(countryServiceCode);
+		CallRateExcelReport callRateExcelReport = new CallRateExcelReport(
+				countrySer.getService(), countrySer.getCountry(), date);
 		ModelAndView mav = reportManager.getReportView(callRateExcelReport);
-		
+
 		HttpHeaders header = new HttpHeaders();
-	    header.setContentType(new MediaType("application", "vnd.ms-excel"));
-	    String name= String.format("%s_%s", countrySer.getCountry().getName(),countrySer.getService().getName());
-	    res.setHeader("Content-disposition", "attachment; filename=" + name+".xls");
-	    HSSFWorkbook book = (HSSFWorkbook)mav.getModel().get("excelBook");
-	    try {
+		header.setContentType(new MediaType("application", "vnd.ms-excel"));
+		String name = String.format("%s_%s", countrySer.getCountry().getName(),
+				countrySer.getService().getName());
+		res.setHeader("Content-disposition", "attachment; filename=" + name
+				+ ".xls");
+		HSSFWorkbook book = (HSSFWorkbook) mav.getModel().get("excelBook");
+		try {
 			book.write(res.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -160,8 +169,9 @@ public class ReportController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "monthly-bill/pdf")
-	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView, 
-			@RequestParam("date")String sDate, @RequestParam("customer") long customerID, BindingResult result) {
+	public ModelAndView generateMonthlyBillPdfReport(ModelAndView modelAndView,
+			@RequestParam("date") String sDate,
+			@RequestParam("customer") long customerID, BindingResult result) {
 		Customer customer = customerService.getCustomerById(customerID);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -170,15 +180,17 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,customer);
-	    modelAndView = reportManager.getReportView(monthlyBillReport);
+
+		MonthlyBillReport monthlyBillReport = new MonthlyBillReport(date,
+				customer);
+		modelAndView = reportManager.getReportView(monthlyBillReport);
 
 		return modelAndView;
 	}
 
-	@RequestMapping(value="monthlyBill/list/{customerId}/{sDate}",method = RequestMethod.GET)
-	public @ResponseBody String monthlyBillList(@PathVariable int customerId, @PathVariable String sDate ){
+	@RequestMapping(value = "monthlyBill/list/{customerId}/{sDate}", method = RequestMethod.GET)
+	public @ResponseBody String monthlyBillList(@PathVariable int customerId,
+			@PathVariable String sDate) {
 		Customer customer = customerService.getCustomerById(customerId);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -187,24 +199,27 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		String retVal=null;
-		for(CustomerMonthly report: monthlyBillService.getCustomerBils(date, customerId).getAllCustomerMonthly()){
+		String retVal = null;
+		for (CustomerMonthly report : monthlyBillService.getCustomerBils(date,
+				customerId).getAllCustomerMonthly()) {
 			retVal += "<tr>";
-			retVal+= "<td>"+report.getDate()+"</td>";
-			retVal+= "<td>"+report.getTime() +"</td>";
-			retVal+= "<td>"+report.getDuration() +"</td>";
-			retVal+= "<td>"+report.getCountry() +"</td>";
-			retVal+= "<td>"+report.getPhoneno() +"</td>";
-			retVal+= "<td>"+report.getCost() +"</td>";
-			retVal+="</tr>";
+			retVal += "<td>" + report.getDate() + "</td>";
+			retVal += "<td>" + report.getTime() + "</td>";
+			retVal += "<td>" + report.getDuration() + "</td>";
+			retVal += "<td>" + report.getCountry() + "</td>";
+			retVal += "<td>" + report.getPhoneno() + "</td>";
+			retVal += "<td>" + report.getCost() + "</td>";
+			retVal += "</tr>";
 		}
-		
+
 		return retVal;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "sales-commission/pdf")
 	public ModelAndView generateSalesCommissionPdfReport(
-			ModelAndView modelAndView,@RequestParam("salesRep") int salesRepID,@RequestParam("date") String sDate) {
+			ModelAndView modelAndView,
+			@RequestParam("salesRep") int salesRepID,
+			@RequestParam("date") String sDate) {
 		SalesRep salesRep = salesRepService.getSalesRepById(salesRepID);
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -219,12 +234,13 @@ public class ReportController {
 
 		return modelAndView;
 	}
-	
-	@RequestMapping(value="salesCommision/list/{salesRepId}/{sDate}", method=RequestMethod.GET)
-	public @ResponseBody String salesCommisionList(@PathVariable int salesRepId, @PathVariable String sDate){
+
+	@RequestMapping(value = "salesCommision/list/{salesRepId}/{sDate}", method = RequestMethod.GET)
+	public @ResponseBody String salesCommisionList(
+			@PathVariable int salesRepId, @PathVariable String sDate) {
 		String retVal = "";
 		System.out.println("Should show sales commision list");
-		
+
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		try {
@@ -232,21 +248,30 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		SalesCommissionTotalReport commisionReport = commissionService.getTotalReport(date, salesRepId);
-		for(SalesCommission salesCom : commisionReport.getSalesCommissionList()){
-			retVal+="<tr>";
-			retVal+="<td>"+salesCom.getCustomer()+"</td>";
-			retVal+="<td>"+salesCom.getCountryservice()+"</td>";
-			retVal+="<td>"+salesCom.getCost()+"</td>";
-			retVal+="<td>"+salesCom.getCommission()+"</td>";
-			retVal+="</tr>";
+		SalesCommissionTotalReport commisionReport = commissionService
+				.getTotalReport(date, salesRepId);
+		for (SalesCommission salesCom : commisionReport
+				.getSalesCommissionList()) {
+			retVal += "<tr>";
+			retVal += "<td>" + salesCom.getCustomer() + "</td>";
+			retVal += "<td>" + salesCom.getCountryservice() + "</td>";
+			retVal += "<td>" + salesCom.getCost() + "</td>";
+			retVal += "<td>" + salesCom.getCommission() + "</td>";
+			retVal += "</tr>";
 		}
-		retVal+="<tr><td></td><td></td><td></td><td>"+"Total commision ="+commisionReport.getTotalCommission()+"</td></tr>";
+		
+		if(commisionReport.getTotalCommission() != null)
+			retVal += "<tr><td></td><td></td><td>Total Commision</td><td>" +  
+				commisionReport.getTotalCommission() + "</td></tr>";
+		else
+			retVal += "<tr><td></td><td></td><td>Total Commision</td><td>00</td></tr>";
 		System.out.println(retVal);
 		return retVal;
 	}
+
 	@RequestMapping(method = RequestMethod.POST, value = "monthly-traffic/excel")
-	public void generateMonthlyTrafficExelReport(@RequestParam("date")String sDate,HttpServletRequest req,
+	public void generateMonthlyTrafficExelReport(
+			@RequestParam("date") String sDate, HttpServletRequest req,
 			HttpServletResponse res) {
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
@@ -255,26 +280,27 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		MonthlyTrafficReport monthlyBillReport = new MonthlyTrafficReport(date);
-	    ModelAndView mav = reportManager.getReportView(monthlyBillReport);
-	    
-	    HttpHeaders header = new HttpHeaders();
-	    header.setContentType(new MediaType("application", "vnd.ms-excel"));
-	    res.setHeader("Content-disposition", "attachment; filename=" + date.toString()+".xls");
-	    HSSFWorkbook book = (HSSFWorkbook)mav.getModel().get("excelBook");
-	    try {
+		ModelAndView mav = reportManager.getReportView(monthlyBillReport);
+
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("application", "vnd.ms-excel"));
+		res.setHeader("Content-disposition",
+				"attachment; filename=" + date.toString() + ".xls");
+		HSSFWorkbook book = (HSSFWorkbook) mav.getModel().get("excelBook");
+		try {
 			book.write(res.getOutputStream());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	@RequestMapping(value="monthlyTraffic/list/{sDate}")
-	public @ResponseBody String getMonthlyTrafficList(@PathVariable String sDate){
-		String retVal="";
-		
+
+	@RequestMapping(value = "monthlyTraffic/list/{sDate}")
+	public @ResponseBody String getMonthlyTrafficList(@PathVariable String sDate) {
+		String retVal = "";
+
 		Date date = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
 		try {
@@ -282,14 +308,15 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Incoming date: "+date);
-		for(MonthlyTraffic monthlyTraffic:monthlyTrafficService.getAllMonthlyTraffic(date)){
-			retVal+="<tr>";
-			retVal+="<td>"+monthlyTraffic.getServiceName()+"</td>";
-			retVal+="<td>"+monthlyTraffic.getFromCountry()+"</td>";
-			retVal+="<td>"+monthlyTraffic.getToCountry()+"</td>";
-			retVal+="<td>"+monthlyTraffic.getMinutesOfCalls()+"</td>";
-			retVal+="</tr>";
+		System.out.println("Incoming date: " + date);
+		for (MonthlyTraffic monthlyTraffic : monthlyTrafficService
+				.getAllMonthlyTraffic(date)) {
+			retVal += "<tr>";
+			retVal += "<td>" + monthlyTraffic.getServiceName() + "</td>";
+			retVal += "<td>" + monthlyTraffic.getFromCountry() + "</td>";
+			retVal += "<td>" + monthlyTraffic.getToCountry() + "</td>";
+			retVal += "<td>" + monthlyTraffic.getMinutesOfCalls() + "</td>";
+			retVal += "</tr>";
 		}
 		return retVal;
 	}
