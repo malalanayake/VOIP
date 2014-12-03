@@ -61,7 +61,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${context}">Home</a>
+			<a class="navbar-brand" href="${context}/">Home</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
@@ -90,9 +90,9 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${context }/customers">Add a Customer</a></li>
 						<li class="divider"></li>
-						<li><a href="${context }/customers/bulkUpdate">Upload
-								Customer List</a></li>
-						<li class="divider"></li>
+						<!-- <li><a href="${context }/customers/bulkUpdate">Upload
+								Customer List</a></li> 
+						<li class="divider"></li>-->
 						<li><a href="${context }/customers/list">Show Customers</a>
 					</ul></li>
 

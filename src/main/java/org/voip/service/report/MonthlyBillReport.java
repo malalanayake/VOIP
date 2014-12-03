@@ -50,6 +50,7 @@ public class MonthlyBillReport implements CustomReport {
 		parameterMap.put("header", "MONTHLY BILL");
 		parameterMap.put("month", dateString);
 		parameterMap.put("customer", this.customer.getName());
+		parameterMap.put("phoneno", this.customer.getPhoneNumber());
 		parameterMap.put("address", this.customer.toString());
 		parameterMap.put("service", this.customer.getCountryService()
 				.getService().getName());
