@@ -14,7 +14,8 @@
 			url :path ,
 			type : 'GET',
 			success : function(msg) {
-				$("#commissionTable").html($("#commissionTable").html() + msg)
+				var header = "<thead><tr><td>Customer</td><td>Service</td><td>Cost</td><td>Commission</td></tr></thead>";
+				$("#commissionTable").html(header + msg)
 				$("#salesCommissionList").show();
 				$("#download").show();
 			},
