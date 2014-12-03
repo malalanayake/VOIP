@@ -30,6 +30,12 @@
 </head>
 <body>
 	<form method="POST" action="monthly-traffic/excel" class="form-inline">
+		<fieldset>
+			<legend>
+				<img width=32 style='margin-right: 5px;vertical-align:text-bottom' src='${context }/resources/img/custom-reports.png' alt='upload call'/>
+				Generate monthly traffic report
+			</legend>
+		</fieldset>
 		<div class="form-group" >
 			<div class="input-append date" id="datepicker" data-date="2014-12"
 				data-date-format="yyyy-mm">

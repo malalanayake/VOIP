@@ -31,6 +31,12 @@
 <body>
 
 <form method="POST" action="sales-commission/pdf" class="form-inline">
+		<fieldset>
+			<legend>
+				<img width=32 style='margin-right: 5px;vertical-align:text-bottom' src='${context }/resources/img/custom-reports.png' alt='upload call'/>
+				Sales representative commission report
+			</legend>
+		</fieldset>
 		<div class="form-group">
 			<select name="salesRep" class="form-control " id="salesRep">
 				<c:forEach items="${salesRepList }" var="salesRep">

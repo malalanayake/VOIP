@@ -30,6 +30,12 @@
 </head>
 <body>
 	<form method="POST" action="monthly-bill/pdf" class="form-inline">
+		<fieldset>
+			<legend>
+				<img width=32 style='margin-right: 5px;vertical-align:text-bottom' src='${context }/resources/img/custom-reports.png' alt='upload call'/>
+				Generate monthly bill
+			</legend>
+		</fieldset>
 		<div class="form-group">
 			<select id="customer" name="customer" class="form-control ">
 				<c:forEach items="${customerList }" var="customer">
