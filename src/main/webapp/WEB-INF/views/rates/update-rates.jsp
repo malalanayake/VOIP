@@ -19,7 +19,10 @@
 	<form:form class="upload-form" role="form" action="${context }/update-rates" method="post" enctype="multipart/form-data">
 		
 		<fieldset>
-			<legend>Upload International calling rates</legend>
+			<legend>
+				<img width=32 style='margin-right: 5px;vertical-align:text-bottom' src='${context }/resources/img/upload-folder.png' alt='upload call'/>
+				Upload International calling rates
+			</legend>
 		</fieldset>
 		<div style="margin-bottom: 5px;">
 			<span>Date: </span>

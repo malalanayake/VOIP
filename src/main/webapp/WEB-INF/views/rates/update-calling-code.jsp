@@ -18,7 +18,10 @@
 	</div>
 	<form:form class="upload-form" role="form" action="${context }/update-calling-code" method="post" enctype="multipart/form-data">
 		<fieldset>
-			<legend>Upload calling code file</legend>
+			<legend>
+				<img width=32 style='margin-right: 5px;vertical-align:text-bottom' src='${context }/resources/img/upload-folder.png' alt='upload call'/>
+				Upload calling code file
+			</legend>
 		</fieldset>
 		<div class="upload-element">
 			<img src='${context }/resources/img/upload.png' />
