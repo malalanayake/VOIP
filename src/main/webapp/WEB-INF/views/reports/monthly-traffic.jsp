@@ -10,18 +10,26 @@
 	function showTraffic() {
 		var date = $("#date").val();
 		var path = '${context}' + '/report/monthlyTraffic/list/' + "/"+ date;
+		$('#loading').toggleClass('hide');
 		$.ajax({
 			url :path ,
 			type : 'GET',
 			success : function(msg) {
+				$('#loading').toggleClass('hide');
 				var header = "<thead><tr><td>Service</td><td>Source Country</td><td>Destination Country</td><td>Total Calls(mins)</td></tr></thead>";
 				$("#monthlyTrafiTable").html(header + msg)
 				$("#monthlyTraffic").show();
 				$("#download").show();
 			},
 			error : function(a, b, c) {
+				$('#loading').toggleClass('hide');
 				alert(a + ", " + ", " + c);
 			}
+		});
+		$('#download').click(function(){
+			$('#loading').toggleClass('hide');
+			$('form').submit();
+			return false;
 		});
 	}
 </script>
@@ -30,6 +38,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id='loading' class='hide'>
+		<div id='background'></div>
+		<div>
+			<img src="${context }/resources/img/framely.gif" alt="loading"/>
+		</div>
+	</div>
 	<form method="POST" action="monthly-traffic/excel" class="form-inline">
 		<fieldset>
 			<legend>
