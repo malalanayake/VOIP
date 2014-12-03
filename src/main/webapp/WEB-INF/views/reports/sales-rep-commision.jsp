@@ -18,7 +18,6 @@
 				var header = "<thead><tr><td>Customer</td><td>Service</td><td>Cost</td><td>Commission</td></tr></thead>";
 				$("#commissionTable").html(header + msg)
 				$("#salesCommissionList").show();
-				$("#download").show();
 				$('#loading').toggleClass('hide');
 			},
 			error : function(a, b, c) {
@@ -62,7 +61,7 @@
 			<input type="date" class="form-control" name="date" id="date"/>
 		</div>
 		<button type="button" class="btn btn-success" onclick=" showCommissions();">Generate Report</button>
-		<button type="submit" style="display: none;" class="btn btn-success" id="download">Download Report</button>
+		<button type="submit"  class="btn btn-success" id="download">Download Report</button>
 	</form>
 	<div style="display: none;" id="salesCommissionList">
 		<table class="table table-bordered" id="commissionTable">

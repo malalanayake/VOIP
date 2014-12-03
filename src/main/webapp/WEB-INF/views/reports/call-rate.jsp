@@ -21,8 +21,7 @@
 				var table = "<thead><tr><td>Country</td><td>Off peak</td><td>Peak</td></tr></thead>";
 				$("#rateListTable").html(table + msg);
 				$("#rateList").show();
-				$("#pdf").show();
-				$("#excel").show();
+	
 			},
 			error : function(a, b, c) {
 				alert(a + ", " + ", " + c);
@@ -57,8 +56,8 @@
 			<input type="date" class="form-control" name="date" id="date" />
 		</div>
 		<button type="button" class="btn btn-success" onclick=" showCallRate();">Generate Report</button>
-		<button id='pdf' style="display: none;" type="submit" class="btn btn-success">Download	Report</button>
-		<button id="excel"  style="display: none;" type="submit" class="btn btn-success">Generate Excel</button>
+		<button id='pdf' type="submit" class="btn btn-success">Download	Report</button>
+		<button id="excel"   type="submit" class="btn btn-success">Generate Excel</button>
 		
 		<div style="display: none;" id="rateList">
 			

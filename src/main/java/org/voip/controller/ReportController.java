@@ -313,8 +313,8 @@ public class ReportController {
 		for (MonthlyTraffic monthlyTraffic : monthlyTrafficService
 				.getAllMonthlyTraffic(date)) {
 			retVal += "<tr>";
-			retVal += "<td>" + monthlyTraffic.getServiceName() + "</td>";
 			retVal += "<td>" + monthlyTraffic.getFromCountry() + "</td>";
+			retVal += "<td>" + monthlyTraffic.getServiceName() + "</td>";
 			retVal += "<td>" + monthlyTraffic.getToCountry() + "</td>";
 			retVal += "<td>" + monthlyTraffic.getMinutesOfCalls() + "</td>";
 			retVal += "</tr>";

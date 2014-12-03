@@ -16,7 +16,7 @@
 			type : 'GET',
 			success : function(msg) {
 				$('#loading').toggleClass('hide');
-				var header = "<thead><tr><td>Service</td><td>Source Country</td><td>Destination Country</td><td>Total Calls(mins)</td></tr></thead>";
+				var header = "<thead><tr><td>Source Country</td><td>Service</td><td>Destination Country</td><td>Total Calls(mins)</td></tr></thead>";
 				$("#monthlyTrafiTable").html(header + msg)
 				$("#monthlyTraffic").show();
 				$("#download").show();
@@ -76,8 +76,8 @@
 		<table class="table table-bordered" id="monthlyTrafiTable">
 				<thead>
 					<tr>
-						<td>Service</td>
 						<td>Source Country</td>
+						<td>Service</td>
 						<td>Destination Country</td>
 						<td>Total Calls(mins)</td>
 					</tr>
