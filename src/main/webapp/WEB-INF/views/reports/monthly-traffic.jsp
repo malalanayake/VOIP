@@ -14,7 +14,8 @@
 			url :path ,
 			type : 'GET',
 			success : function(msg) {
-				$("#monthlyTrafiTable").html($("#monthlyTrafiTable").html() + msg)
+				var header = "<thead><tr><td>Service</td><td>Source Country</td><td>Destination Country</td><td>Total Calls(mins)</td></tr></thead>";
+				$("#monthlyTrafiTable").html(header + msg)
 				$("#monthlyTraffic").show();
 				$("#download").show();
 			},
