@@ -30,6 +30,7 @@ import org.voip.model.Customer;
 import org.voip.model.SalesRep;
 import org.voip.model.Service;
 import org.voip.model.report.CustomerMonthly;
+import org.voip.model.report.CustomerMonthlyTotalReport;
 import org.voip.model.report.MonthlyTraffic;
 import org.voip.model.report.SalesCommission;
 import org.voip.model.report.SalesCommissionTotalReport;
@@ -199,9 +200,9 @@ public class ReportController {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		CustomerMonthlyTotalReport customerReport = monthlyBillService.getCustomerBils(date,customerId);
 		String retVal = null;
-		for (CustomerMonthly report : monthlyBillService.getCustomerBils(date,
-				customerId).getAllCustomerMonthly()) {
+		for (CustomerMonthly report : customerReport.getAllCustomerMonthly()) {
 			retVal += "<tr>";
 			retVal += "<td>" + report.getDate() + "</td>";
 			retVal += "<td>" + report.getTime() + "</td>";
@@ -211,7 +212,7 @@ public class ReportController {
 			retVal += "<td>" + report.getCost() + "</td>";
 			retVal += "</tr>";
 		}
-
+		retVal+="<tr><td></td><td></td><td></td><td></td><td>Total Bill </td><td>"+customerReport.getTotalCost()+"</td></tr>";
 		return retVal;
 	}
 
