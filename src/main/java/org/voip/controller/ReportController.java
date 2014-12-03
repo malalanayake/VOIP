@@ -30,6 +30,7 @@ import org.voip.model.Customer;
 import org.voip.model.SalesRep;
 import org.voip.model.Service;
 import org.voip.model.report.CustomerMonthly;
+import org.voip.model.report.MonthlyTraffic;
 import org.voip.model.report.SalesCommission;
 import org.voip.model.report.SalesCommissionTotalReport;
 import org.voip.service.CallRateService;
@@ -38,6 +39,7 @@ import org.voip.service.CountryService;
 import org.voip.service.CountryServiceService;
 import org.voip.service.CustomerService;
 import org.voip.service.MonthlyBillService;
+import org.voip.service.MonthlyTrafficService;
 import org.voip.service.SalesRepService;
 import org.voip.service.ServiceService;
 import org.voip.service.report.CallRateExcelReport;
@@ -79,6 +81,9 @@ public class ReportController {
 	
 	@Autowired
 	CommissionService commissionService;
+	
+	@Autowired
+	MonthlyTrafficService monthlyTrafficService;
 	
 	@RequestMapping(method = RequestMethod.POST, value = "call-rates/pdf")
 	public ModelAndView generateCallRatePdfReport(ModelAndView modelAndView,
@@ -264,6 +269,29 @@ public class ReportController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="monthlyTraffic/list/{sDate}")
+	public @ResponseBody String getMonthlyTrafficList(@PathVariable String sDate){
+		String retVal="";
+		
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM");
+		try {
+			date = formatter.parse(sDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Incoming date: "+date);
+		for(MonthlyTraffic monthlyTraffic:monthlyTrafficService.getAllMonthlyTraffic(date)){
+			retVal+="<tr>";
+			retVal+="<td>"+monthlyTraffic.getServiceName()+"</td>";
+			retVal+="<td>"+monthlyTraffic.getFromCountry()+"</td>";
+			retVal+="<td>"+monthlyTraffic.getToCountry()+"</td>";
+			retVal+="<td>"+monthlyTraffic.getMinutesOfCalls()+"</td>";
+			retVal+="</tr>";
+		}
+		return retVal;
 	}
 
 }
