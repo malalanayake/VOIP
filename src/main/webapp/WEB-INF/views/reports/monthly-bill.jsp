@@ -16,7 +16,8 @@
 			url :path ,
 			type : 'GET',
 			success : function(msg) {
-				$("#monthlyBilllTable").html($("#monthlyBilllTable").html() + msg)
+				var head = "<thead><tr><td>Date</td><td>Time</td><td>Duration</td><td>Country</td><td>Phone No </td><td>Cost</td></tr></thead>";
+				$("#monthlyBilllTable").html(head + msg)
 				$("#monthlyBillList").show();
 				$("#download").show();
 				$('#loading').toggleClass('hide');
