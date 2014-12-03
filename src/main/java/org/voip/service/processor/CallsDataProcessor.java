@@ -1,8 +1,10 @@
 package org.voip.service.processor;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -46,7 +48,9 @@ public class CallsDataProcessor implements DataProcessor {
 	@Override
 	public boolean process() {
 		try {
-
+			
+			List<CallDetail> callDetailList = new ArrayList<CallDetail>();
+			
 			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
@@ -62,7 +66,7 @@ public class CallsDataProcessor implements DataProcessor {
 				}
 				
 			
-				CallDetail callDetails = new CallDetail();
+				CallDetail callDetail = new CallDetail();
 				
 				Country fromCountry = countryDAO.findOne((int)row.getCell(0).getNumericCellValue());
 				Country toCountry = countryDAO.findOne((int)row.getCell(1).getNumericCellValue());
@@ -72,17 +76,17 @@ public class CallsDataProcessor implements DataProcessor {
 				Date callDate = row.getCell(5).getDateCellValue();
 				int callTime = (int)row.getCell(6).getNumericCellValue();
 				
-				callDetails.setCallDate(callDate);
-				callDetails.setCallTime(callTime);
-				callDetails.setDuration(duration);
-				callDetails.setFromCountry(fromCountry);
-				callDetails.setToCountry(toCountry);
-				callDetails.setToTel(toTel);
-				callDetails.setFromCustomer(customer);
+				callDetail.setCallDate(callDate);
+				callDetail.setCallTime(callTime);
+				callDetail.setDuration(duration);
+				callDetail.setFromCountry(fromCountry);
+				callDetail.setToCountry(toCountry);
+				callDetail.setToTel(toTel);
+				callDetail.setFromCustomer(customer);
 				
-				callDetailDAO.save(callDetails);
-				
+				callDetailList.add(callDetail);
 			}
+			callDetailDAO.save(callDetailList);
 
 		} catch (Exception e) {
 			e.printStackTrace();

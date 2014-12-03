@@ -1,7 +1,9 @@
 package org.voip.service.processor;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -35,7 +37,8 @@ public class SalesCustomerDataProcessor implements DataProcessor{
 	@Override
 	public boolean process() {
 		try {
-
+			
+			List<SalesCustomer> salesCusotmerList = new ArrayList<SalesCustomer>();
 			HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
 			HSSFSheet sheet = workbook.getSheetAt(0);
 
@@ -67,9 +70,10 @@ public class SalesCustomerDataProcessor implements DataProcessor{
 				salesCustomer.setCustomer(customer);
 				salesCustomer.setSalesRep(salesRep);
 				
-				salesCustomerDAO.save(salesCustomer);
+				salesCusotmerList.add(salesCustomer);
 			}
-
+			
+			salesCustomerDAO.save(salesCusotmerList);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
