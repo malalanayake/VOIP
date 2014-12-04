@@ -1,6 +1,8 @@
 package org.voip.controller;
 
 import java.beans.PropertyEditorSupport;
+import java.io.File;
+import java.io.FileInputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.voip.config.Constants;
 import org.voip.model.CountryService;
 import org.voip.model.Customer;
 import org.voip.model.SalesCustomer;
@@ -21,6 +26,8 @@ import org.voip.service.CustomerService;
 import org.voip.service.GeneralService;
 import org.voip.service.SalesCustomerService;
 import org.voip.service.SalesRepService;
+import org.voip.service.processor.CustomerDataProcessor;
+import org.voip.service.processor.DataManager;
 
 @Controller
 @RequestMapping("/customers")
@@ -40,6 +47,10 @@ public class CustomerController {
 	
 	@Autowired
 	SalesRepService salesRepService;
+	
+	@Autowired
+	DataManager dataManager;
+	
 	
 	@InitBinder
 	public void initBindet(WebDataBinder binder){
@@ -84,14 +95,22 @@ public class CustomerController {
 	
 	@RequestMapping(value="bulkUpdate", method= RequestMethod.GET)
 	public String bulkUpdatePage(Model model){
-		System.out.println("Bulk Update mode");
 		return "customers/bulkUpdate";
 	}
 	
 	@RequestMapping(value="bulkUpdate", method= RequestMethod.POST)
-	public String bulkUpdate(Model model){
-		System.out.println("Bulk Updating value");
-		return "customers/bulkUpdate";
+	public String bulkUpdate(@RequestParam("file") MultipartFile file,final RedirectAttributes attr){
+		try{
+			File temp = new File(file.getOriginalFilename());
+			file.transferTo(temp);
+			FileInputStream fis = new FileInputStream(temp);
+			dataManager.executeDataProcessor(new CustomerDataProcessor(fis));
+			attr.addFlashAttribute(Constants.SUCCESS, "Add users successfully.");
+		}catch(Exception e){
+			e.printStackTrace();
+			attr.addFlashAttribute(Constants.ERROR, "Can not process file! Please double check!");
+		}
+		return "redirect:/customers/bulkUpdate";
 	}
 	
 	@RequestMapping(value="/list", method=RequestMethod.GET)
