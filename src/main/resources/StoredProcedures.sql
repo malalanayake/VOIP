@@ -111,9 +111,7 @@ AS
     
 GO
 
-
 --execute getMonthlyReport '2014-12-05',71393754
-
 
 ------
 
@@ -201,7 +199,8 @@ Go
 --exec getSalesReport '2014-12-05',23
 
 
-
+---------------------------------------
+--Deprecated in the latest release
 ---------------------------------------
 CREATE FUNCTION  getCallRate(
 	@country_serviceId numeric(19, 0),
@@ -243,24 +242,3 @@ END
 --select dbo.getCallRate(1,597,'2014-12-05',929)
 
 
-
-
-
-
-
-
-
---CREATE PROCEDURE getMonthlyReport 
---    @reportDate date,
---    @customerId numeric(19, 0) 
---AS 
---	select distinct cd.id, cd.callDate as date,cd.callTime as time,cd.duration,Country.name as country,cd.toTel as phoneno, cd.duration* 2 as cost
---	from CallDetail cd join Customer 
---	on Customer.phoneNumber =cd.fromCustomer_phoneNumber join CallRate
---	on Customer.countryService_id=CallRate.country_service_id join Country
---	on cd.toCountry_code=Country.code
---	where Customer.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
---    
---GO
-
---execute getMonthlyReport '2014-12-05',7139375437
