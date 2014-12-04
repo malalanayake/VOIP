@@ -11,6 +11,7 @@
 		var customerId = $("#customer").val();
 		var date = $("#date").val();
 		var path = '${context}' + '/report/monthlyBill/list/' + customerId + "/"+ date;
+		console.log(path);
 		$('#loading').toggleClass('hide');
 		$.ajax({
 			url :path ,

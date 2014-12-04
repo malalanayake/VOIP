@@ -12,7 +12,7 @@ import org.voip.model.report.CustomerMonthlyTotalReport;
 public class MonthlyBillService {
 	@Autowired
 	CustomerMonthlyDAO customerMonthlyDao;
-	public CustomerMonthlyTotalReport getCustomerBils(Date date, int customerId){
+	public CustomerMonthlyTotalReport getCustomerBils(Date date, long customerId){
 		return customerMonthlyDao.getReportByMonthACustomer(date, customerId);
 	}
 }

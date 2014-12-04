@@ -195,7 +195,7 @@ public class ReportController {
 	}
 
 	@RequestMapping(value = "monthlyBill/list/{customerId}/{sDate}", method = RequestMethod.GET)
-	public @ResponseBody String monthlyBillList(@PathVariable int customerId,
+	public @ResponseBody String monthlyBillList(@PathVariable long customerId,
 			@PathVariable String sDate) {
 		Customer customer = customerService.getCustomerById(customerId);
 		Date date = null;
