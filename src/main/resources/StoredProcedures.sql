@@ -143,29 +143,34 @@ AS
 	insert into SalesCommissionTotalReport values (0);
 	
 	--Get All Customers for salesRep
-	SELECT  c.phoneNumber into #T1
-	FROM SalesRep sr 
-	Join SalesCustomer sc on sr.id = sc.salesRep_id
-	Join Customer c on c.phoneNumber=sc.customer_phoneNumber
-	WHERE sr.code=@salesRepCode
 	
 	--Get Call Cost for all call for phone numbers in #T1
-	select distinct cd.id, c.phoneNumber,
-	 cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime)/60 as cost
-	 into #T2
-	from CallDetail cd 
-	join Customer c on c.phoneNumber =cd.fromCustomer_phoneNumber 
-	join CallRate cr on c.countryService_id=cr.country_service_id 
-	Join Country on cd.toCountry_code=Country.code
-	Join #T1 t on t.phoneNumber= c.phoneNumber
-	where YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
+	select cd.id, c.phoneNumber,
+	(case 
+		when(cd.calltime between cnt.peakTime  and cnt.offPeakTime)  
+			then cr.peakRate* cd.duration/60
+		when (cd.calltime not between cnt.peakTime  and cnt.offPeakTime) 
+			then cr.offPeakRate * cd.duration/60 
+	end) as cost
 	
+	into #T2
+	from CallDetail cd 
+	join Customer c on c.phoneNumber =cd.fromCustomer_phoneNumber
+	
+	join CallRate cr on c.countryService_id=cr.country_service_id and cr.dest_country_code=cd.toCountry_code
+	
+	Join SalesCustomer on SalesCustomer.customer_phoneNumber=c.phoneNumber
+	Join SalesRep sr on sr.id = SalesCustomer.salesRep_id
+	Join Country cnt on cd.fromCountry_code=cnt.code
+	
+	where YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate) and sr.code = @salesRepCode
+	and cr.effectiveFrom = (select MAX(effectiveFrom) from CallRate crn where c.countryService_id=crn.country_service_id and crn.dest_country_code=cd.toCountry_code and crn.effectiveFrom<cd.callDate ) 
+	order by cd.id
+
 	-- Get total cost by each customer
 	select phoneNumber,SUM(cost) as cost  into #T3
 	From #T2  group by phoneNumber
 	
-
-
 	-- Join all the data to produce result
 	insert into SalesCommission
 	select sc.commission*t.cost/100 as commission,t.cost,cnt.name+'_'+s.name as countryservice,c.name as customer,(select top 1 id from SalesCommissionTotalReport) as report_id
@@ -183,7 +188,6 @@ AS
 	
 	select * from SalesCommissionTotalReport;
 Go
-
 --exec getSalesReport '2014-12-05',23
 
 
