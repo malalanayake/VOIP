@@ -62,7 +62,7 @@ AS
 		)
 	    as T on cr.country_service_id=T.country_service_id and cr.dest_country_code=T.dest_country_code 
 		Join Country c on c.code = cr.dest_country_code
-		where T.maxEffectiveFrom=cr.effectiveFrom and cr.country_service_id=1
+		where T.maxEffectiveFrom=cr.effectiveFrom and cr.country_service_id=@countryServiceId
 		order by c.name
 		
 		SELECT T.id,T.effectiveFrom,T.effectiveTo,T.offPeakRate,T.peakRate,T.country_service_id,T.dest_country_code
