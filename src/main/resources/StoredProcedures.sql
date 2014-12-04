@@ -85,14 +85,23 @@ AS
 	
 	--Insert Query Result 
 	Insert into CustomerMonthly
-	select distinct  cd.duration*  dbo.getCallRate(cr.country_service_id,cd.toCountry_code,callDate,callTime)/60 as cost,
+	select distinct  
+	
+	(case 
+		when(cd.calltime between cnt.peakTime  and cnt.offPeakTime)  
+			then cr.peakRate* cd.duration/60
+		when (cd.calltime not between cnt.peakTime  and cnt.offPeakTime) 
+			then cr.offPeakRate * cd.duration/60 
+	end) as cost,
+	
 	Country.name as country,cd.callDate as date,cd.duration,cd.toTel as phoneno,cd.callTime as time, (select top 1 id from CustomerMonthlyTotalReport) as report_id 
 	 
-	from CallDetail cd join Customer c
-	on c.phoneNumber =cd.fromCustomer_phoneNumber join CallRate cr
-	on c.countryService_id=cr.country_service_id join Country
-	on cd.toCountry_code=Country.code
+	from CallDetail cd join Customer c 	on c.phoneNumber =cd.fromCustomer_phoneNumber 
+	join CallRate cr on c.countryService_id=cr.country_service_id and cr.dest_country_code=cd.toCountry_code
+	join Country on cd.toCountry_code=Country.code
+	Join Country cnt on cd.fromCountry_code=cnt.code
 	where c.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
+	and cr.effectiveFrom = (select MAX(effectiveFrom) from CallRate crn where c.countryService_id=crn.country_service_id and crn.dest_country_code=cd.toCountry_code and crn.effectiveFrom<cd.callDate ) 
     order by cd.callDate;
     
     update CustomerMonthlyTotalReport
@@ -103,7 +112,6 @@ AS
 GO
 
 --execute getMonthlyReport '2014-12-05',71393754
-
 
 ------
 
@@ -191,7 +199,8 @@ Go
 --exec getSalesReport '2014-12-05',23
 
 
-
+---------------------------------------
+--Deprecated in the latest release
 ---------------------------------------
 CREATE FUNCTION  getCallRate(
 	@country_serviceId numeric(19, 0),
@@ -233,24 +242,3 @@ END
 --select dbo.getCallRate(1,597,'2014-12-05',929)
 
 
-
-
-
-
-
-
-
---CREATE PROCEDURE getMonthlyReport 
---    @reportDate date,
---    @customerId numeric(19, 0) 
---AS 
---	select distinct cd.id, cd.callDate as date,cd.callTime as time,cd.duration,Country.name as country,cd.toTel as phoneno, cd.duration* 2 as cost
---	from CallDetail cd join Customer 
---	on Customer.phoneNumber =cd.fromCustomer_phoneNumber join CallRate
---	on Customer.countryService_id=CallRate.country_service_id join Country
---	on cd.toCountry_code=Country.code
---	where Customer.phoneNumber=@customerId and YEAR(callDate)=YEAR(@reportDate) and MONTH(callDate)=MONTH(@reportDate)
---    
---GO
-
---execute getMonthlyReport '2014-12-05',7139375437
