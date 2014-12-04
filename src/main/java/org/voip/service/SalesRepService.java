@@ -13,4 +13,8 @@ public class SalesRepService {
 	public SalesRep getSalesRepById(long phoneNumber){
 		return salesRepDao.findOne(phoneNumber);
 	}
+	
+	public SalesRep createSalesRep(SalesRep salesRep){
+		return salesRepDao.save(salesRep);
+	}
 }

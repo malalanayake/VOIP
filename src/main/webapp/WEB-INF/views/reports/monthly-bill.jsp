@@ -23,7 +23,7 @@
 				$('#loading').toggleClass('hide');
 			},
 			error : function(a, b, c) {
-				alert(a + ", " + ", " + c);
+				//alert(a + ", " + ", " + c);
 				$('#loading').toggleClass('hide');
 			}
 		});

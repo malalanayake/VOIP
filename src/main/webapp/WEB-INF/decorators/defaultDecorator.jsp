@@ -78,6 +78,8 @@
 								calling files</a></li>
 						<li class="divider"></li>
 						<li><a href="${context}/update-calling-code">Update calling code</a></li>
+						<li class="divider"></li>
+						<li><a href="${context }/customers/bulkUpdate">Update Customer List</a></li> 
 					</ul></li>
 
 
@@ -88,10 +90,15 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="${context }/customers">Add a Customer</a></li>
 						<li class="divider"></li>
-						<!-- <li><a href="${context }/customers/bulkUpdate">Upload
-								Customer List</a></li> 
-						<li class="divider"></li>-->
 						<li><a href="${context }/customers/list">Show Customers</a>
+					</ul></li>
+					
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-expanded="false">Sales Rep
+						<span class="caret"></span>
+				</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="${context }/add-sale-rep">Add SalesRep</a></li>
 					</ul></li>
 
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
