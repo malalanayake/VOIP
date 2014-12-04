@@ -28,11 +28,6 @@
 				alert("Invalid data! please recheck inputs.");
 			}
 		});
-		$('#download').click(function(){
-			$('#loading').toggleClass('hide');
-			$('form').submit();
-			return false;
-		});
 	}
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -64,7 +59,7 @@
 			<input type="date" class="form-control" name="date" id="date" />
 		</div>
 		<button type="button" class="btn btn-success" onclick=" showBillList();">Generate Report</button>
-		<button type="button" class="btn btn-success" id="download">Download Report</button>
+		<button type="submit" class="btn btn-success" id="download">Download Report</button>
 	</form>
 	<div style="display: none;" id="monthlyBillList">
 		<table class="table table-bordered" id="monthlyBilllTable">
