@@ -43,7 +43,8 @@ public class RateController {
 	@Autowired
 	DataManager dataManager;
 	
-	SampleExcelSheetFactory sesf = new SampleExcelSheetFactory();
+	@Autowired
+	SampleExcelSheetFactory sesf ;//= new SampleExcelSheetFactory();
 	
 	@RequestMapping(value = "/create-rate-sheet", method = RequestMethod.GET)
 	public String createRateSheet(Model model) {
