@@ -1,7 +1,6 @@
 package org.voip.model.report;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
@@ -11,7 +10,7 @@ public class MonthlyTraffic {
 	private String fromCountry;
 	private String serviceName;
 	private String toCountry;
-	private long minutesOfCalls;
+	private float minutesOfCalls;
 	
 	public String getFromCountry() {
 		return fromCountry;
@@ -31,10 +30,10 @@ public class MonthlyTraffic {
 	public void setToCountry(String toCountry) {
 		this.toCountry = toCountry;
 	}
-	public long getMinutesOfCalls() {
+	public float getMinutesOfCalls() {
 		return minutesOfCalls;
 	}
-	public void setMinutesOfCalls(long minutesOfCalls) {
+	public void setMinutesOfCalls(float minutesOfCalls) {
 		this.minutesOfCalls = minutesOfCalls;
 	}
 	
