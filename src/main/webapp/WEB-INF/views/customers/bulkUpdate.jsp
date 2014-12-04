@@ -24,5 +24,10 @@
 		</div>
 		<button type="submit" class="btn btn-success">Update and proccess</button>
 	</form:form>
+	<script type="text/javascript">
+		$(function(){
+			$('#uploadFile').change(function(){ $('#attachedFile').html($(this).val()) });
+		});
+	</script>
 </body>
 </html>
